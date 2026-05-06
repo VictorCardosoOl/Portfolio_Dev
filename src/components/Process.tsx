@@ -81,7 +81,7 @@ const Process: React.FC = () => {
   return (
     <section id="process" className="py-12 md:py-16 bg-white text-[#111] relative overflow-hidden z-10 flex flex-col justify-center">
       <div className="container-fluid">
-        <div className="mb-8 md:mb-12 max-w-2xl">
+        <div className="mb-20 md:mb-32 max-w-2xl">
            <Reveal>
                <h2 className="text-fluid-h2 font-serif font-light text-[#111] leading-[0.9] tracking-tighter uppercase mt-4">
                  BRIEFING
