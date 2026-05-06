@@ -93,10 +93,10 @@ const Process: React.FC = () => {
           {PROCESS_STEPS.map((step: ProcessStep, index: number) => (
             <Reveal key={step.id} delay={index * 150}>
               <div className="flex flex-col h-full border-t border-[#000000]/10 pt-8 mt-8 lg:mt-0 lg:border-t-0 lg:pt-0">
-                 <span className="text-[4rem] md:text-[5rem] font-serif italic text-[#000000]/10 leading-none mb-4 md:mb-6 block select-none tracking-tighter">
+                 <span className="text-fluid-display font-serif italic text-[#000000]/10 leading-none mb-4 md:mb-6 block select-none tracking-tighter">
                    {step.id}
                  </span>
-                  <h3 className="text-xl md:text-2xl font-serif text-[#111] mb-3 tracking-tight">
+                  <h3 className="text-fluid-h3 font-serif font-light text-[#111] mb-3 tracking-tight">
                    {step.title}
                  </h3>
                  <p className="text-fluid-p text-[#333] leading-relaxed font-sans max-w-sm">

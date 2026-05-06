@@ -46,16 +46,16 @@ export default function Navbar({ items, logoText }: NavbarProps) {
       <div className="max-w-[1920px] mx-auto px-6 lg:px-12 3xl:px-24 flex items-center justify-between">
         <div className="flex items-center gap-2 cursor-pointer transition-opacity hover:opacity-75">
           <a href="/" className="flex items-center">
-            <span className="text-xl md:text-2xl font-bold tracking-tight text-charcoal">
-              {logoText}<span className="text-blue-600">.</span>
+            <span className="font-serif font-light text-2xl tracking-tighter text-charcoal">
+              {logoText}
             </span>
           </a>
         </div>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm md:text-base font-medium text-charcoal/80">
+        <nav className="hidden md:flex items-center gap-8">
           {items.map((item) => (
             <div key={item.label} className="group relative">
-              <a href={item.links[0]?.href ?? '#'} className="hover:text-black transition-colors py-2">
+              <a href={item.links[0]?.href ?? '#'} className="text-fluid-label font-sans font-bold uppercase tracking-widest text-charcoal/70 hover:text-charcoal transition-colors py-2">
                 {item.label}
               </a>
             </div>

@@ -62,7 +62,7 @@ export default function Services() {
               </span>
             </div>
             <div className="overflow-hidden">
-              <h2 className="srv-header-line text-5xl md:text-7xl lg:text-8xl font-serif font-light leading-none tracking-tighter uppercase text-cream">
+              <h2 className="srv-header-line text-fluid-h2 font-serif font-light leading-none tracking-tighter uppercase text-cream">
                 Serviços
               </h2>
             </div>

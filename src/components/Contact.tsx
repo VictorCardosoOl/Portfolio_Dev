@@ -43,7 +43,7 @@ export default function Contact() {
             <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-charcoal/40 mb-4 block">
               06 / Contato
             </span>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-light leading-none tracking-tighter uppercase text-charcoal mb-6">
+            <h2 className="text-fluid-h2 font-serif font-light leading-none tracking-tighter uppercase text-charcoal mb-6">
               Vamos<br />
               <span className="italic text-charcoal/30">conversar</span>
             </h2>

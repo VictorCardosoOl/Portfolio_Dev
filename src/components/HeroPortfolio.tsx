@@ -1,16 +1,14 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from '../lib/gsap';
 import { projects } from '../data/portfolio';
+import type { Project } from '../data/portfolio';
 import Image from './ui/Image';
 import TextType from './ui/TextType';
 import { Button } from './ui/Button';
 import ProjectModal from './ProjectModal';
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function HeroPortfolio() {
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const containerRef = useRef<HTMLElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);

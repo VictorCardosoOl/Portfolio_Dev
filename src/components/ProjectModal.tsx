@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import gsap from 'gsap';
+import { gsap } from '../lib/gsap';
 import Lenis from 'lenis';
 import { X, ExternalLink, Github } from 'lucide-react';
 import Image from './ui/Image';
@@ -19,6 +19,8 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
   const overlayRef      = useRef<HTMLDivElement>(null);
   const wrapperRef      = useRef<HTMLDivElement>(null);
   const scopedLenisRef  = useRef<Lenis | null>(null);
+  // C1 FIX: Guardar o ID do RAF para cancelamento correto
+  const rafIdRef        = useRef<number>(0);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -33,6 +35,14 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
       gsap.to(overlayRef.current, { autoAlpha: 1, duration: 0.4 });
       gsap.fromTo(modalOuterRef.current, { y: '100%' }, { y: '2%', duration: 0.8, ease: 'expo.out' });
 
+      // C1 FIX: Move focus into the modal after animation
+      const focusTimeout = setTimeout(() => {
+        const focusable = modalOuterRef.current?.querySelector<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        focusable?.focus();
+      }, 850);
+
       const timeout = setTimeout(() => {
         if (modalContainerRef.current && modalContentRef.current) {
           const scopedLenis = new Lenis({
@@ -43,16 +53,25 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
             touchMultiplier: 2,
           });
           scopedLenisRef.current = scopedLenis;
-          const raf = (time: number) => { scopedLenis.raf(time); requestAnimationFrame(raf); };
-          requestAnimationFrame(raf);
+
+          // C1 FIX: Guardar rafId e cancelar corretamente no cleanup
+          const raf = (time: number) => {
+            scopedLenis.raf(time);
+            rafIdRef.current = requestAnimationFrame(raf);
+          };
+          rafIdRef.current = requestAnimationFrame(raf);
         }
       }, 300);
 
       return () => {
         clearTimeout(timeout);
+        clearTimeout(focusTimeout);
         document.body.style.overflow = '';
         window.removeEventListener('keydown', handleKeyDown);
+        // C1 FIX: Cancelar RAF antes de destruir Lenis
+        cancelAnimationFrame(rafIdRef.current);
         scopedLenisRef.current?.destroy();
+        scopedLenisRef.current = null;
       };
     } else {
       if (wrapperRef.current) {
@@ -64,7 +83,10 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
       }
       document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKeyDown);
+      // C1 FIX: Cancelar RAF no fechamento também
+      cancelAnimationFrame(rafIdRef.current);
       scopedLenisRef.current?.destroy();
+      scopedLenisRef.current = null;
     }
   }, [isOpen, onClose]);
 
@@ -77,11 +99,15 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
         ref={overlayRef}
         onClick={onClose}
         className="absolute inset-0 bg-black/90 opacity-0 invisible"
+        aria-hidden="true"
       />
 
-      {/* Modal Sheet */}
+      {/* D1 FIX: role="dialog" + aria-modal + aria-labelledby */}
       <div
         ref={modalOuterRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-project-title"
         className="absolute left-0 right-0 bottom-0 z-[9999] bg-[#f4f2ee] text-[#111] rounded-t-[2rem] h-[98vh] overflow-hidden shadow-2xl translate-y-full"
       >
         {/* Scoped Lenis Scroll Container */}
@@ -89,7 +115,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
           <div ref={modalContentRef} className="pb-32 flex flex-col items-center">
 
             {/* Giant background title */}
-            <div className="absolute top-0 left-0 w-full overflow-hidden pointer-events-none flex justify-center pt-20 md:pt-28 opacity-[0.04] select-none">
+            <div className="absolute top-0 left-0 w-full overflow-hidden pointer-events-none flex justify-center pt-20 md:pt-28 opacity-[0.04] select-none" aria-hidden="true">
               <span className="text-[15vw] font-bold uppercase tracking-tighter whitespace-nowrap">
                 {project.title}
               </span>
@@ -99,11 +125,15 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
             <div className="container mx-auto px-6 mt-24 md:mt-36 mb-10 flex flex-col items-center text-center relative z-10">
               <div className="flex gap-3 items-center mb-6 text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#111]/40">
                 <span>{project.category}</span>
-                <span className="w-1 h-1 rounded-full bg-[#111]/40" />
+                <span className="w-1 h-1 rounded-full bg-[#111]/40" aria-hidden="true" />
                 <span>{project.year}</span>
               </div>
 
-              <h2 className="text-6xl sm:text-7xl md:text-[9rem] lg:text-[11rem] font-serif font-light uppercase leading-[0.85] tracking-tighter max-w-[90vw]">
+              {/* D1 FIX: id para aria-labelledby */}
+              <h2
+                id="modal-project-title"
+                className="text-6xl sm:text-7xl md:text-[9rem] lg:text-[11rem] font-serif font-light uppercase leading-[0.85] tracking-tighter max-w-[90vw]"
+              >
                 {project.title}
               </h2>
 
@@ -173,7 +203,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
 
               {/* Technical Challenge */}
               <div className="bg-[#111] text-cream rounded-2xl p-8 md:p-10 mb-12">
-                <h3 className="text-[10px] uppercase tracking-[0.25em] font-bold text-cream/40 mb-4">
+                <h3 className="text-[10px] uppercase tracking-[0.25em] font-bold text-cream/60 mb-4">
                   ⚙ Desafio Técnico
                 </h3>
                 <p className="text-base md:text-lg font-light leading-relaxed text-cream/80">
@@ -183,7 +213,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
 
               {/* Tech Stack */}
               <div className="mb-12">
-                <h3 className="text-[10px] uppercase tracking-[0.25em] font-bold text-[#111]/40 mb-5">
+                <h3 className="text-[10px] uppercase tracking-[0.25em] font-bold text-[#111]/60 mb-5">
                   Stack utilizada
                 </h3>
                 <div className="flex flex-wrap gap-2">

@@ -53,7 +53,7 @@ export default function Values() {
     >
       <div className="p-8 md:p-12 3xl:p-24 4xl:p-32 flex flex-col min-h-[50vh] md:min-h-screen">
         <div className="flex justify-between text-[10px] 3xl:text-xs uppercase tracking-widest opacity-80 font-bold mb-8">
-          <h2 className="font-medium tracking-tight">Victor Cardoso</h2>
+          <h2 className="font-serif font-light tracking-tight">Victor Cardoso</h2>
           <span className="opacity-90">Valores Fundamentais</span>
         </div>
         
@@ -88,7 +88,7 @@ export default function Values() {
                   0{index + 1}
                 </span>
                 <div>
-                  <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-charcoal mb-3 group-hover:opacity-70 transition-opacity">
+                  <h3 className="text-fluid-h3 font-serif font-light text-charcoal mb-3 group-hover:opacity-70 transition-opacity">
                     {item.title}
                   </h3>
                   <p className="font-light text-sm md:text-base text-charcoal/70 leading-relaxed">
