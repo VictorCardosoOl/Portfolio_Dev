@@ -19,10 +19,16 @@ export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const progressRef = useRef<HTMLDivElement>(null);
 
-  // Marca como carregado logo após o mount
+  // Marca como carregado quando todo o conteúdo (inclusive imagens) terminar o load
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 200);
-    return () => clearTimeout(timer);
+    const handleLoad = () => setIsLoaded(true);
+    
+    if (document.readyState === 'complete') {
+      handleLoad();
+    } else {
+      window.addEventListener('load', handleLoad);
+      return () => window.removeEventListener('load', handleLoad);
+    }
   }, []);
 
   // Progress bar GSAP — só inicia quando o conteúdo estiver visível

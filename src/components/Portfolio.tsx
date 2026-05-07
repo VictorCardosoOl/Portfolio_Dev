@@ -8,19 +8,24 @@ import { Heading } from './ui/Heading';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Portfolio() {
+// 1. Inversão de controle: quem importa o componente decide o que o botão faz
+interface PortfolioProps {
+  onOpenProject?: (projectId: string) => void;
+}
+
+export default function Portfolio({ onOpenProject }: PortfolioProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    // Usamos gsap.context para o gerenciamento de memória (cleanup automático)
     const ctx = gsap.context(() => {
-      const container = scrollContainerRef.current;
-      if (!container) return;
+      const getScrollAmount = () => window.innerWidth * (projects.length - 1);
 
-      const getScrollAmount = () => {
-        return window.innerWidth * (projects.length - 1);
-      };
-
+      // Animação horizontal ancorada ao scroll vertical
       const horizontalAnim = gsap.to(container, {
         x: () => -getScrollAmount(),
         ease: "none",
@@ -30,12 +35,13 @@ export default function Portfolio() {
           scrub: 1,
           start: "top top",
           end: () => `+=${getScrollAmount()}`,
-          invalidateOnRefresh: true,
+          invalidateOnRefresh: true, // Recalcula proporções ao redimensionar a tela
         }
       });
 
-      // Animação de revelação do texto para cada projeto
-      gsap.utils.toArray<HTMLElement>('.portfolio-card').forEach((card) => {
+      // Animações de revelação dos textos com escopo confinado aos cartões
+      const cards = gsap.utils.toArray<HTMLElement>('.portfolio-card');
+      cards.forEach((card) => {
         const textElements = card.querySelectorAll('.portfolio-text-reveal > *');
         gsap.from(textElements, {
           y: 30,
@@ -51,15 +57,31 @@ export default function Portfolio() {
           }
         });
       });
-      // Força um recálculo para garantir que o tamanho dos projetos seja lido corretamente
-      // após a remoção da tela de loading.
-      setTimeout(() => ScrollTrigger.refresh(), 500);
-      setTimeout(() => ScrollTrigger.refresh(), 1500);
 
+      // 2. Solução Enterprise para o "setTimeout":
+      // Ao invés de adivinhar o tempo, usamos um ResizeObserver para atualizar
+      // o ScrollTrigger sempre que a altura do container principal de fato mudar
+      // (ex: imagens sendo injetadas ou fontes terminando o load).
+      const resizeObserver = new ResizeObserver(() => {
+        ScrollTrigger.refresh();
+      });
+      resizeObserver.observe(container);
+
+      // Opcional: limpeza do observer acoplada ao contexto do gsap
+      return () => resizeObserver.disconnect();
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
+
+  // Handler seguro para o clique
+  const handleViewProject = (title: string) => {
+    if (onOpenProject) {
+      onOpenProject(title);
+    } else {
+      console.info(`Projeto selecionado: ${title}`);
+    }
+  };
 
   return (
     <section 
@@ -67,7 +89,6 @@ export default function Portfolio() {
       ref={sectionRef} 
       className="relative w-full h-[100dvh] bg-white text-charcoal overflow-hidden"
     >
-      {/* Background static texture */}
       <div className="absolute inset-0 opacity-5 pointer-events-none z-0">
         <Image src="https://images.unsplash.com/photo-1618220179428-22790b46a0eb?q=80&w=1000&auto=format&fit=crop" alt="" className="w-full h-full object-cover grayscale" />
       </div>
@@ -85,36 +106,35 @@ export default function Portfolio() {
           <div key={idx} className="flex items-center justify-center w-[100vw] h-full shrink-0">
             <div className="portfolio-card w-[90vw] md:w-[85vw] lg:w-[80vw] h-[80vh] relative group overflow-hidden rounded-md shadow-2xl bg-stone-900">
             
-            {/* Imagem de Fundo (Full Bleed) */}
             <Image
               src={project.image}
               alt={project.title}
               className="absolute inset-0 w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-out z-0"
             />
             
-            {/* Overlay para contraste do texto */}
             <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-all duration-700 z-0" />
 
-            {/* Conteúdo Sobreposto (Esquerda) */}
             <div className="absolute inset-0 flex flex-col justify-center p-8 md:p-16 lg:p-24 portfolio-text-reveal z-10 w-full md:w-[80%] lg:w-[60%]">
-              {/* Opcional: Número e título menor (mantido para contexto, mas com estilo clean) */}
               <span className="text-[10px] md:text-xs uppercase tracking-widest text-white/70 mb-4 block font-bold">
                 0{idx + 1}
               </span>
               
-              {/* Título Principal (Estilo Imagem de Referência) */}
               <Heading size="h2" weight="bold" className="leading-tight text-white drop-shadow-lg">
                 {project.title}
               </Heading>
               
-              {/* Descrição Opcional (Se quiser manter da versão anterior) */}
               <p className="mt-6 text-base md:text-lg font-light tracking-wide text-white/90 max-w-xl leading-relaxed drop-shadow-md">
                 {project.description}
               </p>
               
-              {/* Botão (Estilo Imagem de Referência) */}
               <div className="mt-10">
-                <Button variant="whiteOutline" size="lg" className="rounded-none lowercase px-10 py-6 text-sm" onClick={() => alert("Abrir Modal de Backstage: Desafios, Arquitetura, Impacto")}>
+                {/* 3. Substituição do alert pelo handleViewProject seguro */}
+                <Button 
+                  variant="whiteOutline" 
+                  size="lg" 
+                  className="rounded-none lowercase px-10 py-6 text-sm" 
+                  onClick={() => handleViewProject(project.title)}
+                >
                   view project
                 </Button>
               </div>

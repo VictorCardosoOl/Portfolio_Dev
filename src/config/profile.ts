@@ -13,6 +13,10 @@ export const PROFILE_DATA = {
     linkedin: "https://linkedin.com/in/victorcardoso",
     github: "https://github.com/VictorCardosoOl",
   },
+  contact: {
+    email: "hello@victorcardoso.com",
+    phone: "+55 11 99999-9999",
+  },
   experience: [
     {
       role: "Desenvolvedor Frontend Freelance",

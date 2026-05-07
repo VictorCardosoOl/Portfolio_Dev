@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, Phone, MapPin, Linkedin, Github } from 'lucide-react';
+import { PROFILE_DATA as DATA } from '../config/profile';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,7 +49,7 @@ export default function Contact() {
               <span className="italic text-charcoal/30">conversar</span>
             </h2>
             <p className="text-sm md:text-base font-light text-charcoal/60 leading-relaxed max-w-xs">
-              Disponível para projetos freelance, consultorias e oportunidades de longo prazo.
+              {DATA.bio.split('.')[0]}.
             </p>
           </div>
 
@@ -58,7 +59,7 @@ export default function Contact() {
             {/* Links diretos */}
             <div className="contact-reveal flex flex-col gap-4">
               <a
-                href="mailto:hello@victorcardoso.com"
+                href={`mailto:${DATA.contact.email}`}
                 className="group flex items-center gap-4 py-5 border-b border-charcoal/10 hover:border-charcoal/40 transition-colors duration-300"
               >
                 <span className="w-8 h-8 flex items-center justify-center rounded-full border border-charcoal/20 group-hover:bg-charcoal group-hover:text-cream group-hover:border-charcoal transition-all duration-300 shrink-0">
@@ -67,14 +68,14 @@ export default function Contact() {
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40 mb-0.5">E-mail</span>
                   <span className="text-sm md:text-base text-charcoal group-hover:opacity-70 transition-opacity">
-                    hello@victorcardoso.com
+                    {DATA.contact.email}
                   </span>
                 </div>
                 <span className="ml-auto text-charcoal/30 group-hover:translate-x-1 transition-transform duration-300">→</span>
               </a>
 
               <a
-                href="tel:+5511999999999"
+                href={`tel:${DATA.contact.phone.replace(/\s+/g, '')}`}
                 className="group flex items-center gap-4 py-5 border-b border-charcoal/10 hover:border-charcoal/40 transition-colors duration-300"
               >
                 <span className="w-8 h-8 flex items-center justify-center rounded-full border border-charcoal/20 group-hover:bg-charcoal group-hover:text-cream group-hover:border-charcoal transition-all duration-300 shrink-0">
@@ -83,7 +84,7 @@ export default function Contact() {
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40 mb-0.5">Telefone</span>
                   <span className="text-sm md:text-base text-charcoal group-hover:opacity-70 transition-opacity">
-                    +55 11 99999-9999
+                    {DATA.contact.phone}
                   </span>
                 </div>
                 <span className="ml-auto text-charcoal/30 group-hover:translate-x-1 transition-transform duration-300">→</span>
@@ -95,7 +96,7 @@ export default function Contact() {
                 </span>
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40 mb-0.5">Localização</span>
-                  <span className="text-sm md:text-base text-charcoal">São Paulo, Brasil</span>
+                  <span className="text-sm md:text-base text-charcoal">{DATA.location}</span>
                 </div>
               </div>
             </div>
