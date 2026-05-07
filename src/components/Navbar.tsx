@@ -55,7 +55,7 @@ export default function Navbar({ items, logoText }: NavbarProps) {
         <nav className="hidden md:flex items-center gap-8">
           {items.map((item) => (
             <div key={item.label} className="group relative">
-              <a href={item.links[0]?.href ?? '#'} className="text-fluid-label font-sans font-bold uppercase tracking-widest text-charcoal/70 hover:text-charcoal transition-colors py-2">
+              <a href={item.links[0]?.href ?? '#'} className="text-fluid-label font-bold uppercase tracking-widest text-charcoal/70 hover:text-charcoal transition-colors py-2">
                 {item.label}
               </a>
             </div>

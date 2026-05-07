@@ -47,7 +47,7 @@ export default function Hero() {
               cursorBlinkDuration={0.4}
             />
           </h1>
-          <p className="hero-subtitle mt-4 md:mt-6 text-fluid-p font-sans font-light tracking-wide text-charcoal/70 max-w-sm">Criamos experiências digitais que unem estética impecável e engenharia de ponta.</p>
+          <p className="hero-subtitle mt-4 md:mt-6 text-fluid-p font-light tracking-wide text-charcoal/70 max-w-sm">Criamos experiências digitais que unem estética impecável e engenharia de ponta.</p>
         </header>
         
         <nav className="w-full max-w-md 3xl:max-w-xl mt-auto shrink-0" aria-label="Main Navigation">

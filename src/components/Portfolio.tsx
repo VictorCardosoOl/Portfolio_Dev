@@ -108,7 +108,7 @@ export default function Portfolio() {
               </Heading>
               
               {/* Descrição Opcional (Se quiser manter da versão anterior) */}
-              <p className="mt-6 text-base md:text-lg font-sans font-light tracking-wide text-white/90 max-w-xl leading-relaxed drop-shadow-md">
+              <p className="mt-6 text-base md:text-lg font-light tracking-wide text-white/90 max-w-xl leading-relaxed drop-shadow-md">
                 {project.description}
               </p>
               

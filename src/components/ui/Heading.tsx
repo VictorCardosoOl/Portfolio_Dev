@@ -7,11 +7,11 @@ const headingVariants = cva(
   {
     variants: {
       size: {
-        huge: "text-[clamp(4rem,12vw,12rem)] leading-[0.9]", // Footer
-        h1: "text-[clamp(3rem,8vw,8rem)] leading-[1.1]", // Hero
-        h2: "text-[clamp(2.5rem,5vw,5rem)] leading-[1.1]", // Mission, Portfolio
-        h3: "text-[clamp(1.5rem,3vw,3rem)] leading-[1.2]", // Section headers
-        h4: "text-[clamp(1.25rem,2vw,2rem)] leading-[1.3]", // Cards
+        huge: "text-fluid-huge",
+        h1: "text-fluid-h1",
+        h2: "text-fluid-h2",
+        h3: "text-fluid-h3",
+        h4: "text-fluid-h4",
       },
       weight: {
         light: "font-light",

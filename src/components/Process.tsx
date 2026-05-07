@@ -99,7 +99,7 @@ const Process: React.FC = () => {
                   <h3 className="text-fluid-h3 font-serif font-light text-[#111] mb-3 tracking-tight">
                    {step.title}
                  </h3>
-                 <p className="text-fluid-p text-[#333] leading-relaxed font-sans max-w-sm">
+                 <p className="text-fluid-p text-[#333] leading-relaxed max-w-sm">
                    {step.description}
                  </p>
               </div>

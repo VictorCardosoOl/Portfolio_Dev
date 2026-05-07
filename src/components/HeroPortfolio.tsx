@@ -72,7 +72,7 @@ export default function HeroPortfolio() {
                       cursorBlinkDuration={0.4}
                     />
                  </h1>
-                  <p className="hero-subtitle mt-4 md:mt-6 text-fluid-p font-sans font-light tracking-wide text-charcoal/70 max-w-sm">
+                  <p className="hero-subtitle mt-4 md:mt-6 text-fluid-p font-light tracking-wide text-charcoal/70 max-w-sm">
                      Crio experiências digitais que unem estética impecável e engenharia de ponta.
                   </p>
               </header>

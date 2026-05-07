@@ -47,7 +47,7 @@ export default function Contact() {
               Vamos<br />
               <span className="italic text-charcoal/30">conversar</span>
             </h2>
-            <p className="text-sm md:text-base font-sans font-light text-charcoal/60 leading-relaxed max-w-xs">
+            <p className="text-sm md:text-base font-light text-charcoal/60 leading-relaxed max-w-xs">
               Disponível para projetos freelance, consultorias e oportunidades de longo prazo.
             </p>
           </div>
@@ -66,7 +66,7 @@ export default function Contact() {
                 </span>
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40 mb-0.5">E-mail</span>
-                  <span className="text-sm md:text-base font-sans text-charcoal group-hover:opacity-70 transition-opacity">
+                  <span className="text-sm md:text-base text-charcoal group-hover:opacity-70 transition-opacity">
                     hello@victorcardoso.com
                   </span>
                 </div>
@@ -82,7 +82,7 @@ export default function Contact() {
                 </span>
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40 mb-0.5">Telefone</span>
-                  <span className="text-sm md:text-base font-sans text-charcoal group-hover:opacity-70 transition-opacity">
+                  <span className="text-sm md:text-base text-charcoal group-hover:opacity-70 transition-opacity">
                     +55 11 99999-9999
                   </span>
                 </div>
@@ -95,7 +95,7 @@ export default function Contact() {
                 </span>
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40 mb-0.5">Localização</span>
-                  <span className="text-sm md:text-base font-sans text-charcoal">São Paulo, Brasil</span>
+                  <span className="text-sm md:text-base text-charcoal">São Paulo, Brasil</span>
                 </div>
               </div>
             </div>
