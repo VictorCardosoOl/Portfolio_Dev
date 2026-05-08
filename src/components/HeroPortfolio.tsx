@@ -56,45 +56,78 @@ export default function HeroPortfolio() {
         {/* ========================================================= */}
         <div className="w-screen h-full shrink-0 flex flex-col md:flex-row relative bg-cream">
            
-           <div className="w-full md:w-1/2 h-full flex flex-col justify-between px-6 pb-4 pt-24 md:px-12 md:pb-6 md:pt-32 3xl:px-24 3xl:pb-12 3xl:pt-40 z-20">
-              <header className="shrink-0 relative z-10">
-                 <h1 
-                   ref={titleRef}
-                   className="text-fluid-h1 font-serif font-medium tracking-tighter uppercase min-h-[160px] md:min-h-[180px] lg:min-h-[240px]"
-                 >
-                    <TextType 
-                      text={["Victor Cardoso"]}
-                      typingSpeed={100}
-                      initialDelay={1000}
-                      loop={false}
-                      showCursor={true}
-                      cursorCharacter="_"
-                      cursorBlinkDuration={0.4}
-                    />
-                 </h1>
-                  <p className="hero-subtitle mt-4 md:mt-6 text-fluid-p font-light tracking-wide text-charcoal/70 max-w-sm">
-                     Crio experiências digitais que unem estética impecável e engenharia de ponta.
-                  </p>
-              </header>
+           <div className="w-full md:w-1/2 h-full flex flex-col justify-center items-center md:items-start px-6 pb-4 pt-24 md:px-12 md:pb-6 md:pt-32 3xl:px-24 3xl:pb-12 3xl:pt-40 z-20 overflow-visible">
               
-              <nav className="w-full max-w-md 3xl:max-w-xl mt-auto shrink-0" aria-label="Main Navigation">
-                 <ul className="text-fluid-label font-medium tracking-wide">
-                    {[
-                       { name: 'Trabalhos', link: '#portfolio', page: '02' },
-                       { name: 'Serviços', link: '#services', page: '03' },
-                       { name: 'Quem Somos', link: '#aboutme', page: '04' },
-                       { name: 'Valores', link: '#values', page: '05' },
-                       { name: 'Contato', link: '#contact', page: '06' },
-                    ].map((item, i) => (
-                       <li key={i} className="border-b border-charcoal/20 last:border-0">
-                          <a href={item.link} className="flex justify-between py-1 md:py-1.5 hover:opacity-60 transition-opacity focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 focus-visible:ring-offset-cream outline-none rounded-sm">
-                             <span>{item.name}</span>
-                             <span>{item.page}</span>
-                          </a>
-                       </li>
-                    ))}
-                 </ul>
-              </nav>
+              {/* PORTFOLIO SVG Graphic */}
+              <div className="relative w-full max-w-[120px] sm:max-w-[140px] md:max-w-[160px] lg:max-w-[180px] mx-auto md:mx-0">
+                <div className="w-full text-charcoal">
+                  <svg viewBox="-40 0 230 450" className="w-full h-auto fill-current">
+                    <defs>
+                      <mask id="hole-p">
+                        <rect x="-100" y="-100" width="500" height="600" fill="white" />
+                        <circle cx="60" cy="30" r="15" fill="black" />
+                      </mask>
+                      <mask id="hole-o1">
+                        <rect x="-100" y="-100" width="500" height="600" fill="white" />
+                        <circle cx="145" cy="50" r="20" fill="black" />
+                      </mask>
+                      <mask id="hole-r">
+                        <rect x="-100" y="-100" width="500" height="600" fill="white" />
+                        <circle cx="60" cy="140" r="15" fill="black" />
+                      </mask>
+                      <mask id="hole-o2">
+                        <rect x="-100" y="-100" width="500" height="600" fill="white" />
+                        <circle cx="145" cy="270" r="20" fill="black" />
+                      </mask>
+                      <mask id="hole-o3">
+                        <rect x="-100" y="-100" width="500" height="600" fill="white" />
+                        <ellipse cx="145" cy="360" rx="20" ry="13.5" fill="black" />
+                      </mask>
+                    </defs>
+
+                    <text x="-95" y="-15" transform="rotate(-90)" fill="currentColor" fontSize="24" fontWeight="bold" letterSpacing="4" fontFamily="sans-serif">2026</text>
+
+                    {/* P */}
+                    <path d="M 0,0 L 60,0 A 30,30 0 0,1 60,60 L 30,60 L 30,100 L 0,100 Z" mask="url(#hole-p)" />
+                    {/* O 1 */}
+                    <circle cx="145" cy="50" r="45" mask="url(#hole-o1)" />
+                    {/* R */}
+                    <path d="M 0,110 L 60,110 A 30,30 0 0,1 60,170 L 30,170 L 30,210 L 0,210 Z" mask="url(#hole-r)" />
+                    <path d="M 30,170 L 60,170 L 90,210 L 60,210 Z" />
+                    {/* T */}
+                    <path d="M 100,110 L 190,110 L 190,140 L 160,140 L 160,210 L 130,210 L 130,140 L 100,140 Z" />
+                    {/* F */}
+                    <path d="M 0,220 L 90,220 L 90,250 L 30,250 L 30,265 L 75,265 L 75,290 L 30,290 L 30,320 L 0,320 Z" />
+                    {/* O 2 */}
+                    <circle cx="145" cy="270" r="45" mask="url(#hole-o2)" />
+                    {/* L */}
+                    <path d="M 0,330 L 30,330 L 30,400 L 190,400 L 190,430 L 0,430 Z" />
+                    {/* I */}
+                    <rect x="50" y="330" width="30" height="60" />
+                    {/* O 3 */}
+                    <ellipse cx="145" cy="360" rx="45" ry="30" mask="url(#hole-o3)" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Name & Subtitle */}
+              <div className="mt-6 md:mt-10 pl-0 w-full max-w-[500px] mx-auto md:mx-0 text-center md:text-left relative z-10">
+                <h1 ref={titleRef} className="text-4xl sm:text-5xl md:text-6xl 3xl:text-7xl font-serif font-medium tracking-tighter uppercase whitespace-pre-line text-charcoal leading-[1.05]">
+                  <TextType 
+                    text={["Victor\nCardoso"]}
+                    typingSpeed={100}
+                    initialDelay={1000}
+                    loop={false}
+                    showCursor={true}
+                    cursorCharacter="_"
+                    cursorBlinkDuration={0.4}
+                  />
+                </h1>
+                <p className="hero-subtitle mt-4 text-sm md:text-base font-medium tracking-widest text-charcoal/60 lowercase">
+                  selected works
+                </p>
+              </div>
+
            </div>
            
            {/* Right Image Area */}

@@ -1,101 +1,145 @@
 import React from 'react';
-import { ArrowUp, MessageCircle } from 'lucide-react';
-import { Heading } from './ui/Heading';
-import DecryptedText from './ui/DecryptedText';
+import { ArrowRight } from 'lucide-react';
 
 const Footer = () => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const currentYear = new Date().getFullYear();
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <footer ref={containerRef} className="bg-cream text-charcoal pt-12 pb-6 flex flex-col justify-between border-t border-charcoal/10">
-      {/* Top Section */}
-      <div className="container-fluid grid grid-cols-1 md:grid-cols-12 gap-8">
-        {/* Col 1: Social & Contact (Span 5) */}
-        <div className="md:col-span-5 flex flex-col gap-6">
-          <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
-            <span className="text-fluid-label uppercase tracking-widest text-charcoal/60 font-bold w-32 shrink-0">Redes Sociais</span>
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-sm font-sans">
-              <a href="#" className="hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal rounded-sm">LinkedIn</a>
-              <a href="#" className="hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal rounded-sm">GitHub</a>
-              <a href="#" className="hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal rounded-sm">Instagram</a>
+    <footer className="bg-cream text-charcoal w-full relative font-sans overflow-hidden border-t border-charcoal/10">
+      
+      {/* 
+        ====================================================
+        DESKTOP LAYOUT
+        ====================================================
+      */}
+      <div className="hidden lg:block w-full h-[38vw] relative">
+        
+        {/* Top Content Row */}
+        <div className="absolute top-[15%] left-[5%] right-[5%] flex justify-between z-10">
+          
+          {/* Left: Newsletter */}
+          <div className="w-[40%]">
+            <h2 className="font-serif text-[2.5vw] leading-none mb-[1.5vw] text-charcoal tracking-normal">Sunshine In Your Inbox</h2>
+            <p className="text-[0.9vw] font-medium text-charcoal mb-[3vw]">Get 25% off your Starter Kit when you sign up</p>
+            
+            <form className="relative w-[70%] border-b border-charcoal pb-[0.5vw] mb-[1.5vw] flex items-center">
+              <input 
+                type="email" 
+                placeholder="Email" 
+                className="w-full bg-transparent outline-none text-[0.9vw] text-charcoal placeholder:text-charcoal font-medium"
+                required
+              />
+              <button 
+                type="submit"
+                className="absolute right-0 top-1/2 -translate-y-1/2 w-[1.8vw] h-[1.8vw] rounded-full border border-charcoal flex items-center justify-center transition-colors hover:bg-charcoal hover:text-cream"
+                aria-label="Subscribe"
+              >
+                 <ArrowRight className="w-[1vw] h-[1vw]" strokeWidth={1.5} />
+              </button>
+            </form>
+            
+            <p className="text-[0.7vw] text-charcoal leading-[1.4] max-w-[70%]">
+              You can unsubscribe by using the unsubscribe link.<br/>
+              Victor's <a href="#" className="underline hover:opacity-70">Privacy Policy</a> applies and sets out your rights.
+            </p>
+          </div>
+
+          {/* Right: 2 Columns */}
+          <div className="w-[30%] flex justify-end gap-[6vw]">
+            <div className="flex flex-col gap-[0.8vw]">
+              <h4 className="text-[0.9vw] font-semibold text-charcoal mb-[0.5vw]">Navegação</h4>
+              <a href="#" className="text-[0.8vw] text-charcoal hover:opacity-70">Home</a>
+              <a href="#portfolio" className="text-[0.8vw] text-charcoal hover:opacity-70">Projetos</a>
+              <a href="#mission" className="text-[0.8vw] text-charcoal hover:opacity-70">Sobre</a>
+              <a href="#services" className="text-[0.8vw] text-charcoal hover:opacity-70">Serviços</a>
+            </div>
+            <div className="flex flex-col gap-[0.8vw]">
+              <h4 className="text-[0.9vw] font-semibold text-charcoal mb-[0.5vw]">Contato</h4>
+              <a href="#" className="text-[0.8vw] text-charcoal hover:opacity-70">LinkedIn</a>
+              <a href="#" className="text-[0.8vw] text-charcoal hover:opacity-70">GitHub</a>
+              <a href="#" className="text-[0.8vw] text-charcoal hover:opacity-70">Instagram</a>
+              <a href="mailto:hello@victorcardoso.com" className="text-[0.8vw] text-charcoal hover:opacity-70">Email</a>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
-            <span className="text-fluid-label uppercase tracking-widest text-charcoal/60 font-bold w-32 shrink-0">Diga Olá</span>
-            <a href="mailto:hello@victorcardoso.com" className="text-sm font-sans hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal rounded-sm">hello@victorcardoso.com</a>
+        </div>
+
+        {/* Huge Logo Text - Adjusted so it doesn't get cut off */}
+        <div className="absolute right-[5%] bottom-[8%] z-0 pointer-events-none select-none flex justify-end">
+          <h1 className="font-serif text-[24vw] text-charcoal m-0 p-0 leading-[0.8] tracking-tight lowercase">
+            clevr
+          </h1>
+        </div>
+
+        {/* Bottom Copyright Row */}
+        <div className="absolute bottom-[6%] left-[5%] flex gap-[2.5vw] text-[0.7vw] text-charcoal z-10 w-[40%]">
+          <span>&copy; 2026 Victor Cardoso</span>
+          <a href="#" className="hover:opacity-70">Privacy Policy</a>
+          <span className="ml-auto">Design & Engenharia</span>
+        </div>
+      </div>
+
+      {/* 
+        ====================================================
+        MOBILE LAYOUT
+        ====================================================
+      */}
+      <div className="block lg:hidden w-full px-6 pt-16 pb-8">
+        <div className="flex flex-col gap-16 relative z-10">
+          
+          <div className="w-full">
+            <h2 className="font-serif text-3xl leading-none mb-4 text-charcoal">Sunshine In Your Inbox</h2>
+            <p className="text-sm font-medium text-charcoal mb-8">Get 25% off your Starter Kit when you sign up</p>
+            
+            <form className="relative w-full border-b border-charcoal pb-2 mb-4 flex items-center">
+              <input 
+                type="email" 
+                placeholder="Email" 
+                className="w-full bg-transparent outline-none text-sm text-charcoal placeholder:text-charcoal font-medium"
+                required
+              />
+              <button 
+                type="submit"
+                className="absolute right-0 w-8 h-8 rounded-full border border-charcoal flex items-center justify-center transition-colors hover:bg-charcoal hover:text-cream"
+              >
+                 <ArrowRight size={14} strokeWidth={1.5} />
+              </button>
+            </form>
+            
+            <p className="text-[10px] text-charcoal leading-relaxed max-w-xs">
+              You can unsubscribe by using the unsubscribe link.<br/>
+              Victor's <a href="#" className="underline">Privacy Policy</a> applies and sets out your rights.
+            </p>
+          </div>
+
+          <div className="w-full grid grid-cols-2 gap-8">
+            <div className="flex flex-col gap-3">
+              <h4 className="text-sm font-semibold text-charcoal mb-2">Navegação</h4>
+              <a href="#" className="text-sm text-charcoal">Home</a>
+              <a href="#portfolio" className="text-sm text-charcoal">Projetos</a>
+              <a href="#mission" className="text-sm text-charcoal">Sobre</a>
+              <a href="#services" className="text-sm text-charcoal">Serviços</a>
+            </div>
+            <div className="flex flex-col gap-3">
+              <h4 className="text-sm font-semibold text-charcoal mb-2">Contato</h4>
+              <a href="#" className="text-sm text-charcoal">LinkedIn</a>
+              <a href="#" className="text-sm text-charcoal">GitHub</a>
+              <a href="#" className="text-sm text-charcoal">Instagram</a>
+              <a href="mailto:hello@victorcardoso.com" className="text-sm text-charcoal">Email</a>
+            </div>
           </div>
         </div>
 
-        {/* Col 2: Studio (Span 3) */}
-        <div className="md:col-span-3 flex flex-col gap-4">
-          <span className="text-fluid-label uppercase tracking-widest text-charcoal/60 font-bold">O Estúdio</span>
-          <div className="text-sm font-sans leading-relaxed">
-            <p className="font-serif text-lg italic mb-1">Victor Cardoso</p>
-            <p className="text-charcoal/70">São Paulo</p>
-            <p className="text-charcoal/70">Brasil</p>
-          </div>
+        <div className="w-full flex justify-end mt-20 mb-8 relative z-0 pointer-events-none select-none">
+          <h1 className="font-serif text-[45vw] text-charcoal m-0 p-0 leading-[0.8] tracking-tight lowercase">
+            clevr
+          </h1>
         </div>
 
-        {/* Col 3: Navigation (Span 4) */}
-        <div className="md:col-span-4 flex flex-col sm:flex-row flex-wrap justify-start md:justify-end gap-x-8 gap-y-4 text-fluid-label font-bold uppercase tracking-widest">
-          <a href="#" className="hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal rounded-sm">Home</a>
-          <a href="#portfolio" className="hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal rounded-sm">Projetos</a>
-          <a href="#mission" className="hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal rounded-sm">Sobre</a>
-          <a href="#services" className="hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal rounded-sm">Serviços</a>
+        <div className="w-full flex flex-col gap-3 text-xs text-charcoal relative z-10">
+          <span>&copy; 2026 Victor Cardoso</span>
+          <a href="#">Privacy Policy</a>
+          <span>Design & Engenharia</span>
         </div>
       </div>
 
-      {/* Middle Section: Huge Typography */}
-      <div className="flex-grow flex items-center justify-center py-8 md:py-10 w-full overflow-hidden">
-        <Heading size="huge" className="select-none text-center w-full flex justify-center uppercase">
-          <DecryptedText 
-            text="VICTOR CARDOSO"
-            speed={60}
-            maxIterations={15}
-            characters="A&C1234!?"
-            animateOn="view"
-            revealDirection="center"
-          />
-        </Heading>
-      </div>
-
-      {/* Bottom Section */}
-      <div className="flex justify-between items-end w-full max-w-[1920px] mx-auto">
-        {/* Left: Spacer to keep center alignment */}
-        <div className="w-[144px] hidden md:block shrink-0"></div>
-
-        {/* Center: Copyright */}
-        <div className="text-xs text-charcoal/60 pb-4 text-center hidden md:block">
-          &copy; {currentYear} Victor Cardoso | Design & Engenharia
-        </div>
-
-        {/* Right: Buttons */}
-        <div className="flex gap-4 shrink-0 ml-auto md:ml-0">
-          <button 
-            onClick={scrollToTop}
-            className="w-16 h-16 rounded-full border border-charcoal/10 bg-white flex items-center justify-center hover:bg-charcoal/5 transition-colors focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 focus-visible:ring-offset-cream outline-none"
-            aria-label="Scroll to top"
-          >
-            <ArrowUp size={20} className="text-charcoal stroke-[1.5]" />
-          </button>
-          <button 
-            className="w-16 h-16 rounded-full bg-black flex items-center justify-center hover:bg-black/80 transition-colors focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 focus-visible:ring-offset-cream outline-none"
-            aria-label="Chat"
-          >
-            <MessageCircle size={24} className="text-white stroke-[1.5]" />
-          </button>
-        </div>
-      </div>
-      
-      {/* Mobile Copyright */}
-      <div className="text-xs text-charcoal/60 mt-8 text-center md:hidden">
-        &copy; {currentYear} Victor Cardoso | Design & Engenharia
-      </div>
     </footer>
   );
 };
