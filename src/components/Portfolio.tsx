@@ -8,7 +8,6 @@ import { Heading } from './ui/Heading';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// 1. Inversão de controle: quem importa o componente decide o que o botão faz
 interface PortfolioProps {
   onOpenProject?: (projectId: string) => void;
 }
@@ -21,11 +20,9 @@ export default function Portfolio({ onOpenProject }: PortfolioProps) {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    // Usamos gsap.context para o gerenciamento de memória (cleanup automático)
     const ctx = gsap.context(() => {
       const getScrollAmount = () => window.innerWidth * (projects.length - 1);
 
-      // Animação horizontal ancorada ao scroll vertical
       const horizontalAnim = gsap.to(container, {
         x: () => -getScrollAmount(),
         ease: "none",
@@ -35,11 +32,10 @@ export default function Portfolio({ onOpenProject }: PortfolioProps) {
           scrub: 1,
           start: "top top",
           end: () => `+=${getScrollAmount()}`,
-          invalidateOnRefresh: true, // Recalcula proporções ao redimensionar a tela
+          invalidateOnRefresh: true,
         }
       });
 
-      // Animações de revelação dos textos com escopo confinado aos cartões
       const cards = gsap.utils.toArray<HTMLElement>('.portfolio-card');
       cards.forEach((card) => {
         const textElements = card.querySelectorAll('.portfolio-text-reveal > *');
@@ -58,23 +54,17 @@ export default function Portfolio({ onOpenProject }: PortfolioProps) {
         });
       });
 
-      // 2. Solução Enterprise para o "setTimeout":
-      // Ao invés de adivinhar o tempo, usamos um ResizeObserver para atualizar
-      // o ScrollTrigger sempre que a altura do container principal de fato mudar
-      // (ex: imagens sendo injetadas ou fontes terminando o load).
       const resizeObserver = new ResizeObserver(() => {
         ScrollTrigger.refresh();
       });
       resizeObserver.observe(container);
 
-      // Opcional: limpeza do observer acoplada ao contexto do gsap
       return () => resizeObserver.disconnect();
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
-  // Handler seguro para o clique
   const handleViewProject = (title: string) => {
     if (onOpenProject) {
       onOpenProject(title);
@@ -128,7 +118,6 @@ export default function Portfolio({ onOpenProject }: PortfolioProps) {
               </p>
               
               <div className="mt-10">
-                {/* 3. Substituição do alert pelo handleViewProject seguro */}
                 <Button 
                   variant="whiteOutline" 
                   size="lg" 

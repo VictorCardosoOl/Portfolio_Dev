@@ -29,11 +29,7 @@ export default function SmoothScroll({ isLocked = false }: { isLocked?: boolean 
       infinite: false,
     });
 
-    if (isLocked) {
-      lenis.stop();
-    } else {
-      lenis.start();
-    }
+    isLocked ? lenis.stop() : lenis.start();
 
     lenis.on('scroll', ScrollTrigger.update);
 

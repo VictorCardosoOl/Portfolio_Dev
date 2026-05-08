@@ -38,8 +38,6 @@ export default function Contact() {
     >
       <div className="container-fluid">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-
-          {/* Título */}
           <div className="lg:col-span-5 flex flex-col contact-reveal">
             <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-charcoal/40 mb-4 block">
               06 / Contato
@@ -53,10 +51,7 @@ export default function Contact() {
             </p>
           </div>
 
-          {/* Informações de contato */}
           <div className="lg:col-span-7 flex flex-col gap-10">
-
-            {/* Links diretos */}
             <div className="contact-reveal flex flex-col gap-4">
               <a
                 href={`mailto:${DATA.contact.email}`}
@@ -101,7 +96,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Redes sociais */}
             <div className="contact-reveal flex items-center gap-4">
               <a
                 href="#"

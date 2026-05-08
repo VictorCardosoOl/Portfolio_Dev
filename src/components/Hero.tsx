@@ -8,7 +8,6 @@ export default function Hero() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Subtitle fade up
       gsap.from(".hero-subtitle", {
         y: 20,
         opacity: 0,
@@ -17,7 +16,6 @@ export default function Hero() {
         delay: 0.5
       });
 
-      // Fade in nav items one by one
       gsap.from("nav li", {
         x: -20,
         opacity: 0,
@@ -33,7 +31,6 @@ export default function Hero() {
 
   return (
     <section id="hero" ref={containerRef} className="min-h-[100dvh] w-full grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 overflow-hidden">
-      {/* Left Panel - Cream */}
       <div className="bg-cream px-6 pb-6 pt-24 md:px-12 md:pb-8 md:pt-32 3xl:px-24 3xl:pt-40 flex flex-col justify-between min-h-[50dvh] md:min-h-full relative">
         <header className="shrink-0 relative z-10">
           <h1 className="text-fluid-h1 font-serif font-medium tracking-tighter uppercase min-h-[160px] md:min-h-[180px] lg:min-h-[240px]">
@@ -70,7 +67,6 @@ export default function Hero() {
         </nav>
       </div>
 
-      {/* Right Panel - Charcoal */}
       <div className="bg-charcoal text-cream px-6 pb-6 pt-6 md:px-12 md:pb-8 md:pt-32 3xl:px-24 3xl:pt-40 flex flex-col min-h-[50dvh] md:min-h-full relative">
         <div className="flex justify-between text-fluid-label uppercase tracking-widest opacity-80 font-bold shrink-0">
           <span>Estúdio de Design</span>
@@ -85,7 +81,6 @@ export default function Hero() {
               alt="Minimalist Architecture" 
               className="hero-image-main w-full h-full object-cover scale-110 grayscale hover:grayscale-0 transition-all duration-1000"
             />
-            {/* Overlapping smaller image for editorial feel */}
             <div className="absolute -bottom-6 -left-6 md:-bottom-12 md:-left-12 w-2/3 aspect-square border-4 border-charcoal z-10 shadow-2xl overflow-hidden bg-stone-800">
               <Image 
                 src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=800&auto=format&fit=crop" 
