@@ -59,7 +59,7 @@ export default function HeroPortfolio() {
            <div className="w-full md:w-1/2 h-full flex flex-col justify-center items-center md:items-start px-6 pb-4 pt-24 md:px-12 md:pb-6 md:pt-32 3xl:px-24 3xl:pb-12 3xl:pt-40 z-20 overflow-visible">
               
               {/* PORTFOLIO SVG Graphic */}
-              <div className="relative w-full max-w-[120px] sm:max-w-[140px] md:max-w-[160px] lg:max-w-[180px] mx-auto md:mx-0">
+              <div className="relative w-full max-w-[180px] sm:max-w-[200px] md:max-w-[230px] lg:max-w-[260px] mx-auto md:mx-0 -mt-10 md:-mt-20 -mb-8 md:-mb-16">
                 <div className="w-full text-charcoal">
                   <svg viewBox="-40 0 230 450" className="w-full h-auto fill-current">
                     <defs>
