@@ -64,11 +64,11 @@ const Footer = () => {
         {/* Huge Logo Text - Adjusted so it doesn't get cut off */}
         <div className="absolute right-[5%] bottom-[8%] z-0 pointer-events-none select-none flex justify-end">
           <h1 className="font-serif text-[24vw] text-charcoal m-0 p-0 leading-[0.8] tracking-tight lowercase">
-            <span className="blur-[12px] opacity-60">c</span>
-            <span className="blur-[4px] opacity-80">r</span>
-            <span>a</span>
-            <span className="blur-[8px] opacity-70">f</span>
-            <span className="blur-[2px] opacity-90">t</span>
+            <span className="blur-[16px] opacity-40">c</span>
+            <span className="blur-[12px] opacity-50">r</span>
+            <span className="blur-[8px] opacity-70">a</span>
+            <span className="blur-[4px] opacity-85">f</span>
+            <span className="blur-[2px] opacity-95">t</span>
           </h1>
         </div>
 
@@ -133,11 +133,11 @@ const Footer = () => {
 
         <div className="w-full flex justify-end mt-20 mb-8 relative z-0 pointer-events-none select-none">
           <h1 className="font-serif text-[45vw] text-charcoal m-0 p-0 leading-[0.8] tracking-tight lowercase">
-            <span className="blur-[12px] opacity-60">c</span>
-            <span className="blur-[4px] opacity-80">r</span>
-            <span>a</span>
-            <span className="blur-[8px] opacity-70">f</span>
-            <span className="blur-[2px] opacity-90">t</span>
+            <span className="blur-[16px] opacity-40">c</span>
+            <span className="blur-[12px] opacity-50">r</span>
+            <span className="blur-[8px] opacity-70">a</span>
+            <span className="blur-[4px] opacity-85">f</span>
+            <span className="blur-[2px] opacity-95">t</span>
           </h1>
         </div>
 
