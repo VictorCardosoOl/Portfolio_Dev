@@ -12,7 +12,6 @@ import Process from './components/Process';
 import AboutMe from './components/AboutMe';
 import Values from './components/Values';
 import FAQSection from './components/FAQSection';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -73,7 +72,6 @@ export default function App() {
         <ErrorBoundary><AboutMe /></ErrorBoundary>
         <ErrorBoundary><Values /></ErrorBoundary>
         <ErrorBoundary><FAQSection /></ErrorBoundary>
-        <ErrorBoundary><Contact /></ErrorBoundary>
         <ErrorBoundary><Footer /></ErrorBoundary>
       </div>
     </main>
