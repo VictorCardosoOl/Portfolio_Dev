@@ -1,88 +1,89 @@
 import React from 'react';
-import { ArrowRight, Instagram, Linkedin, Github } from 'lucide-react';
 import { PROFILE_DATA as DATA } from '../config/profile';
 
 const Footer = () => {
   return (
-    <footer id="contact" className="relative w-full bg-stone-950 text-stone-300 overflow-hidden font-sans border-t border-stone-800">
+    <footer id="contact" className="w-full bg-[#fcfcfc] text-black font-sans overflow-hidden">
       
-      {/* 1. Fundo e Textura (Noise SVG) */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.05] mix-blend-overlay">
-        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-          <filter id="noise">
-            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#noise)" />
-        </svg>
-      </div>
-
-      {/* 3. Layout (Grid) */}
-      <div className="relative z-10 w-full max-w-screen-2xl mx-auto px-6 lg:px-12 pt-24 pb-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-0 lg:divide-x divide-stone-800">
-          
-          {/* Col 1: Identidade */}
-          <div className="flex flex-col lg:pr-12">
-            <h2 className="font-serif text-4xl lg:text-5xl text-stone-100 mb-2">{DATA.name}</h2>
-            <p className="font-serif italic text-stone-500 text-lg">Design & Engenharia</p>
-          </div>
-
-          {/* Col 2: Local/CTA */}
-          <div className="flex flex-col lg:px-12">
-            <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-stone-500 font-bold mb-6">Iniciar Projeto</span>
-            <p className="text-sm md:text-base font-light text-stone-400 mb-8 leading-relaxed max-w-sm">
-              Atualmente disponível para novos projetos de design e engenharia criativa. Diga olá.
-            </p>
-            <a 
-              href={`mailto:${DATA.contact.email}`} 
-              className="group inline-flex items-center gap-3 text-stone-100 font-medium w-fit border-b border-stone-700 pb-2 hover:border-stone-300 transition-colors"
-            >
-              Vamos conversar
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
-
-          {/* Col 3: Social */}
-          <div className="flex flex-col lg:px-12">
-            <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-stone-500 font-bold mb-6">Social</span>
-            <div className="flex flex-col gap-4">
-              <a href={DATA.socials.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-stone-400 hover:text-white transition-colors group">
-                <Linkedin size={18} className="group-hover:scale-110 transition-transform" />
-                <span className="text-sm font-light">LinkedIn</span>
-              </a>
-              <a href={DATA.socials.github} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-stone-400 hover:text-white transition-colors group">
-                <Github size={18} className="group-hover:scale-110 transition-transform" />
-                <span className="text-sm font-light">GitHub</span>
-              </a>
-              <a href="#" className="flex items-center gap-3 text-stone-400 hover:text-white transition-colors group">
-                <Instagram size={18} className="group-hover:scale-110 transition-transform" />
-                <span className="text-sm font-light">Instagram</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Col 4: Menu/Créditos */}
-          <div className="flex flex-col lg:pl-12">
-            <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-stone-500 font-bold mb-6">Navegação</span>
-            <nav className="flex flex-col gap-4 mb-auto">
-              <a href="#" className="text-sm font-light text-stone-400 hover:text-white hover:translate-x-2 transition-all w-fit">Home</a>
-              <a href="#portfolio" className="text-sm font-light text-stone-400 hover:text-white hover:translate-x-2 transition-all w-fit">Projetos</a>
-              <a href="#mission" className="text-sm font-light text-stone-400 hover:text-white hover:translate-x-2 transition-all w-fit">Sobre</a>
-              <a href="#services" className="text-sm font-light text-stone-400 hover:text-white hover:translate-x-2 transition-all w-fit">Serviços</a>
-            </nav>
-
-            <div className="mt-12 text-xs text-stone-600 font-light flex flex-col gap-1">
-              <span>&copy; {new Date().getFullYear()} {DATA.name}.</span>
-              <span>Todos os direitos reservados.</span>
-            </div>
-          </div>
-
+      {/* Top Header */}
+      <div className="flex justify-between items-start px-4 md:px-8 pt-8 pb-12 md:pb-24">
+        {/* Empty left space for balance */}
+        <div className="hidden md:block w-1/3"></div>
+        
+        {/* Center Logo */}
+        <div className="w-full md:w-1/3 text-center">
+          <span className="uppercase font-bold tracking-widest text-lg">
+            {DATA.name.split(' ')[0]} {DATA.name.split(' ')[1]}
+          </span>
+        </div>
+        
+        {/* Right Links */}
+        <div className="hidden md:flex w-1/3 justify-end gap-6 text-sm text-stone-500">
+          <a href={DATA.resumeLink} target="_blank" rel="noreferrer" className="hover:text-black transition-colors">resume (pdf)</a>
         </div>
       </div>
 
-      {/* 2. Tipografia de Fundo */}
-      <div className="absolute bottom-[-6%] left-0 w-full flex justify-center pointer-events-none select-none overflow-hidden z-0">
-        <h1 className="font-serif text-[18vw] text-stone-900 opacity-80 m-0 p-0 leading-none tracking-tighter uppercase whitespace-nowrap">
-          {DATA.name.split(' ')[0]}
+      {/* Grid Content */}
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-x-4 gap-y-12 px-4 md:px-8 pb-20 md:pb-32">
+        
+        {/* Col 1: Menu */}
+        <div className="col-span-2 md:col-span-1 flex flex-col gap-[2px] text-sm text-stone-600">
+          <a href="#" className="hover:text-black transition-colors w-fit">home</a>
+          <a href="#portfolio" className="hover:text-black transition-colors w-fit">projects</a>
+          <a href="#services" className="hover:text-black transition-colors w-fit">services</a>
+          <a href="#mission" className="hover:text-black transition-colors w-fit">about {DATA.name.split(' ')[0]}</a>
+          <a href="#contact" className="text-black underline w-fit mt-1">contacts</a>
+        </div>
+
+        {/* Col 2: MAIL */}
+        <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
+          <h3 className="uppercase text-lg md:text-xl text-black">MAIL</h3>
+          <a href={`mailto:${DATA.contact.email}`} className="text-sm text-stone-600 hover:text-black transition-colors">
+            {DATA.contact.email}
+          </a>
+        </div>
+
+        {/* Col 3: PHONE */}
+        <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
+          <h3 className="uppercase text-lg md:text-xl text-black">PHONE</h3>
+          <div className="flex flex-col gap-1">
+            <a href={`tel:${DATA.contact.phone.replace(/\D/g, '')}`} className="text-sm text-stone-600 hover:text-black transition-colors">
+              {DATA.contact.phone}
+            </a>
+          </div>
+        </div>
+
+        {/* Col 4: SOCIAL MEDIA */}
+        <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
+          <h3 className="uppercase text-lg md:text-xl text-black">SOCIAL MEDIA</h3>
+          <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm text-stone-600">
+            <span>in</span>
+            <a href={DATA.socials.linkedin} target="_blank" rel="noreferrer" className="hover:text-black transition-colors">
+              @victorcardoso
+            </a>
+            <span>gh</span>
+            <a href={DATA.socials.github} target="_blank" rel="noreferrer" className="hover:text-black transition-colors">
+              @VictorCardosoOl
+            </a>
+          </div>
+        </div>
+
+        {/* Col 5: ADDRESS */}
+        <div className="col-span-2 md:col-span-2 flex flex-col gap-4">
+          <h3 className="uppercase text-lg md:text-xl text-black">ADDRESS</h3>
+          <p className="text-sm text-stone-600 leading-relaxed">
+            {DATA.location}<br />
+            Available for remote work<br />
+            Mon//Fri 9am//6pm
+          </p>
+        </div>
+
+      </div>
+
+      {/* Huge Bottom Text */}
+      <div className="w-full px-2 md:px-4 pb-4 flex items-end justify-center overflow-hidden">
+        <h1 className="text-[13.5vw] leading-[0.8] tracking-tight font-medium text-black m-0 p-0 whitespace-nowrap">
+          //our contacts
         </h1>
       </div>
 
