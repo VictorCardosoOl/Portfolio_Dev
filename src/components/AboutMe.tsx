@@ -133,6 +133,7 @@ const AboutMe: React.FC = () => {
   const img1Ref = useRef<HTMLImageElement>(null);
   const img2Ref = useRef<HTMLImageElement>(null);
   const img3Ref = useRef<HTMLImageElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const modalWrapperRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const modalContentRef = useRef<HTMLDivElement>(null);
@@ -155,7 +156,41 @@ const AboutMe: React.FC = () => {
     }
   }, [isResumeOpen]);
 
-  // Purged GSAP for static validation
+  // Horizontal Scroll Setup
+  useEffect(() => {
+    // Only apply on desktop
+    const mm = gsap.matchMedia();
+    
+    mm.add("(min-width: 768px)", () => {
+      if (!sectionRef.current || !carouselRef.current) return;
+      
+      const getScrollAmount = () => {
+        const carouselWidth = carouselRef.current!.scrollWidth;
+        // The visible part of the carousel is 55vw (from md:w-[55%])
+        const visibleWidth = window.innerWidth * 0.55;
+        return carouselWidth - visibleWidth + 100; // +100 for padding
+      };
+      
+      const tween = gsap.to(carouselRef.current, {
+        x: () => -getScrollAmount(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          pin: true,
+          scrub: 1,
+          start: "top top",
+          end: () => `+=${getScrollAmount()}`,
+          invalidateOnRefresh: true
+        }
+      });
+      
+      return () => {
+        tween.kill();
+      };
+    });
+    
+    return () => mm.revert();
+  }, []);
 
   // Bloquear o scroll do body quando o modal abrir
   useEffect(() => {
@@ -179,7 +214,7 @@ const AboutMe: React.FC = () => {
         </div>
 
         {/* Left Side */}
-        <div className="w-full md:w-[45%] h-[40vh] md:h-screen relative flex flex-col justify-between p-8 md:p-16 z-10">
+        <div className="w-full md:w-[45%] h-[40vh] md:h-screen relative flex flex-col justify-between p-8 md:p-16 z-20 pointer-events-none">
           
           {/* Sideways text */}
           <div className="hidden md:block absolute left-16 top-1/2 -translate-y-1/2 -rotate-90 origin-left text-xs font-serif tracking-widest text-black/60">
@@ -200,7 +235,11 @@ const AboutMe: React.FC = () => {
         </div>
 
         {/* Right Side (Carousel) */}
-        <div className="w-full md:w-[55%] h-[60vh] md:h-screen flex items-center gap-8 md:gap-16 px-8 md:pl-24 md:pr-16 overflow-x-auto snap-x snap-mandatory z-10 pb-8 md:pb-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <div 
+          ref={carouselRef}
+          className="w-full md:w-[55%] h-[60vh] md:h-screen flex items-center gap-8 md:gap-16 px-8 md:pl-24 md:pr-32 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none z-10 pb-8 md:pb-0" 
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
           
           <style>{`
             #aboutme ::-webkit-scrollbar { display: none; }

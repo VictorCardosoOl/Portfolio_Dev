@@ -13,6 +13,7 @@ import AboutMe from './components/AboutMe';
 import Values from './components/Values';
 import FAQSection from './components/FAQSection';
 import Footer from './components/Footer';
+import CustomCursor from './components/ui/CustomCursor';
 
 export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -50,11 +51,13 @@ export default function App() {
   }, [isLoaded]);
 
   return (
-    <main className="w-full min-h-screen bg-cream text-charcoal selection:bg-charcoal selection:text-cream">
+    <main className="w-full min-h-screen bg-cream text-charcoal selection:bg-charcoal selection:text-cream cursor-none">
+      <CustomCursor />
+      
       {/* Wayfinding: Progress Bar */}
       <div
         ref={progressRef}
-        className="fixed top-0 left-0 right-0 h-[2px] bg-charcoal z-[60] origin-left scale-x-0"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-charcoal z-[60] origin-left scale-x-0 pointer-events-none"
       />
 
       <SmoothScroll isLocked={!isLoaded} />

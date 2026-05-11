@@ -1,5 +1,5 @@
-import React from 'react';
 import { PROFILE_DATA as DATA } from '../config/profile';
+import { MagneticButton } from './ui/MagneticButton';
 
 const Footer = () => {
   return (
@@ -36,11 +36,13 @@ const Footer = () => {
         </div>
 
         {/* Col 2: MAIL */}
-        <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
+        <div className="col-span-2 md:col-span-1 flex flex-col gap-4 items-start">
           <h3 className="uppercase text-lg md:text-xl text-black">MAIL</h3>
-          <a href={`mailto:${DATA.contact.email}`} className="text-sm text-stone-600 hover:text-black transition-colors">
-            {DATA.contact.email}
-          </a>
+          <MagneticButton>
+            <a href={`mailto:${DATA.contact.email}`} className="text-sm text-stone-600 hover:text-black transition-colors block p-2 -ml-2">
+              {DATA.contact.email}
+            </a>
+          </MagneticButton>
         </div>
 
         {/* Col 3: PHONE */}
@@ -54,17 +56,21 @@ const Footer = () => {
         </div>
 
         {/* Col 4: SOCIAL MEDIA */}
-        <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
+        <div className="col-span-2 md:col-span-1 flex flex-col gap-4 items-start">
           <h3 className="uppercase text-lg md:text-xl text-black">SOCIAL MEDIA</h3>
           <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm text-stone-600">
-            <span>in</span>
-            <a href={DATA.socials.linkedin} target="_blank" rel="noreferrer" className="hover:text-black transition-colors">
-              @victorcardoso
-            </a>
-            <span>gh</span>
-            <a href={DATA.socials.github} target="_blank" rel="noreferrer" className="hover:text-black transition-colors">
-              @VictorCardosoOl
-            </a>
+            <span className="pt-2">in</span>
+            <MagneticButton>
+              <a href={DATA.socials.linkedin} target="_blank" rel="noreferrer" className="hover:text-black transition-colors block p-2 -ml-2">
+                @victorcardoso
+              </a>
+            </MagneticButton>
+            <span className="pt-2">gh</span>
+            <MagneticButton>
+              <a href={DATA.socials.github} target="_blank" rel="noreferrer" className="hover:text-black transition-colors block p-2 -ml-2">
+                @VictorCardosoOl
+              </a>
+            </MagneticButton>
           </div>
         </div>
 

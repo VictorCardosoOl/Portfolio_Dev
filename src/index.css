@@ -33,19 +33,22 @@
 @utility text-fluid-huge {
   /* Títulos Gigantes (Footer): 64px → 192px */
   font-size: clamp(4rem, 12vw, 12rem);
-  line-height: 0.9;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
 }
 
 @utility text-fluid-h1 {
   /* Títulos Hero: 48px → 144px */
   font-size: clamp(3rem, 8vw, 9rem);
   line-height: 0.9;
+  letter-spacing: -0.04em;
 }
 
 @utility text-fluid-h2 {
   /* Títulos de seção: 40px → 96px */
   font-size: clamp(2.5rem, 5vw, 6rem);
   line-height: 1;
+  letter-spacing: -0.03em;
 }
 
 @utility text-fluid-h3 {
@@ -76,6 +79,9 @@
   /* Labels, tags, captions: 10px → 13px */
   font-size: clamp(0.625rem, 0.9vw, 0.8125rem);
   line-height: 1.4;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 @utility section-padding {
