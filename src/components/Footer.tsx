@@ -3,7 +3,7 @@ import { PROFILE_DATA as DATA } from '../config/profile';
 
 const Footer = () => {
   return (
-    <footer id="contact" className="w-full bg-[#fcfcfc] text-black font-sans overflow-hidden">
+    <footer id="contact" className="w-full min-h-screen flex flex-col justify-between bg-[#fcfcfc] text-black font-sans overflow-hidden">
       
       {/* Top Header */}
       <div className="flex justify-between items-start px-4 md:px-8 pt-8 pb-12 md:pb-24">

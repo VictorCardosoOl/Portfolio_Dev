@@ -166,46 +166,84 @@ const AboutMe: React.FC = () => {
 
   return (
     <>
-      <section ref={sectionRef} id="aboutme" className="bg-white py-12 md:py-16 flex flex-col justify-center relative z-10 overflow-hidden">
-        <div className="container-fluid relative z-10">
+      <section ref={sectionRef} id="aboutme" className="bg-[#fcfcfc] min-h-screen flex flex-col md:flex-row relative z-10 overflow-hidden font-sans border-t border-black/5">
+        
+        {/* Fundo e Textura (Noise SVG) */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.04] mix-blend-overlay">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <filter id="noise-about">
+              <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
+            </filter>
+            <rect width="100%" height="100%" filter="url(#noise-about)" />
+          </svg>
+        </div>
+
+        {/* Left Side */}
+        <div className="w-full md:w-[45%] h-[40vh] md:h-screen relative flex flex-col justify-between p-8 md:p-16 z-10">
           
-          {/* Header Texto */}
-          <div className="mb-8 md:mb-10 flex flex-col">
-            <h2 className="text-fluid-h3 font-serif font-light leading-[1.3] tracking-tight text-[#666] mb-8 max-w-2xl">
-              Sou <span className="font-semibold text-[#111]">Victor Cardoso</span>, especialista em <span className="font-semibold text-[#111]">Análise</span> de<br className="hidden lg:block" />
-              <span className="font-semibold text-[#111]">Sistemas</span> e <span className="font-semibold text-[#111]">Liderança Operacional</span>.<br className="hidden lg:block" />
-              Transformo <span className="font-semibold text-[#111]">complexidade</span> técnica em<br className="hidden lg:block" />
-              <span className="font-semibold text-[#111]">eficiência</span> de negócio, unindo habilidades<br className="hidden lg:block" />
-              analíticas e estratégia para entregar <span className="font-semibold text-[#111]">resultados</span><br className="hidden lg:block" />
-              reais.
-            </h2>
-            
-            <div className="w-full mt-auto">
-              <h3 className="text-fluid-label font-bold uppercase tracking-[0.2em] text-[#111] mb-4 pl-1">
-                Sobre Mim
-              </h3>
-              <div className="w-full h-px bg-[#111]/20" />
+          {/* Sideways text */}
+          <div className="hidden md:block absolute left-16 top-1/2 -translate-y-1/2 -rotate-90 origin-left text-xs font-serif tracking-widest text-black/60">
+            About Me +
+          </div>
+
+          <div /> {/* Spacer */}
+
+          {/* Huge Text */}
+          <h1 className="font-serif font-bold text-[30vw] md:text-[16vw] leading-[0.75] tracking-tight text-black md:-ml-4">
+            about.
+          </h1>
+        </div>
+
+        {/* Center "Slide" Button */}
+        <div className="hidden md:flex absolute left-[45%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border border-black/20 items-center justify-center text-xs font-serif z-20 bg-[#fcfcfc]/80 backdrop-blur-md pointer-events-none">
+          Slide
+        </div>
+
+        {/* Right Side (Carousel) */}
+        <div className="w-full md:w-[55%] h-[60vh] md:h-screen flex items-center gap-8 md:gap-16 px-8 md:pl-24 md:pr-16 overflow-x-auto snap-x snap-mandatory z-10 pb-8 md:pb-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          
+          <style>{`
+            #aboutme ::-webkit-scrollbar { display: none; }
+          `}</style>
+
+          {/* Card 1 */}
+          <div className="shrink-0 w-[80%] md:w-[55%] snap-center flex flex-col gap-6">
+            <div className="aspect-[3/4] overflow-hidden bg-gray-100">
+              <img ref={img1Ref} src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800" className="w-full h-full object-cover grayscale" alt="Victor Cardoso" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[10px] uppercase tracking-widest text-black/50 mb-2">PROFILE</span>
+              <h3 className="font-serif text-2xl md:text-3xl text-black font-medium mb-1">Victor Cardoso</h3>
+              <span className="text-sm font-sans text-black/70 uppercase tracking-wide">— DEV. /FRONTEND</span>
             </div>
           </div>
 
-          {/* Imagens Parallax */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-10 max-w-screen-2xl 3xl:max-w-[1600px] mx-auto">
-            <div className="aspect-[3/4] overflow-hidden bg-gray-100">
-              <img ref={img1Ref} src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800" className="w-full h-[115%] object-cover grayscale will-change-transform" alt="Industrial" />
-            </div>
-
-            {/* Imagem clicável que abre o Modal */}
-            <div className="aspect-[3/4] overflow-hidden bg-gray-100 cursor-pointer group relative" onClick={() => setIsResumeOpen(true)}>
-              <img ref={img2Ref} src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800" className="w-full h-[125%] object-cover grayscale will-change-transform" alt="Perfil" />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/35 transition-colors duration-500 flex items-center justify-center">
-                <span className="text-white font-mono text-xs tracking-widest uppercase border border-white px-6 py-3 backdrop-blur-sm opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500">
+          {/* Card 2 (Resume) */}
+          <div className="shrink-0 w-[80%] md:w-[55%] snap-center flex flex-col gap-6 cursor-pointer group" onClick={() => setIsResumeOpen(true)}>
+            <div className="aspect-[3/4] overflow-hidden bg-gray-100 relative">
+              <img ref={img2Ref} src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800" className="w-full h-full object-cover grayscale group-hover:scale-105 transition-transform duration-700" alt="Resume" />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20 backdrop-blur-[2px]">
+                <span className="text-white font-mono text-xs tracking-widest uppercase border border-white px-6 py-3 backdrop-blur-sm">
                   Ver Currículo
                 </span>
               </div>
             </div>
+            <div className="flex flex-col">
+              <span className="text-[10px] uppercase tracking-widest text-black/50 mb-2">EDITORIAL</span>
+              <h3 className="font-serif text-2xl md:text-3xl text-black font-medium mb-1">Full Resume</h3>
+              <span className="text-sm font-sans text-black/70 uppercase tracking-wide">— EXP. /2026</span>
+            </div>
+          </div>
 
+          {/* Card 3 */}
+          <div className="shrink-0 w-[80%] md:w-[55%] snap-center flex flex-col gap-6">
             <div className="aspect-[3/4] overflow-hidden bg-gray-100">
-              <img ref={img3Ref} src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800" className="w-full h-[120%] object-cover grayscale will-change-transform" alt="Nature" />
+              <img ref={img3Ref} src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800" className="w-full h-full object-cover grayscale" alt="Nature" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[10px] uppercase tracking-widest text-black/50 mb-2">VISION</span>
+              <h3 className="font-serif text-2xl md:text-3xl text-black font-medium mb-1">Design & Code</h3>
+              <span className="text-sm font-sans text-black/70 uppercase tracking-wide">— TECH. /ART</span>
             </div>
           </div>
 
