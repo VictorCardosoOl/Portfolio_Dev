@@ -156,41 +156,7 @@ const AboutMe: React.FC = () => {
     }
   }, [isResumeOpen]);
 
-  // Horizontal Scroll Setup
-  useEffect(() => {
-    // Only apply on desktop
-    const mm = gsap.matchMedia();
-    
-    mm.add("(min-width: 768px)", () => {
-      if (!sectionRef.current || !carouselRef.current) return;
-      
-      const getScrollAmount = () => {
-        const carouselWidth = carouselRef.current!.scrollWidth;
-        // The visible part of the carousel is 55vw (from md:w-[55%])
-        const visibleWidth = window.innerWidth * 0.55;
-        return carouselWidth - visibleWidth + 100; // +100 for padding
-      };
-      
-      const tween = gsap.to(carouselRef.current, {
-        x: () => -getScrollAmount(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          pin: true,
-          scrub: 1,
-          start: "top top",
-          end: () => `+=${getScrollAmount()}`,
-          invalidateOnRefresh: true
-        }
-      });
-      
-      return () => {
-        tween.kill();
-      };
-    });
-    
-    return () => mm.revert();
-  }, []);
+
 
   // Bloquear o scroll do body quando o modal abrir
   useEffect(() => {
@@ -234,19 +200,13 @@ const AboutMe: React.FC = () => {
           Slide
         </div>
 
-        {/* Right Side (Carousel) */}
+        {/* Right Side (Content) */}
         <div 
           ref={carouselRef}
-          className="w-full md:w-[55%] h-[60vh] md:h-screen flex items-center gap-8 md:gap-16 px-8 md:pl-24 md:pr-32 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none z-10 pb-8 md:pb-0" 
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          className="w-full md:w-[55%] h-[60vh] md:h-screen flex items-center justify-center gap-8 md:gap-16 px-8 md:px-24 z-10" 
         >
-          
-          <style>{`
-            #aboutme ::-webkit-scrollbar { display: none; }
-          `}</style>
 
-          {/* Card 1 */}
-          <div className="shrink-0 w-[80%] md:w-[55%] snap-center flex flex-col gap-6">
+          <div className="shrink-0 w-1/2 flex flex-col gap-6">
             <div className="aspect-[3/4] overflow-hidden bg-gray-100">
               <img ref={img1Ref} src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800" className="w-full h-full object-cover grayscale" alt="Victor Cardoso" />
             </div>
@@ -257,8 +217,7 @@ const AboutMe: React.FC = () => {
             </div>
           </div>
 
-          {/* Card 2 (Resume) */}
-          <div className="shrink-0 w-[80%] md:w-[55%] snap-center flex flex-col gap-6 cursor-pointer group" onClick={() => setIsResumeOpen(true)}>
+          <div className="shrink-0 w-1/2 flex flex-col gap-6 cursor-pointer group" onClick={() => setIsResumeOpen(true)}>
             <div className="aspect-[3/4] overflow-hidden bg-gray-100 relative">
               <img ref={img2Ref} src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800" className="w-full h-full object-cover grayscale group-hover:scale-105 transition-transform duration-700" alt="Resume" />
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20 backdrop-blur-[2px]">
@@ -274,17 +233,7 @@ const AboutMe: React.FC = () => {
             </div>
           </div>
 
-          {/* Card 3 */}
-          <div className="shrink-0 w-[80%] md:w-[55%] snap-center flex flex-col gap-6">
-            <div className="aspect-[3/4] overflow-hidden bg-gray-100">
-              <img ref={img3Ref} src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800" className="w-full h-full object-cover grayscale" alt="Nature" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] uppercase tracking-widest text-black/50 mb-2">VISION</span>
-              <h3 className="font-serif text-2xl md:text-3xl text-black font-medium mb-1">Design & Code</h3>
-              <span className="text-sm font-sans text-black/70 uppercase tracking-wide">— TECH. /ART</span>
-            </div>
-          </div>
+
 
         </div>
       </section>

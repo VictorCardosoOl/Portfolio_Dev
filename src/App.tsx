@@ -13,7 +13,6 @@ import AboutMe from './components/AboutMe';
 import Values from './components/Values';
 import FAQSection from './components/FAQSection';
 import Footer from './components/Footer';
-import CustomCursor from './components/ui/CustomCursor';
 
 export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -51,8 +50,7 @@ export default function App() {
   }, [isLoaded]);
 
   return (
-    <main className="w-full min-h-screen bg-cream text-charcoal selection:bg-charcoal selection:text-cream cursor-none">
-      <CustomCursor />
+    <main className="w-full min-h-screen bg-cream text-charcoal selection:bg-charcoal selection:text-cream">
       
       {/* Wayfinding: Progress Bar */}
       <div
