@@ -28,8 +28,9 @@ uniform float uSpeed;
 varying vec2 vUv;
 
 void main() {
-  float mr = max(uResolution.x, uResolution.y);
+  float mr = min(uResolution.x, uResolution.y);
   vec2 uv = (vUv.xy * 2.0 - 1.0) * uResolution.xy / mr;
+  uv *= 0.3; // Zoom in para criar o efeito de fluido grande e recortado
 
   uv += (uMouse - vec2(0.5)) * uAmplitude;
 
