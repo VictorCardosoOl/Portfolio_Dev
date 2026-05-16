@@ -3,6 +3,8 @@ import { gsap } from '../lib/gsap';
 import { projects } from '../data/portfolio';
 import Image from './ui/Image';
 import TextType from './ui/TextType';
+import { Link } from 'react-router-dom';
+import { MagneticButton } from './ui/MagneticButton';
 
 export default function HeroPortfolio() {
   const containerRef = useRef<HTMLElement>(null);
@@ -61,14 +63,14 @@ export default function HeroPortfolio() {
            <h1 className="text-4xl sm:text-5xl md:text-6xl 3xl:text-7xl font-serif font-medium tracking-tighter uppercase whitespace-pre-line text-[#1a1a1a] leading-[1.05]">
              <TextType text={["Victor\nCardoso"]} typingSpeed={100} showCursor={true} cursorCharacter="_" />
            </h1>
-           <p className="mt-4 text-xs font-bold tracking-[0.25em] text-[#1a1a1a]/50 uppercase">
+           <p className="mt-4 text-[11px] md:text-xs font-bold tracking-[0.25em] text-[#1a1a1a]/50 uppercase">
              selected works
            </p>
         </div>
 
         {/* 2. PROJETOS LADO A LADO (Adeus Envelopes) */}
         {projects.map((project, j) => (
-          <div key={project.id} className="w-[80vw] md:w-[60vw] h-full flex flex-col justify-center px-8 shrink-0">
+          <Link to={`/case/${project.id}`} key={project.id} className="w-[80vw] md:w-[60vw] h-full flex flex-col justify-center px-8 shrink-0 group/card block cursor-pointer">
              {/* Máscara de imagem para o Parallax */}
              <div className="w-full h-[65vh] overflow-hidden relative group rounded-sm">
                 <Image 
@@ -76,16 +78,25 @@ export default function HeroPortfolio() {
                   alt={project.title} 
                   className="project-image w-full h-full object-cover scale-[1.05] origin-center" 
                 />
-                {/* Overlay Elegante */}
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all duration-500" />
+                {/* Overlay Elegante Escurecendo no Hover */}
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-500" />
+                
+                {/* Botão Magnético Centralizado */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <MagneticButton>
+                    <span className="px-8 py-4 bg-[#F4EFE8] text-[#1a1a1a] rounded-full text-[10px] font-bold tracking-widest uppercase shadow-2xl inline-block pointer-events-none">
+                      View Case
+                    </span>
+                  </MagneticButton>
+                </div>
              </div>
              
              {/* Metadados do Projeto */}
              <div className="flex justify-between items-center mt-6 text-[#1a1a1a]">
-               <h2 className="text-3xl font-serif tracking-tight">{project.title}</h2>
+               <h2 className="text-3xl font-serif tracking-tight group-hover/card:opacity-70 transition-opacity">{project.title}</h2>
                <span className="text-[10px] uppercase tracking-widest opacity-60">0{j + 1}</span>
              </div>
-          </div>
+          </Link>
         ))}
         
         {/* Espaço em branco no final para respiro */}

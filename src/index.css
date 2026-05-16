@@ -19,10 +19,10 @@
   --font-secondary: var(--font-sans);
   --font-display: var(--font-serif);
 
-  --color-cream: #FFFFFF;
-  --color-charcoal: #000000;
-  --color-sage: #F5F5F5;
-  --color-stone-950: #000000;
+  --color-cream: #F4EFE8;
+  --color-charcoal: #1a1a1a;
+  --color-sage: #E5E5E5;
+  --color-stone-950: #0A0A0A;
   --color-stone-900: #111111;
   --color-stone-800: #222222;
 
@@ -85,8 +85,8 @@
 }
 
 @utility section-padding {
-  /* Espaçamento vertical de seção: 48px → 96px */
-  padding-block: clamp(3rem, 6vw, 6rem);
+  /* Espaçamento vertical massivo de seção: 96px → 192px (White Space Editorial) */
+  padding-block: clamp(6rem, 12vw, 12rem);
 }
 
 @utility container-fluid {
