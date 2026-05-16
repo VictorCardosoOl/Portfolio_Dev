@@ -2,9 +2,11 @@ import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { gsap } from '../lib/gsap';
 import Lenis from 'lenis';
-import { X, ExternalLink, Github } from 'lucide-react';
+import { X, ExternalLink, Github, ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from './ui/Image';
-import { Project } from '../data/portfolio';
+import { Project, projects } from '../data/portfolio';
+import { Typography } from './ui/Typography';
+import { useSearchParams } from 'react-router-dom';
 
 interface ProjectModalProps {
   isOpen: boolean;
@@ -19,30 +21,62 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
   const overlayRef      = useRef<HTMLDivElement>(null);
   const wrapperRef      = useRef<HTMLDivElement>(null);
   const scopedLenisRef  = useRef<Lenis | null>(null);
-  // C1 FIX: Guardar o ID do RAF para cancelamento correto
   const rafIdRef        = useRef<number>(0);
+  const closeButtonRef  = useRef<HTMLButtonElement>(null);
+  const [, setSearchParams] = useSearchParams();
 
+  // Handle Focus Trap & Keyboard Shortcuts
   useEffect(() => {
+    if (!isOpen || !modalOuterRef.current) return;
+
+    const modal = modalOuterRef.current;
+    const focusableElements = modal.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+      if (e.key === 'Tab') {
+        if (e.shiftKey) { // Shift + Tab
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement?.focus();
+          }
+        } else { // Tab
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement?.focus();
+          }
+        }
+      }
     };
 
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose, project]); // Depend on project to re-evaluate focusable elements when navigating
+
+  // Handle animations & global body/scroll locking
+  useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
+      // Pausa o lenis global na Home para não rolar em background
+      (window as any).lenis?.stop();
 
       gsap.set(wrapperRef.current, { display: 'block' });
       gsap.to(overlayRef.current, { autoAlpha: 1, duration: 0.4 });
       gsap.fromTo(modalOuterRef.current, { y: '100%' }, { y: '2%', duration: 0.8, ease: 'expo.out' });
 
-      // C1 FIX: Move focus into the modal after animation
+      // Auto-focus no botão de fechar quando abre
       const focusTimeout = setTimeout(() => {
-        const focusable = modalOuterRef.current?.querySelector<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
-        focusable?.focus();
+        closeButtonRef.current?.focus();
       }, 850);
 
+      // Iniciar o Lenis escopado do modal
       const timeout = setTimeout(() => {
         if (modalContainerRef.current && modalContentRef.current) {
           const scopedLenis = new Lenis({
@@ -54,7 +88,6 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
           });
           scopedLenisRef.current = scopedLenis;
 
-          // C1 FIX: Guardar rafId e cancelar corretamente no cleanup
           const raf = (time: number) => {
             scopedLenis.raf(time);
             rafIdRef.current = requestAnimationFrame(raf);
@@ -67,8 +100,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
         clearTimeout(timeout);
         clearTimeout(focusTimeout);
         document.body.style.overflow = '';
-        window.removeEventListener('keydown', handleKeyDown);
-        // C1 FIX: Cancelar RAF antes de destruir Lenis
+        (window as any).lenis?.start();
         cancelAnimationFrame(rafIdRef.current);
         scopedLenisRef.current?.destroy();
         scopedLenisRef.current = null;
@@ -82,19 +114,33 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
         });
       }
       document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-      // C1 FIX: Cancelar RAF no fechamento também
+      (window as any).lenis?.start();
       cancelAnimationFrame(rafIdRef.current);
       scopedLenisRef.current?.destroy();
       scopedLenisRef.current = null;
     }
-  }, [isOpen, onClose]);
+  }, [isOpen]); 
+
+  // Reset scroll on navigate between projects
+  useEffect(() => {
+    if (project && scopedLenisRef.current) {
+       scopedLenisRef.current.scrollTo(0, { immediate: true });
+    }
+  }, [project]);
 
   if (!project) return null;
 
+  const currentIndex = projects.findIndex(p => p.id === project.id);
+  const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
+  const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
+
+  const navigateTo = (id: string) => {
+    setSearchParams({ project: id });
+  };
+
   return createPortal(
     <div ref={wrapperRef} style={{ display: 'none' }} className="fixed inset-0 z-[9998]">
-      {/* Overlay */}
+      {/* Overlay Escuro */}
       <div
         ref={overlayRef}
         onClick={onClose}
@@ -102,51 +148,50 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
         aria-hidden="true"
       />
 
-      {/* D1 FIX: role="dialog" + aria-modal + aria-labelledby */}
       <div
         ref={modalOuterRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-project-title"
-        className="absolute left-0 right-0 bottom-0 z-[9999] bg-[#f4f2ee] text-[#111] rounded-t-[2rem] h-[98vh] overflow-hidden shadow-2xl translate-y-full"
+        className="absolute left-0 right-0 bottom-0 z-[9999] bg-[#F4EFE8] text-[#1a1a1a] rounded-t-[2rem] md:rounded-t-[3rem] h-[98vh] overflow-hidden shadow-2xl translate-y-full border-t border-[#1a1a1a]/10"
       >
-        {/* Scoped Lenis Scroll Container */}
         <div ref={modalContainerRef} className="h-full w-full overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
           <div ref={modalContentRef} className="pb-32 flex flex-col items-center">
 
-            {/* Giant background title */}
+            {/* BG Gigante */}
             <div className="absolute top-0 left-0 w-full overflow-hidden pointer-events-none flex justify-center pt-20 md:pt-28 opacity-[0.04] select-none" aria-hidden="true">
-              <span className="text-[15vw] font-bold uppercase tracking-tighter whitespace-nowrap">
+              <span className="text-[15vw] font-bold uppercase tracking-tighter whitespace-nowrap font-serif">
                 {project.title}
               </span>
             </div>
 
             {/* ── HEADER ── */}
-            <div className="container mx-auto px-6 mt-24 md:mt-36 mb-10 flex flex-col items-center text-center relative z-10">
-              <div className="flex gap-3 items-center mb-6 text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#111]/40">
+            <div className="container mx-auto px-6 mt-24 md:mt-36 mb-16 flex flex-col items-center text-center relative z-10">
+              <Typography variant="label" className="mb-6 flex items-center gap-3">
                 <span>{project.category}</span>
-                <span className="w-1 h-1 rounded-full bg-[#111]/40" aria-hidden="true" />
+                <span className="w-1 h-1 rounded-full bg-[#1a1a1a]/40" aria-hidden="true" />
                 <span>{project.year}</span>
-              </div>
+              </Typography>
 
-              {/* D1 FIX: id para aria-labelledby */}
-              <h2
+              <Typography
+                as="h2"
                 id="modal-project-title"
-                className="text-6xl sm:text-7xl md:text-[9rem] lg:text-[11rem] font-serif font-light uppercase leading-[0.85] tracking-tighter max-w-[90vw]"
+                variant="huge"
+                className="max-w-[90vw]"
               >
                 {project.title}
-              </h2>
+              </Typography>
 
               {/* External links */}
-              <div className="flex gap-4 mt-8">
+              <div className="flex gap-4 mt-10">
                 {project.liveUrl && project.liveUrl !== '#' && (
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold border border-[#111]/20 hover:border-[#111] text-[#111]/60 hover:text-[#111] px-5 py-2.5 rounded-full transition-all duration-200"
+                    className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold border border-[#1a1a1a]/20 hover:border-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#F4EFE8] text-[#1a1a1a]/70 px-6 py-3 rounded-full transition-all duration-300 font-sans focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1a1a1a]"
                   >
-                    <ExternalLink size={12} />
+                    <ExternalLink size={14} />
                     Ver ao vivo
                   </a>
                 )}
@@ -155,9 +200,9 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
                     href={project.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold border border-[#111]/20 hover:border-[#111] text-[#111]/60 hover:text-[#111] px-5 py-2.5 rounded-full transition-all duration-200"
+                    className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold border border-[#1a1a1a]/20 hover:border-[#1a1a1a] text-[#1a1a1a]/70 hover:text-[#1a1a1a] px-6 py-3 rounded-full transition-all duration-300 font-sans focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1a1a1a]"
                   >
-                    <Github size={12} />
+                    <Github size={14} />
                     Repositório
                   </a>
                 )}
@@ -165,62 +210,54 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
             </div>
 
             {/* ── PROJECT IMAGE ── */}
-            <div className="w-full max-w-[90vw] md:max-w-[75vw] xl:max-w-[65vw] aspect-[4/3] md:aspect-video relative z-20 mb-20">
-              <div className="absolute inset-0 w-full h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
+            <div className="w-full max-w-[90vw] md:max-w-[80vw] xl:max-w-[70vw] aspect-[4/3] md:aspect-video relative z-20 mb-24">
+              <div className="absolute inset-0 w-full h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl bg-black">
                 <Image
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
+                  className="w-full h-full object-cover grayscale mix-blend-screen opacity-90 hover:scale-105 transition-transform duration-1000"
                 />
               </div>
             </div>
 
-            {/* ── CONTENT ── */}
-            <div className="container mx-auto px-6 max-w-4xl relative z-10 w-full">
+            {/* ── CONTENT (Brutalismo Minimalista) ── */}
+            <div className="container mx-auto px-6 max-w-5xl relative z-10 w-full">
 
               {/* Meta row */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-8 border-b border-[#111]/10 pb-12 mb-12">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-8 border-b border-[#1a1a1a]/20 pb-12 mb-16">
                 <div>
-                  <h4 className="text-[10px] uppercase tracking-[0.25em] opacity-40 mb-2 font-bold">Projeto</h4>
-                  <p className="text-base font-medium">{project.title}</p>
+                  <Typography variant="label" className="mb-2">Projeto</Typography>
+                  <Typography variant="h4">{project.title}</Typography>
                 </div>
                 <div>
-                  <h4 className="text-[10px] uppercase tracking-[0.25em] opacity-40 mb-2 font-bold">Categoria</h4>
-                  <p className="text-base font-medium">{project.category}</p>
+                  <Typography variant="label" className="mb-2">Categoria</Typography>
+                  <Typography variant="h4">{project.category}</Typography>
                 </div>
                 <div>
-                  <h4 className="text-[10px] uppercase tracking-[0.25em] opacity-40 mb-2 font-bold">Ano</h4>
-                  <p className="text-base font-medium">{project.year}</p>
+                  <Typography variant="label" className="mb-2">Ano</Typography>
+                  <Typography variant="h4">{project.year}</Typography>
                 </div>
               </div>
 
-              {/* Description */}
-              <div className="mb-12">
-                <p className="text-xl md:text-2xl font-serif font-light leading-relaxed text-[#111]/80 max-w-3xl">
-                  {project.fullDescription}
-                </p>
+              {/* Desafio Técnico */}
+              <div className="mb-16">
+                <Typography as="h3" variant="label" className="mb-4">O Desafio de Engenharia</Typography>
+                <Typography variant="h3">
+                  {project.problem}
+                </Typography>
               </div>
 
-              {/* Technical Challenge */}
-              <div className="bg-[#111] text-cream rounded-2xl p-8 md:p-10 mb-12">
-                <h3 className="text-[10px] uppercase tracking-[0.25em] font-bold text-cream/60 mb-4">
-                  ⚙ Desafio Técnico
-                </h3>
-                <p className="text-base md:text-lg font-light leading-relaxed text-cream/80">
-                  {project.technicalChallenge}
-                </p>
-              </div>
-
-              {/* Tech Stack */}
-              <div className="mb-12">
-                <h3 className="text-[10px] uppercase tracking-[0.25em] font-bold text-[#111]/60 mb-5">
-                  Stack utilizada
-                </h3>
-                <div className="flex flex-wrap gap-2">
+              {/* Arquitetura */}
+              <div className="mb-16">
+                <Typography as="h3" variant="label" className="mb-4">Arquitetura & Clean Code</Typography>
+                <Typography variant="p" className="text-lg md:text-2xl font-medium mb-8 text-[#1a1a1a]">
+                  {project.architecture}
+                </Typography>
+                <div className="flex flex-wrap gap-3">
                   {project.techStack.map(tech => (
                     <span
                       key={tech}
-                      className="text-xs font-bold uppercase tracking-widest border border-[#111]/15 text-[#111]/60 px-4 py-2 rounded-full"
+                      className="text-xs font-bold uppercase tracking-widest border border-[#1a1a1a] text-[#1a1a1a] px-6 py-2 rounded-full font-sans"
                     >
                       {tech}
                     </span>
@@ -228,17 +265,57 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
                 </div>
               </div>
 
+              {/* Role */}
+              <div className="mb-16">
+                <Typography as="h3" variant="label" className="mb-4">Papel & Execução</Typography>
+                <Typography variant="p" className="text-lg md:text-xl text-[#1a1a1a]/90">
+                  {project.role}
+                </Typography>
+              </div>
+
+              {/* Outcome */}
+              <div className="mb-24">
+                <Typography as="h3" variant="label" className="mb-4">Resultado & Impacto</Typography>
+                <Typography variant="h2">
+                  {project.outcome}
+                </Typography>
+              </div>
+
+              {/* Footer Navigation Buttons */}
+              <div className="border-t border-[#1a1a1a]/20 pt-16 flex justify-between items-center gap-4 flex-wrap">
+                {prevProject ? (
+                  <button 
+                    onClick={() => navigateTo(prevProject.id)}
+                    className="flex items-center gap-3 text-xs uppercase tracking-widest font-bold text-[#1a1a1a]/50 hover:text-[#1a1a1a] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1a1a1a] p-3 rounded-full hover:bg-[#1a1a1a]/5 font-sans"
+                  >
+                    <ArrowLeft size={16} />
+                    Projeto Anterior
+                  </button>
+                ) : <div />}
+                
+                {nextProject ? (
+                  <button 
+                    onClick={() => navigateTo(nextProject.id)}
+                    className="flex items-center gap-3 text-xs uppercase tracking-widest font-bold text-[#1a1a1a]/50 hover:text-[#1a1a1a] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1a1a1a] p-3 rounded-full hover:bg-[#1a1a1a]/5 font-sans"
+                  >
+                    Próximo Projeto
+                    <ArrowRight size={16} />
+                  </button>
+                ) : <div />}
+              </div>
+
             </div>
           </div>
         </div>
 
-        {/* Close button */}
+        {/* HIGH CONTRAST CLOSE BUTTON */}
         <button
+          ref={closeButtonRef}
           onClick={onClose}
           aria-label="Fechar projeto"
-          className="absolute top-6 right-6 md:top-8 md:right-8 z-50 w-12 h-12 bg-black/5 hover:bg-black text-black hover:text-white rounded-full flex items-center justify-center transition-colors duration-300 backdrop-blur-md"
+          className="absolute top-6 right-6 md:top-8 md:right-8 z-50 w-16 h-16 bg-[#1a1a1a] text-[#F4EFE8] hover:bg-[#1a1a1a]/80 hover:scale-105 active:scale-95 rounded-full flex items-center justify-center transition-all duration-300 shadow-2xl border border-[#1a1a1a]/10 focus:outline-none focus-visible:ring-4 focus-visible:ring-[#1a1a1a]/40"
         >
-          <X size={20} />
+          <X size={28} />
         </button>
       </div>
     </div>,

@@ -26,6 +26,8 @@ export default function SmoothScroll({ isLocked = false }: { isLocked?: boolean 
       wheelMultiplier: 1,
       touchMultiplier: 2,
     });
+    
+    (window as any).lenis = lenis;
 
     isLocked ? lenis.stop() : lenis.start();
 
