@@ -6,13 +6,13 @@ import SmoothScroll from '../components/SmoothScroll';
 import { ErrorBoundary } from '../components/ErrorBoundary';
 import { NAVIGATION_CONFIG } from '../config/navigation';
 
-import HeroPortfolio from '../components/HeroPortfolio';
-import Services from '../components/Services';
-import Process from '../components/Process';
-import AboutMe from '../components/AboutMe';
-import Values from '../components/Values';
-import FAQSection from '../components/FAQSection';
-import Footer from '../components/Footer';
+import HeroPortfolio from '../components/sections/HeroPortfolio';
+import Services from '../components/sections/Services';
+import Process from '../components/sections/Process';
+import AboutMe from '../components/sections/AboutMe';
+import Values from '../components/sections/Values';
+import FAQSection from '../components/sections/FAQSection';
+import Footer from '../components/sections/Footer';
 import TransitionLayout from '../components/TransitionLayout';
 
 export default function Home() {
