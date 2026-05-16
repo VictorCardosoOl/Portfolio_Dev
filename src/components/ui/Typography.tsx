@@ -18,7 +18,7 @@ const typographyVariants = cva(
       },
       themeColor: {
         default: "text-[#1a1a1a]",
-        inverted: "text-[#F4EFE8]",
+        inverted: "text-[#FFFFFF]",
         muted: "text-[#1a1a1a]/60",
         none: "",
       },

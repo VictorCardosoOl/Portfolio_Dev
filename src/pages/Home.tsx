@@ -50,7 +50,7 @@ export default function Home() {
 
   return (
     <TransitionLayout>
-      <main className="w-full min-h-screen bg-[#F4EFE8] text-[#1a1a1a] selection:bg-[#1a1a1a] selection:text-[#F4EFE8]">
+      <main className="w-full min-h-screen bg-[#FFFFFF] text-[#1a1a1a] selection:bg-[#1a1a1a] selection:text-[#FFFFFF]">
         <div
           ref={progressRef}
           className="fixed top-0 left-0 right-0 h-[2px] bg-[#1a1a1a] z-[60] origin-left scale-x-0 pointer-events-none"

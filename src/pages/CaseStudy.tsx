@@ -18,10 +18,10 @@ export default function CaseStudy() {
   return (
     <TransitionLayout>
       <SmoothScroll />
-      <main className="w-full min-h-screen bg-[#F4EFE8] text-[#1a1a1a] selection:bg-[#1a1a1a] selection:text-[#F4EFE8]">
+      <main className="w-full min-h-screen bg-[#FFFFFF] text-[#1a1a1a] selection:bg-[#1a1a1a] selection:text-[#FFFFFF]">
         
         {/* Navbar Simplificada para o Case */}
-        <nav className="fixed top-0 left-0 w-full p-6 md:p-12 z-50 flex justify-between items-center mix-blend-difference text-[#F4EFE8] pointer-events-none">
+        <nav className="fixed top-0 left-0 w-full p-6 md:p-12 z-50 flex justify-between items-center mix-blend-difference text-[#FFFFFF] pointer-events-none">
           <Link to="/" className="text-sm font-bold tracking-widest uppercase hover:opacity-70 transition-opacity font-sans pointer-events-auto">
             Victor Cardoso
           </Link>
@@ -30,7 +30,7 @@ export default function CaseStudy() {
               <Link 
                 to="/" 
                 aria-label="Voltar para a página inicial"
-                className="w-16 h-16 bg-[#1a1a1a] text-[#F4EFE8] hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-all duration-300 shadow-xl border border-white/20"
+                className="w-16 h-16 bg-[#1a1a1a] text-[#FFFFFF] hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-all duration-300 shadow-xl border border-white/20"
               >
                 <X size={28} />
               </Link>
@@ -106,7 +106,7 @@ export default function CaseStudy() {
             <section className="flex gap-6 mt-24 justify-center">
               {project.liveUrl && project.liveUrl !== '#' && (
                 <MagneticButton>
-                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="px-10 py-5 bg-[#1a1a1a] text-[#F4EFE8] rounded-full text-xs font-bold tracking-widest uppercase hover:bg-[#1a1a1a]/80 transition-colors font-sans flex items-center gap-2">
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="px-10 py-5 bg-[#1a1a1a] text-[#FFFFFF] rounded-full text-xs font-bold tracking-widest uppercase hover:bg-[#1a1a1a]/80 transition-colors font-sans flex items-center gap-2">
                     <ExternalLink size={14} /> Ver Projeto Ao Vivo
                   </a>
                 </MagneticButton>

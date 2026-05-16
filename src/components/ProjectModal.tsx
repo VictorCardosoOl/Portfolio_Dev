@@ -153,7 +153,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-project-title"
-        className="absolute left-0 right-0 bottom-0 z-[9999] bg-[#F4EFE8] text-[#1a1a1a] rounded-t-[2rem] md:rounded-t-[3rem] h-[98vh] overflow-hidden shadow-2xl translate-y-full border-t border-[#1a1a1a]/10"
+        className="absolute left-0 right-0 bottom-0 z-[9999] bg-[#FFFFFF] text-[#1a1a1a] rounded-t-[2rem] md:rounded-t-[3rem] h-[98vh] overflow-hidden shadow-2xl translate-y-full border-t border-[#1a1a1a]/10"
       >
         <div ref={modalContainerRef} className="h-full w-full overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
           <div ref={modalContentRef} className="pb-32 flex flex-col items-center">
@@ -189,7 +189,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold border border-[#1a1a1a]/20 hover:border-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#F4EFE8] text-[#1a1a1a]/70 px-6 py-3 rounded-full transition-all duration-300 font-sans focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1a1a1a]"
+                    className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold border border-[#1a1a1a]/20 hover:border-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#FFFFFF] text-[#1a1a1a]/70 px-6 py-3 rounded-full transition-all duration-300 font-sans focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1a1a1a]"
                   >
                     <ExternalLink size={14} />
                     Ver ao vivo
@@ -313,7 +313,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
           ref={closeButtonRef}
           onClick={onClose}
           aria-label="Fechar projeto"
-          className="absolute top-6 right-6 md:top-8 md:right-8 z-50 w-16 h-16 bg-[#1a1a1a] text-[#F4EFE8] hover:bg-[#1a1a1a]/80 hover:scale-105 active:scale-95 rounded-full flex items-center justify-center transition-all duration-300 shadow-2xl border border-[#1a1a1a]/10 focus:outline-none focus-visible:ring-4 focus-visible:ring-[#1a1a1a]/40"
+          className="absolute top-6 right-6 md:top-8 md:right-8 z-50 w-16 h-16 bg-[#1a1a1a] text-[#FFFFFF] hover:bg-[#1a1a1a]/80 hover:scale-105 active:scale-95 rounded-full flex items-center justify-center transition-all duration-300 shadow-2xl border border-[#1a1a1a]/10 focus:outline-none focus-visible:ring-4 focus-visible:ring-[#1a1a1a]/40"
         >
           <X size={28} />
         </button>

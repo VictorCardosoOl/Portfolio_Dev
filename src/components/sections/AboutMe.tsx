@@ -50,7 +50,7 @@ const ResumeContent = () => (
             <div className="relative border-l border-[#1a1a1a]/10 ml-3 space-y-12">
               {DATA.experience.map((job, idx) => (
                 <div key={idx} className="pl-8 relative group">
-                  <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#1a1a1a] border-2 border-[#F4EFE8] group-hover:scale-125 transition-transform" />
+                  <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#1a1a1a] border-2 border-[#FFFFFF] group-hover:scale-125 transition-transform" />
                   <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
                     <h4 className="text-xl font-serif text-[#1a1a1a] font-light">{job.role}</h4>
                     <span className="text-[10px] font-bold uppercase tracking-widest text-[#1a1a1a]/50">{job.period}</span>
@@ -113,7 +113,7 @@ const ResumeContent = () => (
           </section>
           
           <div className="pt-4 sticky top-8">
-            <a href={DATA.resumeLink} download className="flex items-center justify-center gap-3 w-full px-8 py-4 bg-[#1a1a1a] text-[#F4EFE8] rounded-full hover:bg-[#1a1a1a]/80 transition-all text-xs font-bold uppercase tracking-widest shadow-lg">
+            <a href={DATA.resumeLink} download className="flex items-center justify-center gap-3 w-full px-8 py-4 bg-[#1a1a1a] text-[#FFFFFF] rounded-full hover:bg-[#1a1a1a]/80 transition-all text-xs font-bold uppercase tracking-widest shadow-lg">
               <Download size={16} /> Baixar CV Completo
             </a>
           </div>
@@ -195,7 +195,7 @@ const AboutMe: React.FC = () => {
         </div>
 
         {/* Center "Slide" Button */}
-        <div className="hidden md:flex absolute left-[45%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border border-[#1a1a1a]/20 items-center justify-center text-xs font-serif z-20 bg-[#F4EFE8]/80 backdrop-blur-md pointer-events-none text-[#1a1a1a]">
+        <div className="hidden md:flex absolute left-[45%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border border-[#1a1a1a]/20 items-center justify-center text-xs font-serif z-20 bg-[#FFFFFF]/80 backdrop-blur-md pointer-events-none text-[#1a1a1a]">
           Slide
         </div>
 
@@ -219,7 +219,7 @@ const AboutMe: React.FC = () => {
           <div className="shrink-0 w-1/2 flex flex-col gap-6 cursor-pointer group" onClick={() => setIsResumeOpen(true)}>
             <div className="aspect-[3/4] overflow-hidden bg-[#1a1a1a]/5 relative">
               <img ref={img2Ref} src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800" className="w-full h-full object-cover grayscale group-hover:scale-105 transition-transform duration-700 mix-blend-multiply opacity-90" alt="Resume" />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#F4EFE8]/80 backdrop-blur-[2px]">
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#FFFFFF]/80 backdrop-blur-[2px]">
                 <span className="text-[#1a1a1a] font-mono text-xs tracking-widest uppercase border border-[#1a1a1a] px-6 py-3 font-bold">
                   Ver Currículo
                 </span>
@@ -250,17 +250,17 @@ const AboutMe: React.FC = () => {
           {/* Container Branco do Modal */}
           <div
             ref={modalContentRef}
-            className="absolute left-0 right-0 bottom-0 z-[9999] w-full bg-[#F4EFE8] shadow-2xl overflow-hidden flex flex-col h-[98vh] rounded-t-[2rem] max-w-[96vw] mx-auto translate-y-full"
+            className="absolute left-0 right-0 bottom-0 z-[9999] w-full bg-[#FFFFFF] shadow-2xl overflow-hidden flex flex-col h-[98vh] rounded-t-[2rem] max-w-[96vw] mx-auto translate-y-full"
           >
             {/* Botão Fechar */}
             <div className="absolute top-0 right-0 z-50 p-6 md:p-8">
-              <button onClick={() => setIsResumeOpen(false)} className="w-12 h-12 rounded-full flex items-center justify-center bg-[#1a1a1a] text-[#F4EFE8] hover:bg-[#1a1a1a]/80 transition-all focus:outline-none">
+              <button onClick={() => setIsResumeOpen(false)} className="w-12 h-12 rounded-full flex items-center justify-center bg-[#1a1a1a] text-[#FFFFFF] hover:bg-[#1a1a1a]/80 transition-all focus:outline-none">
                 <X size={20} />
               </button>
             </div>
             
             {/* Scroll Interno do Currículo */}
-            <div className="flex-grow h-full w-full overflow-y-auto bg-[#F4EFE8]">
+            <div className="flex-grow h-full w-full overflow-y-auto bg-[#FFFFFF]">
               <ResumeContent />
             </div>
           </div>

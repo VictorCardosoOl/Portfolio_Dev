@@ -22,7 +22,7 @@
   --font-secondary: var(--font-sans);
   --font-display: var(--font-serif);
 
-  --color-cream: #F4EFE8;
+  --color-cream: #FFFFFF;
   --color-charcoal: #1a1a1a;
   --color-sage: #E5E5E5;
   --color-stone-950: #0A0A0A;
@@ -104,7 +104,7 @@
 
 @layer base {
   body {
-    @apply bg-[#F4EFE8] text-[#1a1a1a] antialiased;
+    @apply bg-[#FFFFFF] text-[#1a1a1a] antialiased;
     font-family: var(--font-sans);
   }
 }

@@ -89,7 +89,7 @@ export default function HeroPortfolio() {
                 {/* Botão Magnético Centralizado */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <MagneticButton>
-                    <span className="px-8 py-4 bg-[#F4EFE8] text-[#1a1a1a] rounded-full text-[10px] font-bold tracking-widest uppercase shadow-2xl inline-block pointer-events-none">
+                    <span className="px-8 py-4 bg-[#FFFFFF] text-[#1a1a1a] rounded-full text-[10px] font-bold tracking-widest uppercase shadow-2xl inline-block pointer-events-none">
                       View Case
                     </span>
                   </MagneticButton>
