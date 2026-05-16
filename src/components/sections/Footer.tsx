@@ -2,20 +2,10 @@ import { PROFILE_DATA as DATA } from '../../config/profile';
 
 const Footer = () => {
   return (
-    <div className="w-full bg-transparent px-2 md:px-6 pb-2 md:pb-6 pt-4">
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 30s linear infinite;
-        }
-      `}</style>
-
+    <div className="w-full bg-transparent px-2 md:px-6 pb-2 md:px-6 pt-4">
       <footer 
         id="contact" 
-        className="relative w-full rounded-[2rem] md:rounded-[3rem] bg-[#FFFFFF] border border-[#1a1a1a]/10 text-[#1a1a1a] font-sans overflow-hidden flex flex-col justify-between"
+        className="relative w-full rounded-[2rem] md:rounded-[3rem] bg-[#FFFFFF] text-[#1a1a1a] font-sans overflow-hidden flex flex-col justify-between"
         style={{
           minHeight: '75vh',
           // SVG cross grid background in dark color
@@ -25,27 +15,20 @@ const Footer = () => {
         }}
       >
         {/* Top Navigation Row */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center px-6 md:px-12 py-6 border-b border-[#1a1a1a]/10">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center px-6 md:px-12 py-8">
+          <a href="#portfolio" className="flex items-center gap-3 hover:opacity-70 transition-opacity">
             <div className="w-4 h-4 rounded-full border-[3px] border-[#1a1a1a] flex items-center justify-center">
               <div className="w-1.5 h-1.5 rounded-full bg-[#1a1a1a]"></div>
             </div>
-            <span className="text-base md:text-lg font-serif tracking-wide">{DATA.name}</span>
-          </div>
-          
-          <div className="flex items-center gap-3 mt-4 md:mt-0">
-            <div className="w-4 h-4 rounded-full border-[3px] border-[#1a1a1a] flex items-center justify-center">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#1a1a1a]"></div>
-            </div>
-            <span className="text-base md:text-lg font-serif tracking-wide text-[#1a1a1a]/70">Projetos, Serviços</span>
-          </div>
+            <span className="text-base md:text-lg font-serif tracking-wide text-[#1a1a1a]">Projetos Selecionados</span>
+          </a>
 
-          <div className="flex items-center gap-3 mt-4 md:mt-0">
+          <a href="#mission" className="flex items-center gap-3 mt-4 md:mt-0 hover:opacity-70 transition-opacity">
             <div className="w-4 h-4 rounded-full border-[3px] border-[#1a1a1a] flex items-center justify-center">
               <div className="w-1.5 h-1.5 rounded-full bg-[#1a1a1a]"></div>
             </div>
-            <span className="text-base md:text-lg font-serif tracking-wide text-[#1a1a1a]/70">Currículo, Contato</span>
-          </div>
+            <span className="text-base md:text-lg font-serif tracking-wide text-[#1a1a1a]">Currículo</span>
+          </a>
         </div>
 
         {/* Middle Section */}
@@ -91,39 +74,12 @@ const Footer = () => {
         </div>
 
         {/* Bottom Giant Typography */}
-        <div className="w-full flex flex-col items-center justify-end px-4 overflow-hidden pt-4">
+        <div className="w-full flex flex-col items-center justify-end px-4 overflow-hidden pt-4 pb-8 md:pb-12">
           <h1 className="text-[10vw] md:text-[11vw] leading-[0.8] tracking-tighter font-serif m-0 p-0 whitespace-nowrap select-none text-center flex items-center justify-center relative">
             @VictorCardoso
           </h1>
         </div>
 
-        {/* Marquee Ticker Bottom */}
-        <div className="w-full overflow-hidden border-t border-[#1a1a1a]/10 mt-6 py-2 bg-[#1a1a1a]/5 backdrop-blur-sm relative z-10 flex text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-[#1a1a1a]/60">
-          <div className="animate-marquee whitespace-nowrap flex gap-4 items-center w-max">
-            {/* Duplicated for seamless loop */}
-            <span>DISPONÍVEL PARA PROJETOS REMOTOS</span>
-            <span className="text-[#1a1a1a]/30">+</span>
-            <span>DESENVOLVIMENTO FRONTEND</span>
-            <span className="text-[#1a1a1a]/30">+</span>
-            <span>DESIGN DE INTERFACES</span>
-            <span className="text-[#1a1a1a]/30">+</span>
-            <span>REACT & NEXT.JS</span>
-            <span className="text-[#1a1a1a]/30">+</span>
-            <span>EXPERIÊNCIAS DIGITAIS</span>
-            <span className="text-[#1a1a1a]/30">+</span>
-            
-            <span>DISPONÍVEL PARA PROJETOS REMOTOS</span>
-            <span className="text-[#1a1a1a]/30">+</span>
-            <span>DESENVOLVIMENTO FRONTEND</span>
-            <span className="text-[#1a1a1a]/30">+</span>
-            <span>DESIGN DE INTERFACES</span>
-            <span className="text-[#1a1a1a]/30">+</span>
-            <span>REACT & NEXT.JS</span>
-            <span className="text-[#1a1a1a]/30">+</span>
-            <span>EXPERIÊNCIAS DIGITAIS</span>
-            <span className="text-[#1a1a1a]/30">+</span>
-          </div>
-        </div>
       </footer>
     </div>
   );
