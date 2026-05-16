@@ -79,7 +79,7 @@ const Process: React.FC = () => {
   if (!PROCESS_STEPS || PROCESS_STEPS.length === 0) return null;
 
   return (
-    <section id="process" className="py-12 md:py-16 bg-white text-[#111] relative overflow-hidden z-10 flex flex-col justify-center">
+    <section id="process" className="py-12 md:py-16 border-t border-[#1a1a1a]/15 pt-12 md:pt-16 text-[#111] relative overflow-hidden z-10 flex flex-col justify-center">
       <div className="container-fluid">
         <div className="mb-20 md:mb-32 max-w-2xl">
            <Reveal>
@@ -112,3 +112,5 @@ const Process: React.FC = () => {
 };
 
 export default Process;
+
+

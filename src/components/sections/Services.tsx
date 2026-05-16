@@ -47,9 +47,9 @@ export default function Services() {
     <section
       id="services"
       ref={containerRef}
-      className="bg-[#111] text-cream overflow-hidden relative z-10"
+      className="border-t border-[#1a1a1a]/15 overflow-hidden relative z-10"
     >
-      <div className="h-px bg-cream/10" />
+      
 
       <div className="container-fluid py-12 md:py-16">
 
@@ -57,24 +57,24 @@ export default function Services() {
         <div className="srv-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-12">
           <div>
             <div className="overflow-hidden mb-4">
-              <span className="srv-header-line block text-[10px] uppercase tracking-[0.3em] font-bold text-cream/40">
+              <span className="srv-header-line block text-[10px] uppercase tracking-[0.3em] font-bold text-[#1a1a1a]/40">
                 03 / Especialidades
               </span>
             </div>
             <div className="overflow-hidden">
-              <h2 className="srv-header-line text-fluid-h2 font-serif font-light leading-none tracking-tighter uppercase text-cream">
+              <h2 className="srv-header-line text-fluid-h2 font-serif font-light leading-none tracking-tighter uppercase text-[#1a1a1a]">
                 Serviços
               </h2>
             </div>
           </div>
 
-          <p className="text-sm md:text-base font-light leading-relaxed text-cream/50 pb-2 md:self-end max-w-xs md:max-w-sm">
+          <p className="text-sm md:text-base font-light leading-relaxed text-[#1a1a1a]/50 pb-2 md:self-end max-w-xs md:max-w-sm">
             Combinando engenharia sólida com sensibilidade de design para entregar produtos digitais que impressionam e performam.
           </p>
         </div>
 
         {/* ── LISTA DE ESPECIALIDADES ── */}
-        <ul className="srv-list divide-y divide-cream/10">
+        <ul className="srv-list divide-y divide-[#1a1a1a]/10">
           {specialties.map((item, i) => {
             const isHovered = hoveredIndex === i;
             return (
@@ -87,12 +87,12 @@ export default function Services() {
                 {/* Row header */}
                 <div className="w-full flex items-center gap-6 md:gap-10 py-5 md:py-6">
                   {/* Number */}
-                  <span className="font-serif text-sm md:text-base text-cream/25 shrink-0 w-8 text-right tabular-nums">
+                  <span className="font-serif text-sm md:text-base text-[#1a1a1a]/25 shrink-0 w-8 text-right tabular-nums">
                     {item.id}
                   </span>
 
                   {/* Title */}
-                  <span className={`flex-1 text-2xl md:text-3xl lg:text-4xl font-serif tracking-tight transition-colors duration-300 ${isHovered ? 'text-cream/50' : 'text-cream'}`}>
+                  <span className={`flex-1 text-2xl md:text-3xl lg:text-4xl font-serif tracking-tight transition-colors duration-300 ${isHovered ? 'text-[#1a1a1a]/50' : 'text-[#1a1a1a]'}`}>
                     {item.title}
                   </span>
 
@@ -101,7 +101,7 @@ export default function Services() {
                     {item.technologies.map(tech => (
                       <span
                         key={tech}
-                        className="text-[10px] uppercase tracking-widest font-bold border border-cream/20 text-cream/40 px-2.5 py-1 rounded-full"
+                        className="text-[10px] uppercase tracking-widest font-bold border border-[#1a1a1a]/20 text-[#1a1a1a]/40 px-2.5 py-1 rounded-full"
                       >
                         {tech}
                       </span>
@@ -110,7 +110,7 @@ export default function Services() {
 
                   {/* Toggle icon */}
                   <span
-                    className={`shrink-0 ml-2 text-cream/40 transition-transform duration-500 ${isHovered ? 'rotate-45' : 'rotate-0'}`}
+                    className={`shrink-0 ml-2 text-[#1a1a1a]/40 transition-transform duration-500 ${isHovered ? 'rotate-45' : 'rotate-0'}`}
                     aria-hidden="true"
                   >
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -125,18 +125,18 @@ export default function Services() {
                   className={`overflow-hidden transition-all duration-500 ease-in-out ${isHovered ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}
                 >
                   <div className="pl-14 md:pl-20 pb-8 grid md:grid-cols-2 gap-10">
-                    <p className="text-sm md:text-base font-light text-cream/60 leading-relaxed max-w-lg">
+                    <p className="text-sm md:text-base font-light text-[#1a1a1a]/60 leading-relaxed max-w-lg">
                       {item.description}
                     </p>
 
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.25em] font-bold text-cream/30 mb-4">
+                      <p className="text-[10px] uppercase tracking-[0.25em] font-bold text-[#1a1a1a]/30 mb-4">
                         Entregáveis
                       </p>
                       <ul className="space-y-2">
                         {item.deliverables.map(d => (
-                          <li key={d} className="flex items-center gap-3 text-sm text-cream/70 font-light">
-                            <span className="w-1.5 h-1.5 rounded-full bg-cream/30 shrink-0" aria-hidden="true" />
+                          <li key={d} className="flex items-center gap-3 text-sm text-[#1a1a1a]/70 font-light">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#1a1a1a]/30 shrink-0" aria-hidden="true" />
                             {d}
                           </li>
                         ))}
@@ -151,13 +151,13 @@ export default function Services() {
 
         {/* ── CTA ── */}
         <div className="mt-10 md:mt-14 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
-          <p className="text-sm text-cream/40 font-light max-w-xs leading-relaxed">
+          <p className="text-sm text-[#1a1a1a]/40 font-light max-w-xs leading-relaxed">
             Cada projeto é tratado como único — sem templates, sem atalhos.
           </p>
           <a
             href="#contact"
             id="services-cta"
-            className="group inline-flex items-center gap-3 border border-cream/20 hover:border-cream/60 text-cream/70 hover:text-cream text-xs uppercase tracking-widest font-bold py-4 px-8 transition-all duration-300 rounded-sm"
+            className="group inline-flex items-center gap-3 border border-[#1a1a1a]/20 hover:border-[#1a1a1a]/60 text-[#1a1a1a]/70 hover:text-[#1a1a1a] text-xs uppercase tracking-widest font-bold py-4 px-8 transition-all duration-300 rounded-sm"
           >
             Vamos conversar
             <span className="inline-block transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
@@ -165,7 +165,9 @@ export default function Services() {
         </div>
       </div>
 
-      <div className="h-px bg-cream/10" />
+      
     </section>
   );
 }
+
+

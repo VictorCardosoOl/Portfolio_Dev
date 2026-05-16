@@ -49,7 +49,7 @@ export default function Values() {
     <section 
       id="values" 
       ref={containerRef} 
-      className="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-white text-charcoal overflow-hidden"
+      className="min-h-screen grid grid-cols-1 md:grid-cols-2 border-t border-[#1a1a1a]/15 pt-24 pb-24 text-charcoal overflow-hidden"
     >
       <div className="p-8 md:p-12 3xl:p-24 4xl:p-32 flex flex-col min-h-[50vh] md:min-h-screen">
         <div className="flex justify-between text-[10px] 3xl:text-xs uppercase tracking-widest opacity-80 font-bold mb-8">
@@ -103,3 +103,5 @@ export default function Values() {
     </section>
   );
 }
+
+

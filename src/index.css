@@ -102,11 +102,11 @@
 
 
 
-body {
-  background-color: var(--color-cream);
-  color: var(--color-charcoal);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
+@layer base {
+  body {
+    @apply bg-[#F4EFE8] text-[#1a1a1a] antialiased;
+    font-family: var(--font-sans);
+  }
 }
 
 html {
