@@ -21,28 +21,24 @@ export default function SmoothScroll({ isLocked = false }: { isLocked?: boolean 
     if (prefersReducedMotion) return;
 
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.08,
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 2,
-      infinite: false,
     });
 
     isLocked ? lenis.stop() : lenis.start();
 
     lenis.on('scroll', ScrollTrigger.update);
 
-    const update = (time: number) => {
+    gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
-    };
-
-    gsap.ticker.add(update);
+    });
     gsap.ticker.lagSmoothing(0);
 
     return () => {
       lenis.destroy();
-      gsap.ticker.remove(update);
+      gsap.ticker.remove((time) => lenis.raf(time * 1000));
     };
   }, [prefersReducedMotion, isLocked]);
 
