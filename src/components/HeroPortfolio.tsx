@@ -15,19 +15,20 @@ export default function HeroPortfolio() {
       const gallery = galleryRef.current;
       if (!gallery) return;
 
-      // Movimento lateral limpo em vez de envelopes empilhados
-      gsap.to(gallery, {
-        x: () => -(gallery.scrollWidth - window.innerWidth),
+      const totalScroll = gallery.scrollWidth - window.innerWidth;
+
+      // Movimento lateral limpo
+      const lateralScroll = gsap.to(gallery, {
+        x: () => -totalScroll,
         ease: "none",
         scrollTrigger: {
           trigger: containerRef.current,
           pin: true,
-          scrub: true, // lag do scrub off para telas 120Hz
+          scrub: true, 
           start: "top top",
-          end: () => `+=${gallery.scrollWidth}`,
+          end: () => `+=${totalScroll}`,
           invalidateOnRefresh: true,
-        },
-        id: "lateral-scroll"
+        }
       });
 
       // Parallax sutil nas imagens para sofisticação
@@ -39,7 +40,7 @@ export default function HeroPortfolio() {
             ease: "none",
             scrollTrigger: {
               trigger: img.parentElement,
-              containerAnimation: gsap.getById("lateral-scroll"), // Link com a animação acima
+              containerAnimation: lateralScroll, 
               start: "left right",
               end: "right left",
               scrub: true,
@@ -58,7 +59,7 @@ export default function HeroPortfolio() {
       {/* Container Flexível que ultrapassa os 100vw */}
       <div ref={galleryRef} className="flex h-full w-max">
         
-        {/* 1. HERO SECTION (Fica como o primeiro item da fila) */}
+        {/* 1. HERO SECTION */}
         <div className="w-[100vw] h-full flex flex-col justify-center px-12 z-10 shrink-0 relative">
            <h1 className="text-4xl sm:text-5xl md:text-6xl 3xl:text-7xl font-serif font-medium tracking-tighter uppercase whitespace-pre-line text-[#1a1a1a] leading-[1.05]">
              <TextType text={["Victor\nCardoso"]} typingSpeed={100} showCursor={true} cursorCharacter="_" />
@@ -68,7 +69,7 @@ export default function HeroPortfolio() {
            </p>
         </div>
 
-        {/* 2. PROJETOS LADO A LADO (Adeus Envelopes) */}
+        {/* 2. PROJETOS LADO A LADO */}
         {projects.map((project, j) => (
           <Link to={`/case/${project.id}`} key={project.id} className="w-[80vw] md:w-[60vw] h-full flex flex-col justify-center px-8 shrink-0 group/card block cursor-pointer">
              {/* Máscara de imagem para o Parallax */}
