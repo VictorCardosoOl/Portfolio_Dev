@@ -1,20 +1,17 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import CaseStudy from './pages/CaseStudy';
 
 export default function App() {
   return (
-    <>
-      <div 
-        className="fixed inset-0 z-50 pointer-events-none opacity-[0.035] mix-blend-multiply" 
-        style={{ backgroundImage: "url('/noise.png')" }} 
-      />
-      <Router>
+    <Router>
+      <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/case/:id" element={<CaseStudy />} />
         </Routes>
-      </Router>
-    </>
+      </MainLayout>
+    </Router>
   );
 }
