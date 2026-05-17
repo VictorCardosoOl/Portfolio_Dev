@@ -9,51 +9,15 @@ gsap.registerPlugin(ScrollTrigger);
 import { PROFILE_DATA as DATA } from '../../config/profile';
 
 // ============================================================================
-// COMPONENTE SECUNDÁRIO: CONTEÚDO DO CURRÍCULO (Resume Content - Horizontal Scroll)
+// COMPONENTE SECUNDÁRIO: CONTEÚDO DO CURRÍCULO (Resume Content - Vertical Scroll)
 // ============================================================================
 const ResumeContent = ({ isOpen }: { isOpen: boolean }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const galleryRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    // Atraso pequeno para garantir que o modal foi renderizado e tem altura
-    const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
-        const gallery = galleryRef.current;
-        const scroller = document.querySelector('.modal-scroll-container');
-        if (!gallery || !scroller) return;
-
-        const totalScroll = gallery.scrollWidth - window.innerWidth;
-
-        gsap.to(gallery, {
-          x: () => -totalScroll,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            scroller: scroller,
-            pin: true,
-            scrub: 1,
-            start: "top top",
-            end: () => `+=${totalScroll}`,
-            invalidateOnRefresh: true,
-          }
-        });
-      }, containerRef);
-
-      return () => ctx.revert();
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [isOpen]);
-
   return (
-    <div ref={containerRef} className="h-screen w-full overflow-hidden bg-[#fafafa]">
-      <div ref={galleryRef} className="flex h-full w-max text-[#333333]">
+    <div className="w-full bg-[#fafafa]">
+      <div className="flex flex-col text-[#333333]">
         
         {/* Panel 1: Header / Intro */}
-        <div className="w-[100vw] h-full flex items-center justify-center p-8 lg:p-24 shrink-0 relative">
+        <div className="w-full flex items-center justify-center p-8 lg:p-24 relative border-b border-[#e5e5e5]">
           <div className="max-w-4xl w-full">
              <h1 className="text-5xl md:text-8xl font-bold tracking-tighter mb-4 text-[#1a1a1a]">Victor<br/>Cardoso Cunha</h1>
              <p className="text-lg md:text-2xl text-[#666666] font-light mb-8">Analista de Soluções JR / Desenvolvedor Full Stack Júnior</p>
@@ -76,8 +40,8 @@ const ResumeContent = ({ isOpen }: { isOpen: boolean }) => {
         </div>
 
         {/* Panel 2: Resumo & Competências */}
-        <div className="w-[100vw] lg:w-[80vw] h-full flex flex-col justify-center p-8 lg:p-24 shrink-0 border-l border-[#e5e5e5]">
-          <div className="max-w-3xl">
+        <div className="w-full flex flex-col justify-center p-8 lg:p-24 border-b border-[#e5e5e5] bg-white">
+          <div className="max-w-4xl w-full mx-auto">
             <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-6 flex items-center gap-3">
               <Terminal size={18}/> Resumo Profissional
             </h2>
@@ -124,8 +88,8 @@ const ResumeContent = ({ isOpen }: { isOpen: boolean }) => {
         </div>
 
         {/* Panel 3: Experiência Profissional */}
-        <div className="w-[100vw] lg:w-[80vw] h-full flex flex-col justify-center p-8 lg:p-24 shrink-0 border-l border-[#e5e5e5]">
-          <div className="max-w-4xl w-full">
+        <div className="w-full flex flex-col justify-center p-8 lg:p-24 border-b border-[#e5e5e5]">
+          <div className="max-w-4xl w-full mx-auto">
             <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-10 flex items-center gap-3">
               <Briefcase size={18}/> Experiência Profissional
             </h2>
@@ -167,8 +131,8 @@ const ResumeContent = ({ isOpen }: { isOpen: boolean }) => {
         </div>
 
         {/* Panel 4: Formação Acadêmica & Cursos */}
-        <div className="w-[100vw] lg:w-[80vw] h-full flex flex-col justify-center p-8 lg:p-24 shrink-0 border-l border-[#e5e5e5] relative">
-          <div className="max-w-4xl w-full">
+        <div className="w-full flex flex-col justify-center p-8 lg:p-24 bg-white relative pb-32">
+          <div className="max-w-4xl w-full mx-auto">
             <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-6 flex items-center gap-3">
               <Award size={18}/> Formação Acadêmica
             </h2>
@@ -201,8 +165,8 @@ const ResumeContent = ({ isOpen }: { isOpen: boolean }) => {
             <p className="text-sm text-[#444444] font-light"><strong>Inglês:</strong> Intermediário (Leitura e Escrita)</p>
           </div>
           
-          <div className="absolute right-8 bottom-8 lg:right-24 lg:bottom-24">
-             <a href="#" download className="flex items-center justify-center gap-3 px-6 py-4 bg-[#1a1a1a] text-[#FFFFFF] rounded-full hover:bg-[#333333] transition-all text-[10px] font-bold uppercase tracking-widest shadow-lg">
+          <div className="max-w-4xl w-full mx-auto mt-12 flex justify-start">
+             <a href="#" download className="flex items-center justify-center gap-3 px-8 py-4 bg-[#1a1a1a] text-[#FFFFFF] rounded-full hover:bg-[#333333] transition-all text-[10px] font-bold uppercase tracking-widest shadow-lg">
                <Download size={16} /> Baixar CV PDF
              </a>
           </div>
@@ -283,10 +247,13 @@ const AboutMe: React.FC = () => {
           </h1>
         </div>
 
-        {/* Center "Slide" Button */}
-        <div className="hidden md:flex absolute left-[45%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border border-[#1a1a1a]/20 items-center justify-center text-xs font-serif z-20 bg-[#FFFFFF]/80 backdrop-blur-md pointer-events-none text-[#1a1a1a]">
-          Slide
-        </div>
+        {/* Center "Currículo" Button */}
+        <button 
+          onClick={() => setIsResumeOpen(true)}
+          className="hidden md:flex absolute left-[45%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full border border-[#1a1a1a]/20 items-center justify-center text-[10px] uppercase font-bold tracking-widest z-30 bg-[#1a1a1a] text-white shadow-2xl hover:scale-105 transition-transform cursor-pointer"
+        >
+          Currículo
+        </button>
 
         {/* Right Side (Content) */}
         <div 
@@ -305,14 +272,9 @@ const AboutMe: React.FC = () => {
             </div>
           </div>
 
-          <div className="shrink-0 w-1/2 flex flex-col gap-6 cursor-pointer group" onClick={() => setIsResumeOpen(true)}>
+          <div className="shrink-0 w-1/2 flex flex-col gap-6">
             <div className="aspect-[3/4] overflow-hidden bg-[#1a1a1a]/5 relative">
-              <img ref={img2Ref} src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800" className="w-full h-full object-cover grayscale group-hover:scale-105 transition-transform duration-700 mix-blend-multiply opacity-90" alt="Resume" />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#FFFFFF]/80 backdrop-blur-[2px]">
-                <span className="text-[#1a1a1a] font-mono text-xs tracking-widest uppercase border border-[#1a1a1a] px-6 py-3 font-bold">
-                  Ver Currículo
-                </span>
-              </div>
+              <img ref={img2Ref} src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800" className="w-full h-full object-cover grayscale mix-blend-multiply opacity-90" alt="Resume" />
             </div>
             <div className="flex flex-col">
               <span className="text-[10px] uppercase tracking-widest text-[#1a1a1a]/50 mb-2">EDITORIAL</span>
