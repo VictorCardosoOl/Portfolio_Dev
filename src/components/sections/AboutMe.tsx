@@ -29,26 +29,33 @@ const ResumeContent = ({ isOpen }: { isOpen: boolean }) => {
       <div className="max-w-[1440px] w-full mx-auto text-[#1a1a1a] font-sans">
         
         {/* Header */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24 items-end">
+        <div className="flex flex-col xl:flex-row justify-between items-start xl:items-end gap-12 mb-24">
           <div>
             <h1 className="text-5xl md:text-7xl font-light text-black tracking-tight leading-none mb-4">Victor Cardoso</h1>
             <p className="text-xs md:text-sm text-gray-400 uppercase tracking-widest">Analista & Dev Full Stack</p>
           </div>
-          <div className="flex gap-6">
-            <span className="text-xs md:text-sm text-gray-400 italic">Endereço</span>
-            <p className="text-sm md:text-base text-gray-500 font-light leading-relaxed">
-              Tatuapé<br/>
-              São Paulo, SP<br/>
-              BRASIL
-            </p>
-          </div>
-          <div className="flex gap-6">
-            <span className="text-xs md:text-sm text-gray-400 italic">Contato</span>
-            <p className="text-sm md:text-base text-gray-500 font-light leading-relaxed">
-              victorcardcunha@gmail.com<br/>
-              +55 11 97744-0146<br/>
-              github.com/VictorCardosoOl
-            </p>
+          <div className="flex flex-col md:flex-row gap-10 items-start md:items-end">
+            <div className="flex gap-4">
+              <span className="text-xs md:text-sm text-gray-400 italic">Endereço</span>
+              <p className="text-sm md:text-base text-gray-500 font-light leading-relaxed">
+                Tatuapé<br/>
+                São Paulo, SP<br/>
+                BRASIL
+              </p>
+            </div>
+            <div className="flex gap-4">
+              <span className="text-xs md:text-sm text-gray-400 italic">Contato</span>
+              <p className="text-sm md:text-base text-gray-500 font-light leading-relaxed">
+                victorcardcunha@gmail.com<br/>
+                +55 11 97744-0146<br/>
+                github.com/VictorCardosoOl
+              </p>
+            </div>
+            <div className="mb-1 md:mb-0">
+              <a href="#" download className="flex items-center justify-center gap-3 px-8 py-4 bg-[#1a1a1a] text-[#FFFFFF] rounded-full hover:bg-[#333333] transition-all text-[10px] md:text-xs font-bold uppercase tracking-widest shadow-lg">
+                <Download size={18} /> Baixar CV
+              </a>
+            </div>
           </div>
         </div>
 
@@ -72,19 +79,19 @@ const ResumeContent = ({ isOpen }: { isOpen: boolean }) => {
 
             {/* ESPECIALIDADES */}
             <div className="mb-20">
-              <h2 className="text-xs md:text-sm font-bold text-black uppercase tracking-widest border-b border-dotted border-gray-400 pb-4 mb-12">Especialidades</h2>
+              <h2 className="text-xs md:text-sm font-bold text-black uppercase tracking-widest border-b border-dotted border-gray-400 pb-4 mb-16">Especialidades</h2>
               <div className="flex justify-center gap-0 relative">
-                 <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border border-gray-300 flex items-center justify-center relative z-10 bg-white shadow-sm">
+                 <div className="w-32 h-32 md:w-48 md:h-48 rounded-full border border-gray-300 flex items-center justify-center relative z-10 bg-white shadow-sm">
                    <Terminal size={32} className="text-gray-800" />
-                   <span className="absolute -bottom-8 text-xs text-gray-500 whitespace-nowrap">Front-end</span>
+                   <span className="absolute -bottom-8 md:-bottom-10 text-xs md:text-sm text-gray-500 whitespace-nowrap">Front-end</span>
                  </div>
-                 <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border border-gray-300 flex items-center justify-center relative z-20 bg-white -ml-8 md:-ml-12 shadow-sm">
+                 <div className="w-32 h-32 md:w-48 md:h-48 rounded-full border border-gray-300 flex items-center justify-center relative z-20 bg-white -ml-4 md:-ml-8 shadow-sm">
                    <Cpu size={32} className="text-gray-800" />
-                   <span className="absolute -bottom-8 text-xs text-gray-500 whitespace-nowrap">Back-end</span>
+                   <span className="absolute -bottom-8 md:-bottom-10 text-xs md:text-sm text-gray-500 whitespace-nowrap">Back-end</span>
                  </div>
-                 <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border border-gray-300 flex items-center justify-center relative z-30 bg-white -ml-8 md:-ml-12 shadow-sm">
+                 <div className="w-32 h-32 md:w-48 md:h-48 rounded-full border border-gray-300 flex items-center justify-center relative z-30 bg-white -ml-4 md:-ml-8 shadow-sm">
                    <Briefcase size={32} className="text-gray-800" />
-                   <span className="absolute -bottom-8 text-xs text-gray-500 whitespace-nowrap">Automação</span>
+                   <span className="absolute -bottom-8 md:-bottom-10 text-xs md:text-sm text-gray-500 whitespace-nowrap">Automação</span>
                  </div>
               </div>
             </div>
@@ -250,12 +257,6 @@ const ResumeContent = ({ isOpen }: { isOpen: boolean }) => {
               </div>
             </div>
             
-            <div className="mt-20 flex justify-end">
-              <a href="#" download className="flex items-center justify-center gap-3 px-10 py-5 bg-[#1a1a1a] text-[#FFFFFF] rounded-full hover:bg-[#333333] transition-all text-xs font-bold uppercase tracking-widest shadow-lg">
-                <Download size={20} /> Baixar CV PDF
-              </a>
-            </div>
-
           </div>
         </div>
       </div>
