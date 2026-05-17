@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Download, MapPin, ExternalLink, Globe, Award, Briefcase, Terminal, Cpu } from 'lucide-react';
+import { X, Download, MapPin, ExternalLink, Globe, Award, Briefcase, Terminal, Cpu, Smartphone, Mail, Github, Linkedin } from 'lucide-react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
@@ -9,120 +9,209 @@ gsap.registerPlugin(ScrollTrigger);
 import { PROFILE_DATA as DATA } from '../../config/profile';
 
 // ============================================================================
-// COMPONENTE SECUNDÁRIO: CONTEÚDO DO CURRÍCULO (Resume Content)
+// COMPONENTE SECUNDÁRIO: CONTEÚDO DO CURRÍCULO (Resume Content - Horizontal Scroll)
 // ============================================================================
-const ResumeContent = () => (
-  <div className="min-h-screen pb-24">
-    {/* Header do CV */}
-    <div className="w-full pt-32 pb-16 px-6 md:px-12 relative overflow-hidden border-b border-[#1a1a1a]/15">
-      <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row gap-10 items-end relative z-10 3xl:px-12">
-        <div className="flex-1 pb-2">
-          <span className="px-3 py-1 border border-[#1a1a1a]/20 rounded-full text-[10px] font-mono uppercase tracking-widest text-[#1a1a1a]/80 mb-4 inline-block">
-            {DATA.role}
-          </span>
-          <h1 className="text-5xl md:text-7xl font-serif font-light tracking-tight mb-4 leading-none text-[#1a1a1a]">
-            {DATA.name}
-          </h1>
-          <p className="text-lg md:text-xl font-light text-[#1a1a1a]/70 max-w-2xl mb-8 leading-relaxed">
-            {DATA.bio}
-          </p>
-          <div className="flex flex-wrap gap-x-8 gap-y-3 text-xs font-mono text-[#1a1a1a]/50 uppercase tracking-widest border-t border-[#1a1a1a]/15 pt-6">
-            <span className="flex items-center gap-2"><MapPin size={12} /> {DATA.location}</span>
-            <span className="flex items-center gap-2"><Globe size={12} /> Português / Inglês</span>
-            <a href={DATA.socials.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-[#1a1a1a] hover:text-[#1a1a1a]/60 transition-colors underline-offset-4">
-              <ExternalLink size={12} /> LinkedIn
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+const ResumeContent = ({ isOpen }: { isOpen: boolean }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
 
-    {/* Corpo do CV */}
-    <div className="max-w-[1920px] mx-auto px-6 md:px-12 3xl:px-24 mt-24 md:mt-32 3xl:mt-40">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+  useEffect(() => {
+    if (!isOpen) return;
+
+    // Atraso pequeno para garantir que o modal foi renderizado e tem altura
+    const timer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        const gallery = galleryRef.current;
+        const scroller = document.querySelector('.modal-scroll-container');
+        if (!gallery || !scroller) return;
+
+        const totalScroll = gallery.scrollWidth - window.innerWidth;
+
+        gsap.to(gallery, {
+          x: () => -totalScroll,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            scroller: scroller,
+            pin: true,
+            scrub: 1,
+            start: "top top",
+            end: () => `+=${totalScroll}`,
+            invalidateOnRefresh: true,
+          }
+        });
+      }, containerRef);
+
+      return () => ctx.revert();
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [isOpen]);
+
+  return (
+    <div ref={containerRef} className="h-screen w-full overflow-hidden bg-[#fafafa]">
+      <div ref={galleryRef} className="flex h-full w-max text-[#333333]">
         
-        {/* Esquerda: Experiência e Educação */}
-        <div className="lg:col-span-8 space-y-16">
-          <section>
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a1a]/40 mb-10 border-b border-[#1a1a1a]/10 pb-4 flex items-center gap-2">
-              <Briefcase size={14} /> Experiência Profissional
-            </h3>
-            <div className="relative border-l border-[#1a1a1a]/10 ml-3 space-y-12">
-              {DATA.experience.map((job, idx) => (
-                <div key={idx} className="pl-8 relative group">
-                  <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#1a1a1a] border-2 border-[#FFFFFF] group-hover:scale-125 transition-transform" />
-                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-                    <h4 className="text-xl font-serif text-[#1a1a1a] font-light">{job.role}</h4>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#1a1a1a]/50">{job.period}</span>
-                  </div>
-                  <p className="text-xs font-bold uppercase tracking-widest text-[#1a1a1a]/50 mb-4">{job.company} • {job.location}</p>
-                  <ul className="space-y-2">
-                    {job.description.map((desc, i) => (
-                      <li key={i} className="text-sm text-[#1a1a1a]/70 font-light leading-relaxed flex items-start gap-2">
-                        <span className="mt-1.5 w-1 h-1 bg-[#1a1a1a]/30 rounded-full shrink-0" /> {desc}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </section>
+        {/* Panel 1: Header / Intro */}
+        <div className="w-[100vw] h-full flex items-center justify-center p-8 lg:p-24 shrink-0 relative">
+          <div className="max-w-4xl w-full">
+             <h1 className="text-5xl md:text-8xl font-bold tracking-tighter mb-4 text-[#1a1a1a]">Victor<br/>Cardoso Cunha</h1>
+             <p className="text-lg md:text-2xl text-[#666666] font-light mb-8">Analista de Soluções JR / Desenvolvedor Full Stack Júnior</p>
+             
+             <div className="flex flex-wrap gap-6 text-sm font-mono text-[#666666] mb-12">
+               <span className="flex items-center gap-2"><MapPin size={16}/> Tatuapé - São Paulo/SP</span>
+               <span className="flex items-center gap-2"><Smartphone size={16}/> (11) 97744-0146</span>
+               <span className="flex items-center gap-2"><Mail size={16}/> victorcardcunha@gmail.com</span>
+             </div>
 
-          <section>
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a1a]/40 mb-8 border-b border-[#1a1a1a]/10 pb-4 flex items-center gap-2">
-              <Award size={14} /> Formação Acadêmica
-            </h3>
-            <div className="space-y-6">
-              {DATA.education.map((edu, idx) => (
-                <div key={idx} className="p-6 rounded-sm border border-[#1a1a1a]/5 bg-[#1a1a1a]/[0.02]">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#1a1a1a]/50 mb-1 block">{edu.period}</span>
-                  <h4 className="text-lg font-serif font-medium text-[#1a1a1a] mb-1">{edu.degree}</h4>
-                  <p className="text-xs font-bold uppercase tracking-widest text-[#1a1a1a]/50">{edu.institution}</p>
-                </div>
-              ))}
-            </div>
-          </section>
+             <div className="flex gap-4">
+               <a href="https://github.com/VictorCardosoOl" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 border border-[#333333] hover:bg-[#333333] hover:text-[#FFFFFF] transition-colors rounded-full text-xs font-bold uppercase tracking-wider">
+                 <Github size={16}/> GitHub
+               </a>
+               <a href="#" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 border border-[#333333] hover:bg-[#333333] hover:text-[#FFFFFF] transition-colors rounded-full text-xs font-bold uppercase tracking-wider">
+                 <Linkedin size={16}/> LinkedIn
+               </a>
+             </div>
+          </div>
         </div>
 
-        {/* Direita: Skills */}
-        <div className="lg:col-span-4 space-y-12">
-          <section>
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a1a]/40 mb-6 border-b border-[#1a1a1a]/10 pb-4">Competências</h3>
-            <div className="space-y-6">
-              <div className="p-6 rounded-sm border border-[#1a1a1a]/5 bg-[#1a1a1a]/[0.02]">
-                <div className="flex items-center gap-2 mb-4">
-                  <Terminal size={16} /> <h4 className="font-serif font-medium text-lg text-[#1a1a1a]">Técnicas</h4>
-                </div>
-                <ul className="space-y-2">
-                  {DATA.skills.technical.map((skill, i) => (
-                    <li key={i} className="text-xs font-mono text-[#1a1a1a]/80 border-b border-[#1a1a1a]/5 pb-1">{skill}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="p-6 rounded-sm border border-[#1a1a1a]/5 bg-[#1a1a1a]/[0.02]">
-                <div className="flex items-center gap-2 mb-4">
-                  <Cpu size={16} /> <h4 className="font-serif font-medium text-lg text-[#1a1a1a]">Soft Skills</h4>
-                </div>
-                <ul className="space-y-2">
-                  {DATA.skills.softSkills.map((skill, i) => (
-                    <li key={i} className="text-xs font-mono text-[#1a1a1a]/80 border-b border-[#1a1a1a]/5 pb-1">{skill}</li>
-                  ))}
-                </ul>
-              </div>
+        {/* Panel 2: Resumo & Competências */}
+        <div className="w-[100vw] lg:w-[80vw] h-full flex flex-col justify-center p-8 lg:p-24 shrink-0 border-l border-[#e5e5e5]">
+          <div className="max-w-3xl">
+            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-6 flex items-center gap-3">
+              <Terminal size={18}/> Resumo Profissional
+            </h2>
+            <p className="text-base md:text-xl leading-relaxed font-light mb-12 text-[#444444]">
+              Profissional de tecnologia com rápida ascensão na área de sistemas e operações, atuando atualmente como Analista de Soluções JR. Possuo profundo conhecimento técnico em sistemas de gestão (Sigo - Medicina Ocupacional) e forte capacidade para aliar visão de negócio à execução técnica. Lidero projetos estratégicos focados na automação de processos, análise de estruturas operacionais e especificação de novas funcionalidades. Com sólida base em Front-end (React, TypeScript) e em transição para o Back-end (Node.js), tenho como principal foco atuar como Desenvolvedor Full Stack Júnior de alto impacto.
+            </p>
+
+            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-6">Competências Técnicas</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+               <div>
+                 <h4 className="font-bold mb-3 text-[#1a1a1a] text-sm">Linguagens & Frameworks</h4>
+                 <div className="flex flex-wrap gap-2">
+                   {['Python', 'JavaScript', 'TypeScript', 'Node.js', 'Next.js', 'React', 'HTML5', 'CSS'].map(s => (
+                     <span key={s} className="px-3 py-1 bg-[#eeeeee] text-[10px] font-mono rounded-sm text-[#333333]">{s}</span>
+                   ))}
+                 </div>
+               </div>
+               <div>
+                 <h4 className="font-bold mb-3 text-[#1a1a1a] text-sm">Bancos de Dados</h4>
+                 <div className="flex flex-wrap gap-2">
+                   {['SQL', 'MySQL'].map(s => (
+                     <span key={s} className="px-3 py-1 bg-[#eeeeee] text-[10px] font-mono rounded-sm text-[#333333]">{s}</span>
+                   ))}
+                 </div>
+               </div>
+               <div>
+                 <h4 className="font-bold mb-3 text-[#1a1a1a] text-sm">Ferramentas e Infra</h4>
+                 <div className="flex flex-wrap gap-2">
+                   {['Git', 'GitHub', 'Trello', 'Linux', 'Windows'].map(s => (
+                     <span key={s} className="px-3 py-1 bg-[#eeeeee] text-[10px] font-mono rounded-sm text-[#333333]">{s}</span>
+                   ))}
+                 </div>
+               </div>
+               <div>
+                 <h4 className="font-bold mb-3 text-[#1a1a1a] text-sm">Outros</h4>
+                 <div className="flex flex-wrap gap-2">
+                   {['Pacote Office Avançado', 'Automação', 'Especificação Técnica'].map(s => (
+                     <span key={s} className="px-3 py-1 bg-[#eeeeee] text-[10px] font-mono rounded-sm text-[#333333]">{s}</span>
+                   ))}
+                 </div>
+               </div>
             </div>
-          </section>
+          </div>
+        </div>
+
+        {/* Panel 3: Experiência Profissional */}
+        <div className="w-[100vw] lg:w-[80vw] h-full flex flex-col justify-center p-8 lg:p-24 shrink-0 border-l border-[#e5e5e5]">
+          <div className="max-w-4xl w-full">
+            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-10 flex items-center gap-3">
+              <Briefcase size={18}/> Experiência Profissional
+            </h2>
+            <div className="space-y-10 relative border-l-2 border-[#dddddd] pl-8">
+               <div className="relative">
+                 <div className="absolute -left-[41px] top-1 w-5 h-5 bg-[#fafafa] border-4 border-[#1a1a1a] rounded-full"/>
+                 <h3 className="text-xl font-bold text-[#1a1a1a]">Analista de Soluções JR</h3>
+                 <span className="text-xs font-mono text-[#666666]">WISE SYSTEM (São Paulo, SP) • Atual</span>
+                 <ul className="mt-3 space-y-1 text-sm text-[#444444] font-light">
+                   <li>• Liderança do projeto estratégico "Maximizar o Uso do Sistema Sigo".</li>
+                   <li>• Análise de estruturas operacionais e automação de processos manuais.</li>
+                   <li>• Especificação técnica de novas funcionalidades para a equipe de desenvolvimento.</li>
+                   <li>• Atuação contínua como elo entre as necessidades do negócio e as soluções tecnológicas.</li>
+                 </ul>
+               </div>
+
+               <div className="relative">
+                 <div className="absolute -left-[41px] top-1 w-5 h-5 bg-[#fafafa] border-4 border-[#cccccc] rounded-full"/>
+                 <h3 className="text-lg font-bold text-[#333333]">Supervisor de Op. / Analista de Treinamento</h3>
+                 <span className="text-xs font-mono text-[#666666]">WISE SYSTEM • 2025</span>
+                 <ul className="mt-3 space-y-1 text-sm text-[#444444] font-light">
+                   <li>• Suporte técnico avançado e aplicação de testes de software.</li>
+                   <li>• Manutenção e instalação de programas em computadores e servidores.</li>
+                   <li>• Correção de parâmetros via banco de dados e manutenção de infraestrutura.</li>
+                 </ul>
+               </div>
+
+               <div className="relative">
+                 <div className="absolute -left-[41px] top-1 w-5 h-5 bg-[#fafafa] border-4 border-[#cccccc] rounded-full"/>
+                 <h3 className="text-lg font-bold text-[#333333]">Estágio em Suporte</h3>
+                 <span className="text-xs font-mono text-[#666666]">WISE SYSTEM • 2024</span>
+                 <ul className="mt-3 space-y-1 text-sm text-[#444444] font-light">
+                   <li>• Atendimento ao cliente e suporte técnico de primeiro nível.</li>
+                   <li>• Auxílio na manutenção de infraestrutura e testes de sistemas.</li>
+                 </ul>
+               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Panel 4: Formação Acadêmica & Cursos */}
+        <div className="w-[100vw] lg:w-[80vw] h-full flex flex-col justify-center p-8 lg:p-24 shrink-0 border-l border-[#e5e5e5] relative">
+          <div className="max-w-4xl w-full">
+            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-6 flex items-center gap-3">
+              <Award size={18}/> Formação Acadêmica
+            </h2>
+            <div className="mb-12">
+              <h3 className="text-lg font-bold text-[#1a1a1a]">Engenharia da Computação</h3>
+              <p className="text-sm text-[#666666] font-light mt-1">Universidade Anhembi Morumbi • 01/2022 a 12/2026 (Cursando 9º Semestre)</p>
+            </div>
+
+            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-6">Cursos Complementares</h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12 text-[#444444]">
+              <li className="p-4 bg-[#eeeeee] rounded-sm">
+                <span className="block font-bold text-[#1a1a1a] text-sm">Front End Pro</span>
+                <span className="text-xs">EBAC (Cursando)</span>
+              </li>
+              <li className="p-4 bg-[#eeeeee] rounded-sm">
+                <span className="block font-bold text-[#1a1a1a] text-sm">Santander Coders 2023.2 | Back-End</span>
+                <span className="text-xs">Concluído</span>
+              </li>
+              <li className="p-4 bg-[#eeeeee] rounded-sm">
+                <span className="block font-bold text-[#1a1a1a] text-sm">JS Algoritmos e Estrutura de Dados</span>
+                <span className="text-xs">Udemy – Concluído</span>
+              </li>
+              <li className="p-4 bg-[#eeeeee] rounded-sm">
+                <span className="block font-bold text-[#1a1a1a] text-sm">Python e HTML</span>
+                <span className="text-xs">Curso em Vídeo – Concluídos</span>
+              </li>
+            </ul>
+
+            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-3">Idiomas</h2>
+            <p className="text-sm text-[#444444] font-light"><strong>Inglês:</strong> Intermediário (Leitura e Escrita)</p>
+          </div>
           
-          <div className="pt-4 sticky top-8">
-            <a href={DATA.resumeLink} download className="flex items-center justify-center gap-3 w-full px-8 py-4 bg-[#1a1a1a] text-[#FFFFFF] rounded-full hover:bg-[#1a1a1a]/80 transition-all text-xs font-bold uppercase tracking-widest shadow-lg">
-              <Download size={16} /> Baixar CV Completo
-            </a>
+          <div className="absolute right-8 bottom-8 lg:right-24 lg:bottom-24">
+             <a href="#" download className="flex items-center justify-center gap-3 px-6 py-4 bg-[#1a1a1a] text-[#FFFFFF] rounded-full hover:bg-[#333333] transition-all text-[10px] font-bold uppercase tracking-widest shadow-lg">
+               <Download size={16} /> Baixar CV PDF
+             </a>
           </div>
         </div>
 
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 // ============================================================================
 // COMPONENTE PRINCIPAL: ABOUT SECTION
@@ -260,8 +349,8 @@ const AboutMe: React.FC = () => {
             </div>
             
             {/* Scroll Interno do Currículo */}
-            <div className="flex-grow h-full w-full overflow-y-auto bg-[#FFFFFF]">
-              <ResumeContent />
+            <div className="flex-grow h-full w-full overflow-y-auto bg-[#FFFFFF] modal-scroll-container">
+              <ResumeContent isOpen={isResumeOpen} />
             </div>
           </div>
         </div>,
