@@ -9,169 +9,255 @@ gsap.registerPlugin(ScrollTrigger);
 import { PROFILE_DATA as DATA } from '../../config/profile';
 
 // ============================================================================
-// COMPONENTE SECUNDÁRIO: CONTEÚDO DO CURRÍCULO (Resume Content - Vertical Scroll)
+// COMPONENTE SECUNDÁRIO: CONTEÚDO DO CURRÍCULO (EFResume Style - Full Section)
 // ============================================================================
+
+const SkillDots = ({ name, score }: { name: string, score: number }) => (
+  <div className="flex justify-between items-center text-xs md:text-sm mb-3">
+    <span className="text-gray-500 font-light">{name}</span>
+    <div className="flex gap-2">
+      {[1, 2, 3, 4, 5].map(i => (
+        <div key={i} className={`w-2 h-2 rounded-full ${i <= score ? 'bg-gray-800' : 'bg-gray-200'}`} />
+      ))}
+    </div>
+  </div>
+);
+
 const ResumeContent = ({ isOpen }: { isOpen: boolean }) => {
   return (
-    <div className="w-full bg-[#fafafa]">
-      <div className="flex flex-col text-[#333333]">
+    <div className="w-full bg-[#FFFFFF] py-24 md:py-32 px-6 md:px-12 lg:px-24">
+      <div className="max-w-[1440px] w-full mx-auto text-[#1a1a1a] font-sans">
         
-        {/* Panel 1: Header / Intro */}
-        <div className="w-full flex items-center justify-center p-8 lg:p-24 relative border-b border-[#e5e5e5]">
-          <div className="max-w-4xl w-full">
-             <h1 className="text-5xl md:text-8xl font-bold tracking-tighter mb-4 text-[#1a1a1a]">Victor<br/>Cardoso Cunha</h1>
-             <p className="text-lg md:text-2xl text-[#666666] font-light mb-8">Analista de Soluções JR / Desenvolvedor Full Stack Júnior</p>
-             
-             <div className="flex flex-wrap gap-6 text-sm font-mono text-[#666666] mb-12">
-               <span className="flex items-center gap-2"><MapPin size={16}/> Tatuapé - São Paulo/SP</span>
-               <span className="flex items-center gap-2"><Smartphone size={16}/> (11) 97744-0146</span>
-               <span className="flex items-center gap-2"><Mail size={16}/> victorcardcunha@gmail.com</span>
-             </div>
-
-             <div className="flex gap-4">
-               <a href="https://github.com/VictorCardosoOl" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 border border-[#333333] hover:bg-[#333333] hover:text-[#FFFFFF] transition-colors rounded-full text-xs font-bold uppercase tracking-wider">
-                 <Github size={16}/> GitHub
-               </a>
-               <a href="#" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 border border-[#333333] hover:bg-[#333333] hover:text-[#FFFFFF] transition-colors rounded-full text-xs font-bold uppercase tracking-wider">
-                 <Linkedin size={16}/> LinkedIn
-               </a>
-             </div>
+        {/* Header */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24 items-end">
+          <div>
+            <h1 className="text-5xl md:text-7xl font-light text-black tracking-tight leading-none mb-4">Victor Cardoso</h1>
+            <p className="text-xs md:text-sm text-gray-400 uppercase tracking-widest">Analista & Dev Full Stack</p>
           </div>
-        </div>
-
-        {/* Panel 2: Resumo & Competências */}
-        <div className="w-full flex flex-col justify-center p-8 lg:p-24 border-b border-[#e5e5e5] bg-white">
-          <div className="max-w-4xl w-full mx-auto">
-            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-6 flex items-center gap-3">
-              <Terminal size={18}/> Resumo Profissional
-            </h2>
-            <p className="text-base md:text-xl leading-relaxed font-light mb-12 text-[#444444]">
-              Profissional de tecnologia com rápida ascensão na área de sistemas e operações, atuando atualmente como Analista de Soluções JR. Possuo profundo conhecimento técnico em sistemas de gestão (Sigo - Medicina Ocupacional) e forte capacidade para aliar visão de negócio à execução técnica. Lidero projetos estratégicos focados na automação de processos, análise de estruturas operacionais e especificação de novas funcionalidades. Com sólida base em Front-end (React, TypeScript) e em transição para o Back-end (Node.js), tenho como principal foco atuar como Desenvolvedor Full Stack Júnior de alto impacto.
+          <div className="flex gap-6">
+            <span className="text-xs md:text-sm text-gray-400 italic">Endereço</span>
+            <p className="text-sm md:text-base text-gray-500 font-light leading-relaxed">
+              Tatuapé<br/>
+              São Paulo, SP<br/>
+              BRASIL
             </p>
-
-            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-6">Competências Técnicas</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-               <div>
-                 <h4 className="font-bold mb-3 text-[#1a1a1a] text-sm">Linguagens & Frameworks</h4>
-                 <div className="flex flex-wrap gap-2">
-                   {['Python', 'JavaScript', 'TypeScript', 'Node.js', 'Next.js', 'React', 'HTML5', 'CSS'].map(s => (
-                     <span key={s} className="px-3 py-1 bg-[#eeeeee] text-[10px] font-mono rounded-sm text-[#333333]">{s}</span>
-                   ))}
-                 </div>
-               </div>
-               <div>
-                 <h4 className="font-bold mb-3 text-[#1a1a1a] text-sm">Bancos de Dados</h4>
-                 <div className="flex flex-wrap gap-2">
-                   {['SQL', 'MySQL'].map(s => (
-                     <span key={s} className="px-3 py-1 bg-[#eeeeee] text-[10px] font-mono rounded-sm text-[#333333]">{s}</span>
-                   ))}
-                 </div>
-               </div>
-               <div>
-                 <h4 className="font-bold mb-3 text-[#1a1a1a] text-sm">Ferramentas e Infra</h4>
-                 <div className="flex flex-wrap gap-2">
-                   {['Git', 'GitHub', 'Trello', 'Linux', 'Windows'].map(s => (
-                     <span key={s} className="px-3 py-1 bg-[#eeeeee] text-[10px] font-mono rounded-sm text-[#333333]">{s}</span>
-                   ))}
-                 </div>
-               </div>
-               <div>
-                 <h4 className="font-bold mb-3 text-[#1a1a1a] text-sm">Outros</h4>
-                 <div className="flex flex-wrap gap-2">
-                   {['Pacote Office Avançado', 'Automação', 'Especificação Técnica'].map(s => (
-                     <span key={s} className="px-3 py-1 bg-[#eeeeee] text-[10px] font-mono rounded-sm text-[#333333]">{s}</span>
-                   ))}
-                 </div>
-               </div>
-            </div>
+          </div>
+          <div className="flex gap-6">
+            <span className="text-xs md:text-sm text-gray-400 italic">Contato</span>
+            <p className="text-sm md:text-base text-gray-500 font-light leading-relaxed">
+              victorcardcunha@gmail.com<br/>
+              +55 11 97744-0146<br/>
+              github.com/VictorCardosoOl
+            </p>
           </div>
         </div>
 
-        {/* Panel 3: Experiência Profissional */}
-        <div className="w-full flex flex-col justify-center p-8 lg:p-24 border-b border-[#e5e5e5]">
-          <div className="max-w-4xl w-full mx-auto">
-            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-10 flex items-center gap-3">
-              <Briefcase size={18}/> Experiência Profissional
-            </h2>
-            <div className="space-y-10 relative border-l-2 border-[#dddddd] pl-8">
-               <div className="relative">
-                 <div className="absolute -left-[41px] top-1 w-5 h-5 bg-[#fafafa] border-4 border-[#1a1a1a] rounded-full"/>
-                 <h3 className="text-xl font-bold text-[#1a1a1a]">Analista de Soluções JR</h3>
-                 <span className="text-xs font-mono text-[#666666]">WISE SYSTEM (São Paulo, SP) • Atual</span>
-                 <ul className="mt-3 space-y-1 text-sm text-[#444444] font-light">
-                   <li>• Liderança do projeto estratégico "Maximizar o Uso do Sistema Sigo".</li>
-                   <li>• Análise de estruturas operacionais e automação de processos manuais.</li>
-                   <li>• Especificação técnica de novas funcionalidades para a equipe de desenvolvimento.</li>
-                   <li>• Atuação contínua como elo entre as necessidades do negócio e as soluções tecnológicas.</li>
-                 </ul>
-               </div>
-
-               <div className="relative">
-                 <div className="absolute -left-[41px] top-1 w-5 h-5 bg-[#fafafa] border-4 border-[#cccccc] rounded-full"/>
-                 <h3 className="text-lg font-bold text-[#333333]">Supervisor de Op. / Analista de Treinamento</h3>
-                 <span className="text-xs font-mono text-[#666666]">WISE SYSTEM • 2025</span>
-                 <ul className="mt-3 space-y-1 text-sm text-[#444444] font-light">
-                   <li>• Suporte técnico avançado e aplicação de testes de software.</li>
-                   <li>• Manutenção e instalação de programas em computadores e servidores.</li>
-                   <li>• Correção de parâmetros via banco de dados e manutenção de infraestrutura.</li>
-                 </ul>
-               </div>
-
-               <div className="relative">
-                 <div className="absolute -left-[41px] top-1 w-5 h-5 bg-[#fafafa] border-4 border-[#cccccc] rounded-full"/>
-                 <h3 className="text-lg font-bold text-[#333333]">Estágio em Suporte</h3>
-                 <span className="text-xs font-mono text-[#666666]">WISE SYSTEM • 2024</span>
-                 <ul className="mt-3 space-y-1 text-sm text-[#444444] font-light">
-                   <li>• Atendimento ao cliente e suporte técnico de primeiro nível.</li>
-                   <li>• Auxílio na manutenção de infraestrutura e testes de sistemas.</li>
-                 </ul>
-               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Panel 4: Formação Acadêmica & Cursos */}
-        <div className="w-full flex flex-col justify-center p-8 lg:p-24 bg-white relative pb-32">
-          <div className="max-w-4xl w-full mx-auto">
-            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-6 flex items-center gap-3">
-              <Award size={18}/> Formação Acadêmica
-            </h2>
-            <div className="mb-12">
-              <h3 className="text-lg font-bold text-[#1a1a1a]">Engenharia da Computação</h3>
-              <p className="text-sm text-[#666666] font-light mt-1">Universidade Anhembi Morumbi • 01/2022 a 12/2026 (Cursando 9º Semestre)</p>
-            </div>
-
-            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-6">Cursos Complementares</h2>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12 text-[#444444]">
-              <li className="p-4 bg-[#eeeeee] rounded-sm">
-                <span className="block font-bold text-[#1a1a1a] text-sm">Front End Pro</span>
-                <span className="text-xs">EBAC (Cursando)</span>
-              </li>
-              <li className="p-4 bg-[#eeeeee] rounded-sm">
-                <span className="block font-bold text-[#1a1a1a] text-sm">Santander Coders 2023.2 | Back-End</span>
-                <span className="text-xs">Concluído</span>
-              </li>
-              <li className="p-4 bg-[#eeeeee] rounded-sm">
-                <span className="block font-bold text-[#1a1a1a] text-sm">JS Algoritmos e Estrutura de Dados</span>
-                <span className="text-xs">Udemy – Concluído</span>
-              </li>
-              <li className="p-4 bg-[#eeeeee] rounded-sm">
-                <span className="block font-bold text-[#1a1a1a] text-sm">Python e HTML</span>
-                <span className="text-xs">Curso em Vídeo – Concluídos</span>
-              </li>
-            </ul>
-
-            <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#999999] mb-3">Idiomas</h2>
-            <p className="text-sm text-[#444444] font-light"><strong>Inglês:</strong> Intermediário (Leitura e Escrita)</p>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-24">
           
-          <div className="max-w-4xl w-full mx-auto mt-12 flex justify-start">
-             <a href="#" download className="flex items-center justify-center gap-3 px-8 py-4 bg-[#1a1a1a] text-[#FFFFFF] rounded-full hover:bg-[#333333] transition-all text-[10px] font-bold uppercase tracking-widest shadow-lg">
-               <Download size={16} /> Baixar CV PDF
-             </a>
+          {/* Left Column */}
+          <div>
+            {/* RESUMO PROFISSIONAL */}
+            <div className="mb-20">
+              <h2 className="text-xs md:text-sm font-bold text-black uppercase tracking-widest border-b border-dotted border-gray-400 pb-4 mb-8">Resumo Profissional</h2>
+              <p className="text-sm md:text-base text-gray-600 font-light leading-loose mb-6">
+                Profissional de tecnologia com rápida ascensão na área de sistemas e operações, atuando atualmente como Analista de Soluções JR.
+              </p>
+              <p className="text-sm md:text-base text-gray-600 font-light leading-loose mb-6">
+                Possuo profundo conhecimento técnico em sistemas de gestão (Sigo - Medicina Ocupacional) e forte capacidade para aliar visão de negócio à execução técnica. Lidero projetos estratégicos focados na automação de processos.
+              </p>
+              <p className="text-sm md:text-base text-gray-600 font-light leading-loose">
+                Com sólida base em Front-end (React, TypeScript) e em transição para o Back-end (Node.js), tenho como principal foco atuar como Desenvolvedor Full Stack Júnior de alto impacto.
+              </p>
+            </div>
+
+            {/* ESPECIALIDADES */}
+            <div className="mb-20">
+              <h2 className="text-xs md:text-sm font-bold text-black uppercase tracking-widest border-b border-dotted border-gray-400 pb-4 mb-12">Especialidades</h2>
+              <div className="flex justify-center gap-0 relative">
+                 <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border border-gray-300 flex items-center justify-center relative z-10 bg-white shadow-sm">
+                   <Terminal size={32} className="text-gray-800" />
+                   <span className="absolute -bottom-8 text-xs text-gray-500 whitespace-nowrap">Front-end</span>
+                 </div>
+                 <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border border-gray-300 flex items-center justify-center relative z-20 bg-white -ml-8 md:-ml-12 shadow-sm">
+                   <Cpu size={32} className="text-gray-800" />
+                   <span className="absolute -bottom-8 text-xs text-gray-500 whitespace-nowrap">Back-end</span>
+                 </div>
+                 <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border border-gray-300 flex items-center justify-center relative z-30 bg-white -ml-8 md:-ml-12 shadow-sm">
+                   <Briefcase size={32} className="text-gray-800" />
+                   <span className="absolute -bottom-8 text-xs text-gray-500 whitespace-nowrap">Automação</span>
+                 </div>
+              </div>
+            </div>
+
+            {/* COMPETÊNCIAS */}
+            <div className="mb-20 mt-28">
+              <h2 className="text-xs md:text-sm font-bold text-black uppercase tracking-widest border-b border-dotted border-gray-400 pb-4 mb-10">Competências Técnicas</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                <div>
+                  <h3 className="text-xs text-gray-400 italic mb-6">Linguagens</h3>
+                  <SkillDots name="JavaScript" score={5} />
+                  <SkillDots name="TypeScript" score={4} />
+                  <SkillDots name="Python" score={4} />
+                  <SkillDots name="HTML & CSS" score={5} />
+                </div>
+                <div>
+                  <h3 className="text-xs text-gray-400 italic mb-6">Frameworks/DB</h3>
+                  <SkillDots name="React" score={5} />
+                  <SkillDots name="Node.js" score={4} />
+                  <SkillDots name="Next.js" score={3} />
+                  <SkillDots name="SQL/MySQL" score={4} />
+                </div>
+              </div>
+            </div>
+
+            {/* IDIOMAS */}
+            <div>
+              <h2 className="text-xs md:text-sm font-bold text-black uppercase tracking-widest border-b border-dotted border-gray-400 pb-4 mb-12">Idiomas</h2>
+              <div className="flex gap-16 justify-center">
+                 <div className="flex flex-col items-center gap-4">
+                   <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border-[8px] border-gray-800 flex items-center justify-center">
+                     <span className="text-xs md:text-sm font-bold">PT</span>
+                   </div>
+                   <div className="text-center">
+                     <span className="block text-xs font-bold text-gray-700 mb-1">PORTUGUÊS</span>
+                     <span className="block text-xs text-gray-400">Nativo</span>
+                   </div>
+                 </div>
+                 <div className="flex flex-col items-center gap-4">
+                   <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border-[8px] border-gray-300 flex items-center justify-center relative overflow-hidden">
+                     <div className="absolute inset-0 border-[8px] border-gray-800 rounded-full" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 50%)' }}></div>
+                     <span className="text-xs md:text-sm font-bold relative z-10">EN</span>
+                   </div>
+                   <div className="text-center">
+                     <span className="block text-xs font-bold text-gray-700 mb-1">INGLÊS</span>
+                     <span className="block text-xs text-gray-400">Intermediário</span>
+                   </div>
+                 </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Column */}
+          <div>
+            {/* EDUCAÇÃO */}
+            <div className="mb-20">
+              <h2 className="text-xs md:text-sm font-bold text-black uppercase tracking-widest border-b border-dotted border-gray-400 pb-4 mb-10">Formação Acadêmica</h2>
+              <div className="relative border-l border-black ml-2 space-y-12 pb-4">
+                <div className="relative pl-8 md:pl-12">
+                  <div className="absolute -left-[4.5px] top-2 w-2 h-2 bg-black rounded-full" />
+                  <span className="text-xs text-gray-400 block mb-2">Jan 2022 a Dez 2026</span>
+                  <h4 className="text-sm md:text-lg font-bold text-gray-800 leading-tight mb-1">Engenharia da Computação (9º Semestre)</h4>
+                  <span className="text-xs text-gray-500 italic block mt-1">Universidade Anhembi Morumbi, SP.</span>
+                </div>
+              </div>
+            </div>
+
+            {/* EXPERIÊNCIA */}
+            <div className="mb-20 mt-10">
+              <h2 className="text-xs md:text-sm font-bold text-black uppercase tracking-widest border-b border-dotted border-gray-400 pb-4 mb-12">Experiência Profissional</h2>
+              
+              <div className="flex items-start gap-8 md:gap-12 mb-12">
+                <div className="text-7xl md:text-9xl font-light text-black leading-none shrink-0 -mt-2">1</div>
+                <div>
+                  <span className="text-xs text-gray-400 block mb-1">Atual</span>
+                  <h4 className="text-sm md:text-lg font-bold text-gray-800 mb-1">Analista de Soluções JR.</h4>
+                  <span className="text-xs md:text-sm text-gray-500 italic block mb-4">WISE SYSTEM</span>
+                  <p className="text-sm text-gray-500 leading-loose">
+                    Liderança do projeto "Maximizar o Uso do Sistema Sigo". Automação de processos operacionais e especificação técnica.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-8 md:gap-12 mb-12">
+                <div className="text-7xl md:text-9xl font-light text-black leading-none shrink-0 -mt-2">2</div>
+                <div>
+                  <span className="text-xs text-gray-400 block mb-1">2025</span>
+                  <h4 className="text-sm md:text-lg font-bold text-gray-800 mb-1">Supervisor de Op. / Analista</h4>
+                  <span className="text-xs md:text-sm text-gray-500 italic block mb-4">WISE SYSTEM</span>
+                  <p className="text-sm text-gray-500 leading-loose">
+                    Suporte avançado, manutenção em servidores e correção de parâmetros de BD.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-8 md:gap-12">
+                <div className="text-7xl md:text-9xl font-light text-black leading-none shrink-0 -mt-2">3</div>
+                <div>
+                  <span className="text-xs text-gray-400 block mb-1">2024</span>
+                  <h4 className="text-sm md:text-lg font-bold text-gray-800 mb-1">Estágio em Suporte</h4>
+                  <span className="text-xs md:text-sm text-gray-500 italic block mb-4">WISE SYSTEM</span>
+                  <p className="text-sm text-gray-500 leading-loose">
+                    Atendimento ao cliente, auxílio na infraestrutura e testes.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* CURSOS E RECONHECIMENTOS */}
+            <div className="mb-20">
+              <h2 className="text-xs md:text-sm font-bold text-black uppercase tracking-widest border-b border-dotted border-gray-400 pb-4 mb-10">Cursos Complementares</h2>
+              
+              <div className="flex items-start gap-6 mb-8">
+                <div className="w-12 h-12 md:w-16 md:h-16 border-[2px] border-black flex items-center justify-center shrink-0 rounded-full">
+                  <Award size={24} className="text-black" />
+                </div>
+                <div className="pt-1">
+                  <h4 className="text-sm md:text-base font-bold text-gray-800">Front End Pro (EBAC) & Santander Coders Back-End</h4>
+                  <p className="text-sm text-gray-500 leading-relaxed mt-2">Formações completas em desenvolvimento web moderno.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 md:w-16 md:h-16 border-[2px] border-gray-400 flex items-center justify-center shrink-0 rounded-full">
+                  <Award size={24} className="text-gray-400" />
+                </div>
+                <div className="pt-1">
+                  <h4 className="text-sm md:text-base font-bold text-gray-800">JS, Algoritmos, Python e HTML</h4>
+                  <p className="text-sm text-gray-500 leading-relaxed mt-2">Udemy e Curso em Vídeo - Concluídos.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* OUTROS */}
+            <div className="mb-12">
+              <h2 className="text-xs md:text-sm font-bold text-black uppercase tracking-widest border-b border-dotted border-gray-400 pb-4 mb-10">Ferramentas & Outros</h2>
+              <div className="flex flex-wrap gap-8">
+                <div className="flex flex-col items-center">
+                  <div className="w-16 h-16 rounded-full border border-gray-300 flex items-center justify-center mb-3">
+                    <Github size={24} className="text-gray-600" />
+                  </div>
+                  <span className="text-xs text-gray-500">Git/GitHub</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="w-16 h-16 rounded-full border border-gray-300 flex items-center justify-center mb-3">
+                    <Terminal size={24} className="text-gray-600" />
+                  </div>
+                  <span className="text-xs text-gray-500">Linux</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="w-16 h-16 rounded-full border border-gray-300 flex items-center justify-center mb-3">
+                    <Smartphone size={24} className="text-gray-600" />
+                  </div>
+                  <span className="text-xs text-gray-500">Office</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="w-16 h-16 rounded-full border border-gray-300 flex items-center justify-center mb-3">
+                    <Award size={24} className="text-gray-600" />
+                  </div>
+                  <span className="text-xs text-gray-500">Trello</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-20 flex justify-end">
+              <a href="#" download className="flex items-center justify-center gap-3 px-10 py-5 bg-[#1a1a1a] text-[#FFFFFF] rounded-full hover:bg-[#333333] transition-all text-xs font-bold uppercase tracking-widest shadow-lg">
+                <Download size={20} /> Baixar CV PDF
+              </a>
+            </div>
+
           </div>
         </div>
-
       </div>
     </div>
   );

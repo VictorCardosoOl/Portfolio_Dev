@@ -114,24 +114,17 @@ html {
 }
 
 /* ==========================================================================
-   ACESSIBILIDADE: BARRA DE ROLAGEM
+   ACESSIBILIDADE: BARRA DE ROLAGEM OCULTA
    ========================================================================== */
 /* Chrome, Safari e Opera */
 ::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-cream);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-charcoal);
-  border-radius: 4px;
+  display: none;
 }
 
 /* IE, Edge e Firefox */
 * {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-charcoal) var(--color-cream);
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* ==========================================================================
