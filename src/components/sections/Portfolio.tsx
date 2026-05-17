@@ -123,8 +123,9 @@ export default function Portfolio({ onOpenProject }: PortfolioProps) {
                   size="lg" 
                   className="rounded-none lowercase px-10 py-6 text-sm" 
                   onClick={() => handleViewProject(project.title)}
+                  aria-label={`Ver detalhes do projeto ${project.title}`}
                 >
-                  view project
+                  ver projeto
                 </Button>
               </div>
             </div>
