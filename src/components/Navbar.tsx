@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useScrollDirection } from '../hooks/useScrollDirection';
 import { MagneticButton } from './ui/MagneticButton';
-import { Linkedin, MessageCircle } from 'lucide-react';
+import { Linkedin, MessageCircle, Folder, User, Mail, Home } from 'lucide-react';
 
 interface NavLink {
   label: string;
@@ -34,26 +34,30 @@ export default function Navbar({ items, logoText }: NavbarProps) {
 
   const isPastHero = scrollY > (windowHeight * 0.95);
   const isHidden = !isPastHero || scrollDirection === 'down';
-  // Reduzido o padding vertical de py-4 para py-2
-  const backgroundClass = 'bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200/50 py-2';
+  
+  // Floating pill background for mobile, standard border-b for desktop
+  const backgroundClass = 'bg-white/80 backdrop-blur-md shadow-lg md:shadow-sm border border-gray-200/50 md:border-x-0 md:border-t-0 md:border-b';
 
   return (
     <header
-      className={`fixed w-full z-50 transition-all duration-300 ease-in-out ${backgroundClass}
-        bottom-0 md:top-0 md:bottom-auto border-t md:border-t-0 border-b-0 md:border-b
-        pb-[env(safe-area-inset-bottom)] md:pb-0
-        ${isHidden ? 'translate-y-full md:-translate-y-full opacity-0 outline-none' : 'translate-y-0 opacity-100'}
+      className={`fixed z-50 transition-all duration-300 ease-in-out ${backgroundClass}
+        bottom-4 left-4 right-4 rounded-[2rem] md:bottom-auto md:top-0 md:left-0 md:right-0 md:rounded-none md:w-full
+        pb-[env(safe-area-inset-bottom)] pt-[env(safe-area-inset-top)] md:pb-0 md:pt-0
+        ${isHidden ? 'translate-y-[150%] md:-translate-y-full opacity-0 outline-none' : 'translate-y-0 opacity-100'}
       `}
     >
-      <div className="max-w-[1920px] mx-auto px-6 lg:px-12 3xl:px-24 flex items-center justify-between">
+      <div className="max-w-[1920px] mx-auto px-6 py-3 md:py-2 lg:px-12 3xl:px-24 flex items-center justify-between">
+        {/* LOGO */}
         <div className="flex items-center gap-2 cursor-pointer transition-opacity hover:opacity-75">
           <a href="/" className="flex items-center">
             <span className="font-serif font-light text-2xl tracking-tighter text-charcoal">
-              {logoText}
+              <span className="md:hidden">V.</span>
+              <span className="hidden md:inline">{logoText}</span>
             </span>
           </a>
         </div>
 
+        {/* DESKTOP MENU */}
         <nav className="hidden md:flex items-center gap-8">
           {items.map((item) => (
             <div key={item.label} className="group relative">
@@ -64,9 +68,24 @@ export default function Navbar({ items, logoText }: NavbarProps) {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
-          {/* Ícones Sociais */}
-          <div className="hidden sm:flex items-center gap-3 mr-2">
+        {/* MOBILE ICONS / DESKTOP RIGHT ACTIONS */}
+        <div className="flex items-center gap-6 md:gap-4">
+          
+          {/* Ícones de Navegação Mobile */}
+          <div className="flex md:hidden items-center gap-5 text-charcoal/70">
+            <a href="#portfolio" aria-label="Portfólio" className="hover:text-charcoal transition-colors p-1" onClick={() => { if ("vibrate" in navigator) navigator.vibrate(20); }}>
+              <Folder size={20} strokeWidth={1.5} />
+            </a>
+            <a href="#aboutme" aria-label="Sobre Mim" className="hover:text-charcoal transition-colors p-1" onClick={() => { if ("vibrate" in navigator) navigator.vibrate(20); }}>
+              <User size={20} strokeWidth={1.5} />
+            </a>
+            <a href="#contact" aria-label="Contato" className="hover:text-charcoal transition-colors p-1" onClick={() => { if ("vibrate" in navigator) navigator.vibrate(20); }}>
+              <Mail size={20} strokeWidth={1.5} />
+            </a>
+          </div>
+
+          {/* Ícones Sociais Desktop */}
+          <div className="hidden md:flex items-center gap-3 mr-2">
              <a href="#" aria-label="LinkedIn" className="text-charcoal/70 hover:text-charcoal transition-colors p-1">
                 <Linkedin size={20} strokeWidth={1.5} />
              </a>
@@ -75,23 +94,12 @@ export default function Navbar({ items, logoText }: NavbarProps) {
              </a>
           </div>
 
-          <MagneticButton className="hidden sm:inline-block">
+          <MagneticButton className="hidden md:inline-block">
             <a href="#contact" className="inline-flex items-center justify-center text-xs md:text-sm font-semibold bg-charcoal text-cream px-5 py-2 md:py-2.5 rounded-full hover:bg-black transition-colors">
               Fale Conosco
             </a>
           </MagneticButton>
           
-          <button 
-            type="button" 
-            aria-label="Toggle menu" 
-            className="md:hidden p-2 text-charcoal focus:outline-none transition-colors hover:text-black"
-          >
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="18" x2="21" y2="18" />
-             </svg>
-          </button>
         </div>
       </div>
     </header>
