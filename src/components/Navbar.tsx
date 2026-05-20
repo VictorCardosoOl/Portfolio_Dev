@@ -39,9 +39,11 @@ export default function Navbar({ items, logoText }: NavbarProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${backgroundClass} ${
-        isHidden ? '-translate-y-full opacity-0 outline-none' : 'translate-y-0 opacity-100'
-      }`}
+      className={`fixed w-full z-50 transition-all duration-300 ease-in-out ${backgroundClass}
+        bottom-0 md:top-0 md:bottom-auto border-t md:border-t-0 border-b-0 md:border-b
+        pb-[env(safe-area-inset-bottom)] md:pb-0
+        ${isHidden ? 'translate-y-full md:-translate-y-full opacity-0 outline-none' : 'translate-y-0 opacity-100'}
+      `}
     >
       <div className="max-w-[1920px] mx-auto px-6 lg:px-12 3xl:px-24 flex items-center justify-between">
         <div className="flex items-center gap-2 cursor-pointer transition-opacity hover:opacity-75">

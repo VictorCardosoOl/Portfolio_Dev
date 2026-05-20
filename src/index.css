@@ -7,15 +7,14 @@
    3. O site inteiro será atualizado automaticamente!
 ========================================================================== */
 
-@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,500,700,400,900&display=swap');
-@import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,400,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@200..800&display=swap');
 
 @import "tailwindcss";
 
 @theme {
   /* 2. DEFINIÇÃO DAS FONTES DO PROJETO */
-  --font-serif: 'Cabinet Grotesk', sans-serif;
-  --font-sans: 'General Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
   
   /* Alias para consistência */
   --font-primary: var(--font-serif);
@@ -36,22 +35,22 @@
 @utility text-fluid-huge {
   /* Títulos Gigantes (Footer): 64px → 192px */
   font-size: clamp(4rem, 12vw, 12rem);
-  line-height: 0.8;
-  letter-spacing: -0.05em;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
 }
 
 @utility text-fluid-h1 {
   /* Títulos Hero: 48px → 144px */
   font-size: clamp(3rem, 8vw, 9rem);
-  line-height: 0.9;
-  letter-spacing: -0.04em;
+  line-height: 1;
+  letter-spacing: normal;
 }
 
 @utility text-fluid-h2 {
   /* Títulos de seção: 40px → 96px */
   font-size: clamp(2.5rem, 5vw, 6rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
+  line-height: 1.05;
+  letter-spacing: normal;
 }
 
 @utility text-fluid-h3 {
@@ -109,8 +108,8 @@
   }
 }
 
-html {
-  /* overflow-x removido para evitar quebras no GSAP Pinning */
+html, body {
+  overscroll-behavior: none;
 }
 
 /* ==========================================================================

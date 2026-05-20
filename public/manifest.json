@@ -1,0 +1,21 @@
+{
+  "name": "Victor Cardoso | Frontend & UI Designer",
+  "short_name": "Victor Cardoso",
+  "description": "Portfólio de Victor Cardoso - Engenheiro de Software focado em UI/UX.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/vite.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
