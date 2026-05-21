@@ -15,52 +15,76 @@ export default function HeroPortfolio() {
       const gallery = galleryRef.current;
       if (!gallery) return;
 
-      const totalScroll = gallery.scrollWidth - window.innerWidth;
+      let mm = gsap.matchMedia();
 
-      // Movimento lateral limpo
-      const lateralScroll = gsap.to(gallery, {
-        x: () => -totalScroll,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          pin: true,
-          scrub: true, 
-          start: "top top",
-          end: () => `+=${totalScroll}`,
-          invalidateOnRefresh: true,
-        }
-      });
+      mm.add("(min-width: 768px)", () => {
+        const totalScroll = gallery.scrollWidth - window.innerWidth;
 
-      // Parallax sutil nas imagens para sofisticação
-      gsap.utils.toArray('.project-image').forEach((img: any) => {
-        gsap.fromTo(img, 
-          { x: "-10vw" }, 
-          {
-            x: "10vw",
-            ease: "none",
-            scrollTrigger: {
-              trigger: img.parentElement,
-              containerAnimation: lateralScroll, 
-              start: "left right",
-              end: "right left",
-              scrub: true,
-            }
+        // Movimento lateral limpo
+        const lateralScroll = gsap.to(gallery, {
+          x: () => -totalScroll,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            pin: true,
+            scrub: true, 
+            start: "top top",
+            end: () => `+=${totalScroll}`,
+            invalidateOnRefresh: true,
           }
-        );
+        });
+
+        // Parallax sutil nas imagens para sofisticação
+        gsap.utils.toArray('.project-image').forEach((img: any) => {
+          gsap.fromTo(img, 
+            { x: "-10vw" }, 
+            {
+              x: "10vw",
+              ease: "none",
+              scrollTrigger: {
+                trigger: img.parentElement,
+                containerAnimation: lateralScroll, 
+                start: "left right",
+                end: "right left",
+                scrub: true,
+              }
+            }
+          );
+        });
       });
+      
+      // Parallax sutil vertical para mobile
+      mm.add("(max-width: 767px)", () => {
+         gsap.utils.toArray('.project-image').forEach((img: any) => {
+          gsap.fromTo(img, 
+            { y: "-5%" }, 
+            {
+              y: "5%",
+              ease: "none",
+              scrollTrigger: {
+                trigger: img.parentElement,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              }
+            }
+          );
+        });
+      });
+
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={containerRef} className="relative w-full h-[100dvh] overflow-hidden">
+    <section ref={containerRef} className="relative w-full md:h-[100dvh] md:overflow-hidden pb-32 md:pb-0">
       
-      {/* Container Flexível que ultrapassa os 100vw */}
-      <div ref={galleryRef} className="flex h-full w-max">
+      {/* Container Flexível que ultrapassa os 100vw no desktop */}
+      <div ref={galleryRef} className="flex flex-col md:flex-row md:h-full w-full md:w-max">
         
         {/* 1. HERO SECTION */}
-        <div className="w-[100vw] h-full flex flex-col justify-center px-12 z-10 shrink-0 relative">
+        <div className="w-full md:w-[100vw] min-h-[60vh] md:h-full flex flex-col justify-center px-6 md:px-12 z-10 shrink-0 relative mt-16 md:mt-0">
            <h1 className="text-6xl sm:text-7xl md:text-[8rem] 3xl:text-[10rem] font-serif font-medium tracking-tighter uppercase whitespace-pre-line text-[#1a1a1a] leading-[0.9]">
              <TextType text={["Victor\nCardoso"]} typingSpeed={100} showCursor={true} cursorCharacter="_" />
            </h1>
@@ -69,19 +93,19 @@ export default function HeroPortfolio() {
            </p>
         </div>
 
-        {/* 2. PROJETOS LADO A LADO */}
+        {/* 2. PROJETOS LADO A LADO (Desktop) / VERTICAL (Mobile) */}
         {projects.map((project, j) => (
           <Link 
             to={`/case/${project.id}`} 
             key={project.id} 
-            className="w-[80vw] md:w-[60vw] h-full flex flex-col justify-center px-8 shrink-0 group/card block cursor-pointer text-left focus:outline-none"
+            className="w-full md:w-[60vw] md:h-full flex flex-col justify-center px-6 md:px-8 shrink-0 group/card block cursor-pointer text-left focus:outline-none mb-16 md:mb-0"
           >
              {/* Máscara de imagem para o Parallax */}
-             <div className="w-full h-[65vh] overflow-hidden relative group rounded-sm">
+             <div className="w-full aspect-[4/3] md:aspect-auto md:h-[65vh] overflow-hidden relative group rounded-2xl md:rounded-sm shadow-sm md:shadow-none">
                 <Image 
                   src={project.image} 
                   alt={project.title} 
-                  className="project-image w-full h-full object-cover scale-[1.05] origin-center" 
+                  className="project-image w-full h-full object-cover scale-[1.1] origin-center" 
                 />
                 {/* Overlay Elegante Escurecendo no Hover */}
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-500" />
@@ -100,15 +124,15 @@ export default function HeroPortfolio() {
              </div>
              
              {/* Metadados do Projeto */}
-             <div className="flex justify-between items-center mt-6 text-[#1a1a1a] w-full">
-               <h2 className="text-3xl font-serif tracking-tight group-hover/card:opacity-70 transition-opacity">{project.title}</h2>
+             <div className="flex justify-between items-center mt-6 text-[#1a1a1a] w-full px-2 md:px-0">
+               <h2 className="text-2xl md:text-3xl font-serif tracking-tight group-hover/card:opacity-70 transition-opacity">{project.title}</h2>
                <span className="text-[10px] uppercase tracking-widest opacity-60">0{j + 1}</span>
              </div>
           </Link>
         ))}
         
-        {/* Espaço em branco no final para respiro */}
-        <div className="w-[20vw] h-full shrink-0" />
+        {/* Espaço em branco no final para respiro (apenas desktop) */}
+        <div className="hidden md:block w-[20vw] h-full shrink-0" />
       </div>
     </section>
   );
