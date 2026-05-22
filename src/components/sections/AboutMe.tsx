@@ -337,7 +337,7 @@ const AboutMe: React.FC = () => {
         {/* Center "Currículo" Button */}
         <button 
           onClick={() => setIsResumeOpen(true)}
-          className="hidden md:flex absolute left-[45%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full border border-[#1a1a1a]/20 items-center justify-center text-[10px] uppercase font-bold tracking-widest z-30 bg-[#1a1a1a] text-white shadow-2xl hover:scale-105 transition-transform cursor-pointer"
+          className="flex absolute left-[50%] md:left-[45%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 rounded-full border border-[#1a1a1a]/20 items-center justify-center text-[9px] md:text-[10px] uppercase font-bold tracking-widest z-30 bg-[#1a1a1a] text-white shadow-2xl hover:scale-105 transition-transform cursor-pointer"
         >
           Currículo
         </button>

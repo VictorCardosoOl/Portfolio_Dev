@@ -156,7 +156,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
         className="absolute left-0 right-0 bottom-0 z-[9999] bg-[#FFFFFF] text-[#1a1a1a] rounded-t-[2rem] md:rounded-t-[3rem] h-[98vh] overflow-hidden shadow-2xl translate-y-full border-t border-[#1a1a1a]/10"
       >
         <div ref={modalContainerRef} className="h-full w-full overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
-          <div ref={modalContentRef} className="pb-32 flex flex-col items-center">
+          <div ref={modalContentRef} className="pb-16 md:pb-32 flex flex-col items-center">
 
             {/* BG Gigante */}
             <div className="absolute top-0 left-0 w-full overflow-hidden pointer-events-none flex justify-center pt-20 md:pt-28 opacity-[0.04] select-none" aria-hidden="true">
@@ -166,7 +166,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
             </div>
 
             {/* ── HEADER ── */}
-            <div className="container mx-auto px-6 mt-24 md:mt-36 mb-16 flex flex-col items-center text-center relative z-10">
+            <div className="container mx-auto px-6 mt-16 md:mt-36 mb-10 md:mb-16 flex flex-col items-center text-center relative z-10">
               <Typography variant="label" className="mb-6 flex items-center gap-3">
                 <span>{project.category}</span>
                 <span className="w-1 h-1 rounded-full bg-[#1a1a1a]/40" aria-hidden="true" />
@@ -183,7 +183,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
               </Typography>
 
               {/* External links */}
-              <div className="flex gap-4 mt-10">
+              <div className="flex flex-wrap justify-center gap-4 mt-6 md:mt-10">
                 {project.liveUrl && project.liveUrl !== '#' && (
                   <a
                     href={project.liveUrl}
@@ -210,7 +210,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
             </div>
 
             {/* ── PROJECT IMAGE ── */}
-            <div className="w-full max-w-[90vw] md:max-w-[80vw] xl:max-w-[70vw] aspect-[4/3] md:aspect-video relative z-20 mb-24">
+            <div className="w-full max-w-[90vw] md:max-w-[80vw] xl:max-w-[70vw] aspect-[4/3] md:aspect-video relative z-20 mb-12 md:mb-24">
               <div className="absolute inset-0 w-full h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl bg-black">
                 <Image
                   src={project.image}
@@ -224,7 +224,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
             <div className="container mx-auto px-6 max-w-5xl relative z-10 w-full">
 
               {/* Meta row */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-8 border-b border-[#1a1a1a]/20 pb-12 mb-16">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 border-b border-[#1a1a1a]/20 pb-8 md:pb-12 mb-10 md:mb-16">
                 <div>
                   <Typography variant="label" className="mb-2">Projeto</Typography>
                   <Typography variant="h4">{project.title}</Typography>
@@ -240,7 +240,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
               </div>
 
               {/* Desafio Técnico */}
-              <div className="mb-16">
+              <div className="mb-10 md:mb-16">
                 <Typography as="h3" variant="label" className="mb-4">O Desafio de Engenharia</Typography>
                 <Typography variant="h3">
                   {project.problem}
@@ -248,7 +248,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
               </div>
 
               {/* Arquitetura */}
-              <div className="mb-16">
+              <div className="mb-10 md:mb-16">
                 <Typography as="h3" variant="label" className="mb-4">Arquitetura & Clean Code</Typography>
                 <Typography variant="p" className="text-lg md:text-2xl font-medium mb-8 text-[#1a1a1a]">
                   {project.architecture}
@@ -266,7 +266,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
               </div>
 
               {/* Role */}
-              <div className="mb-16">
+              <div className="mb-10 md:mb-16">
                 <Typography as="h3" variant="label" className="mb-4">Papel & Execução</Typography>
                 <Typography variant="p" className="text-lg md:text-xl text-[#1a1a1a]/90">
                   {project.role}
@@ -274,7 +274,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
               </div>
 
               {/* Outcome */}
-              <div className="mb-24">
+              <div className="mb-12 md:mb-24">
                 <Typography as="h3" variant="label" className="mb-4">Resultado & Impacto</Typography>
                 <Typography variant="h2">
                   {project.outcome}

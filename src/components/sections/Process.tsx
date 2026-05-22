@@ -79,9 +79,9 @@ const Process: React.FC = () => {
   if (!PROCESS_STEPS || PROCESS_STEPS.length === 0) return null;
 
   return (
-    <section id="process" className="py-12 md:py-16 border-t border-[#1a1a1a]/15 pt-12 md:pt-16 text-[#111] relative overflow-hidden z-10 flex flex-col justify-center">
+    <section id="process" className="py-8 md:py-12 border-t border-[#1a1a1a]/15 pt-8 md:pt-12 text-[#111] relative overflow-hidden z-10 flex flex-col justify-center">
       <div className="container-fluid">
-        <div className="mb-20 md:mb-32 max-w-2xl">
+        <div className="mb-8 md:mb-20 max-w-2xl">
            <Reveal>
                <h2 className="text-fluid-h2 font-serif font-light text-[#111] leading-[0.9] tracking-tighter uppercase mt-4">
                  BRIEFING
@@ -89,10 +89,10 @@ const Process: React.FC = () => {
            </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10">
           {PROCESS_STEPS.map((step: ProcessStep, index: number) => (
             <Reveal key={step.id} delay={index * 150}>
-              <div className="flex flex-col h-full border-t border-[#000000]/10 pt-8 mt-8 lg:mt-0 lg:border-t-0 lg:pt-0">
+              <div className="flex flex-col h-full border-t border-[#000000]/10 pt-4 md:pt-6 lg:border-t-0 lg:pt-0">
                  <span className="text-fluid-display font-serif italic text-[#000000]/10 leading-none mb-4 md:mb-6 block select-none tracking-tighter">
                    {step.id}
                  </span>

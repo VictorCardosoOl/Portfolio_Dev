@@ -33,20 +33,21 @@ export default function Navbar({ items, logoText }: NavbarProps) {
   }, []);
 
   const isPastHero = scrollY > (windowHeight * 0.95);
-  const isHidden = !isPastHero || scrollDirection === 'down';
+  const isHiddenDesktop = !isPastHero || scrollDirection === 'down';
   
-  // Floating pill background for mobile, standard border-b for desktop
-  const backgroundClass = 'bg-white/80 backdrop-blur-md shadow-lg md:shadow-sm border border-gray-200/50 md:border-x-0 md:border-t-0 md:border-b';
+  // Floating pill background for mobile (liquid glass), standard border-b for desktop
+  const backgroundClass = 'bg-white/30 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/40 md:bg-white/80 md:backdrop-blur-md md:shadow-sm md:border-gray-200/50 md:border-x-0 md:border-t-0 md:border-b';
 
   return (
     <header
       className={`fixed z-50 transition-all duration-300 ease-in-out ${backgroundClass}
-        bottom-4 left-4 right-4 rounded-[2rem] md:bottom-auto md:top-0 md:left-0 md:right-0 md:rounded-none md:w-full
+        bottom-6 left-4 right-4 rounded-full md:bottom-auto md:top-0 md:left-0 md:right-0 md:rounded-none md:w-full
         pb-[env(safe-area-inset-bottom)] pt-[env(safe-area-inset-top)] md:pb-0 md:pt-0
-        ${isHidden ? 'translate-y-[150%] md:-translate-y-full opacity-0 outline-none' : 'translate-y-0 opacity-100'}
+        ${isHiddenDesktop ? 'md:-translate-y-full md:opacity-0 md:outline-none' : 'md:translate-y-0 md:opacity-100'}
+        translate-y-0 opacity-100
       `}
     >
-      <div className="max-w-[1920px] mx-auto px-6 py-3 md:py-2 lg:px-12 3xl:px-24 flex items-center justify-between">
+      <div className="max-w-[1920px] mx-auto px-6 py-2 md:py-3 lg:px-12 3xl:px-24 flex items-center justify-between">
         {/* LOGO */}
         <div className="flex items-center gap-2 cursor-pointer transition-opacity hover:opacity-75">
           <a href="/" className="flex items-center">
@@ -72,15 +73,15 @@ export default function Navbar({ items, logoText }: NavbarProps) {
         <div className="flex items-center gap-6 md:gap-4">
           
           {/* Ícones de Navegação Mobile */}
-          <div className="flex md:hidden items-center gap-5 text-charcoal/70">
+          <div className="flex md:hidden items-center gap-6 text-charcoal/70">
             <a href="#portfolio" aria-label="Portfólio" className="hover:text-charcoal transition-colors p-1" onClick={() => { if ("vibrate" in navigator) navigator.vibrate(20); }}>
-              <Folder size={20} strokeWidth={1.5} />
+              <Folder size={22} strokeWidth={1.5} />
             </a>
             <a href="#aboutme" aria-label="Sobre Mim" className="hover:text-charcoal transition-colors p-1" onClick={() => { if ("vibrate" in navigator) navigator.vibrate(20); }}>
-              <User size={20} strokeWidth={1.5} />
+              <User size={22} strokeWidth={1.5} />
             </a>
             <a href="#contact" aria-label="Contato" className="hover:text-charcoal transition-colors p-1" onClick={() => { if ("vibrate" in navigator) navigator.vibrate(20); }}>
-              <Mail size={20} strokeWidth={1.5} />
+              <Mail size={22} strokeWidth={1.5} />
             </a>
           </div>
 
