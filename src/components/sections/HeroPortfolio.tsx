@@ -34,42 +34,13 @@ export default function HeroPortfolio() {
           }
         });
 
-        // Parallax sutil nas imagens para sofisticação
-        gsap.utils.toArray('.project-image').forEach((img: any) => {
-          gsap.fromTo(img, 
-            { x: "-10vw" }, 
-            {
-              x: "10vw",
-              ease: "none",
-              scrollTrigger: {
-                trigger: img.parentElement,
-                containerAnimation: lateralScroll, 
-                start: "left right",
-                end: "right left",
-                scrub: true,
-              }
-            }
-          );
-        });
+        // Parallax interno nas imagens removido para evitar barras cinzas laterais/verticais
+        // e manter um visual minimalista e elegante (a imagem agora é fixa no card).
       });
       
-      // Parallax sutil vertical para mobile
+      // Ajustes mobile
       mm.add("(max-width: 767px)", () => {
-         gsap.utils.toArray('.project-image').forEach((img: any) => {
-          gsap.fromTo(img, 
-            { y: "-5%" }, 
-            {
-              y: "5%",
-              ease: "none",
-              scrollTrigger: {
-                trigger: img.parentElement,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
-              }
-            }
-          );
-        });
+         // Nenhuma animação parallax interna na imagem para mobile para manter a consistência limpa
       });
 
     }, containerRef);
@@ -100,12 +71,12 @@ export default function HeroPortfolio() {
             key={project.id} 
             className="w-full md:w-[60vw] md:h-full flex flex-col justify-center px-6 md:px-8 shrink-0 group/card block cursor-pointer text-left focus:outline-none mb-16 md:mb-0"
           >
-             {/* Máscara de imagem para o Parallax */}
-             <div className="w-full aspect-[4/3] md:aspect-auto md:h-[65vh] overflow-hidden relative group rounded-2xl md:rounded-sm shadow-sm md:shadow-none">
+             {/* Máscara de imagem sem parallax interno */}
+             <div className="w-full aspect-[4/5] md:aspect-video overflow-hidden relative group rounded-xl md:rounded-sm bg-transparent">
                 <Image 
                   src={project.image} 
                   alt={project.title} 
-                  className="project-image w-full h-full object-cover scale-[1.1] origin-center" 
+                  className="w-full h-full object-cover origin-center transition-transform duration-700 group-hover:scale-105" 
                 />
                 {/* Overlay Elegante Escurecendo no Hover */}
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-500" />
@@ -124,9 +95,12 @@ export default function HeroPortfolio() {
              </div>
              
              {/* Metadados do Projeto */}
-             <div className="flex justify-between items-center mt-6 text-[#1a1a1a] w-full px-2 md:px-0">
+             <div className="flex justify-between items-end mt-6 text-[#1a1a1a] w-full px-1 md:px-0">
                <h2 className="text-2xl md:text-3xl font-serif tracking-tight group-hover/card:opacity-70 transition-opacity">{project.title}</h2>
-               <span className="text-[10px] uppercase tracking-widest opacity-60">0{j + 1}</span>
+               <div className="flex items-center gap-6">
+                 <span className="text-lg md:text-xl font-serif tracking-tight opacity-80">{project.year}</span>
+                 <span className="text-xs font-medium uppercase tracking-widest opacity-40">0{j + 1}</span>
+               </div>
              </div>
           </Link>
         ))}

@@ -96,6 +96,17 @@ const CardNav: React.FC<CardNavProps> = ({
     }
   }, [toggleMenu]);
 
+  // Handle ESC key to close menu
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isExpanded) {
+        toggleMenu();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isExpanded, toggleMenu]);
+
   return (
     <div className={`card-nav-container ${className} ${isHidden ? 'hidden' : ''}`}>
       <nav 
