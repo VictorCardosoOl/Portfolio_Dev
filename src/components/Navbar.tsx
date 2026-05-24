@@ -35,8 +35,8 @@ export default function Navbar({ items, logoText }: NavbarProps) {
   const isPastHero = scrollY > (windowHeight * 0.95);
   const isHiddenDesktop = !isPastHero || scrollDirection === 'down';
   
-  // Floating pill background for mobile (liquid glass), standard border-b for desktop
-  const backgroundClass = 'bg-white/30 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/40 md:bg-white/80 md:backdrop-blur-md md:shadow-sm md:border-gray-200/50 md:border-x-0 md:border-t-0 md:border-b';
+  // Floating pill background for mobile (liquid glass), transparent for desktop
+  const backgroundClass = 'bg-white/30 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/40 md:bg-transparent md:backdrop-blur-none md:shadow-none md:border-transparent';
 
   return (
     <header
@@ -47,7 +47,7 @@ export default function Navbar({ items, logoText }: NavbarProps) {
         translate-y-0 opacity-100
       `}
     >
-      <div className="max-w-[1920px] mx-auto px-6 py-2 md:py-3 lg:px-12 3xl:px-24 flex items-center justify-between">
+      <div className="max-w-[1920px] mx-auto px-6 py-2 md:py-1 lg:px-12 3xl:px-24 flex items-center justify-between">
         {/* LOGO */}
         <div className="flex items-center gap-2 cursor-pointer transition-opacity hover:opacity-75">
           <a href="/" className="flex items-center">
@@ -62,7 +62,7 @@ export default function Navbar({ items, logoText }: NavbarProps) {
         <nav className="hidden md:flex items-center gap-8">
           {items.map((item) => (
             <div key={item.label} className="group relative">
-              <a href={item.links[0]?.href ?? '#'} className="text-fluid-label font-bold uppercase tracking-widest text-charcoal/70 hover:text-charcoal transition-colors py-2">
+              <a href={item.links[0]?.href ?? '#'} className="text-fluid-label font-bold uppercase tracking-widest text-[#1a1a1a] hover:text-black transition-colors py-2">
                 {item.label}
               </a>
             </div>
