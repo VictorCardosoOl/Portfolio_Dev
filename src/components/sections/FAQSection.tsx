@@ -109,7 +109,12 @@ export default function FAQSection() {
           {FAQ_ITEMS.map((item, i) => {
             const isOpen = openIndex === i;
             return (
-              <li key={item.id} className="faq-row">
+              <li 
+                key={item.id} 
+                className="faq-row"
+                onMouseEnter={() => window.innerWidth >= 1024 && setOpenIndex(i)}
+                onMouseLeave={() => window.innerWidth >= 1024 && setOpenIndex(null)}
+              >
                 <button
                   onClick={() => toggleItem(i)}
                   className="w-full flex items-center gap-6 md:gap-10 py-5 md:py-6 text-left group focus:outline-none"
@@ -171,7 +176,7 @@ export default function FAQSection() {
               id="faq-cta"
               className="group inline-flex items-center gap-3 border border-[#1a1a1a]/20 hover:border-[#1a1a1a]/60 text-[#1a1a1a]/70 hover:text-[#1a1a1a] text-xs uppercase tracking-widest font-bold py-4 px-8 transition-all duration-300 rounded-sm"
             >
-              Fale conosco
+              WhatsApp
               <span className="inline-block transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
             </a>
           </MagneticButton>

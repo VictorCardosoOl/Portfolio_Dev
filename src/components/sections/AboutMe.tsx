@@ -81,16 +81,16 @@ const ResumeContent = ({ isOpen }: { isOpen: boolean }) => {
             <div className="mb-20">
               <h2 className="text-xs md:text-sm font-bold text-black uppercase tracking-widest border-b border-dotted border-gray-400 pb-4 mb-16">Especialidades</h2>
               <div className="flex justify-center gap-0 relative">
-                 <div className="w-32 h-32 md:w-48 md:h-48 rounded-full border border-gray-300 flex items-center justify-center relative z-10 bg-white shadow-sm">
-                   <Terminal size={32} className="text-gray-800" />
+                 <div className="w-24 h-24 md:w-36 md:h-36 rounded-full border border-gray-300 flex items-center justify-center relative z-10 bg-white shadow-sm">
+                   <Terminal size={28} className="text-gray-800" />
                    <span className="absolute -bottom-8 md:-bottom-10 text-xs md:text-sm text-gray-500 whitespace-nowrap">Front-end</span>
                  </div>
-                 <div className="w-32 h-32 md:w-48 md:h-48 rounded-full border border-gray-300 flex items-center justify-center relative z-20 bg-white -ml-4 md:-ml-8 shadow-sm">
-                   <Cpu size={32} className="text-gray-800" />
+                 <div className="w-24 h-24 md:w-36 md:h-36 rounded-full border border-gray-300 flex items-center justify-center relative z-20 bg-white -ml-2 md:-ml-4 shadow-sm">
+                   <Cpu size={28} className="text-gray-800" />
                    <span className="absolute -bottom-8 md:-bottom-10 text-xs md:text-sm text-gray-500 whitespace-nowrap">Back-end</span>
                  </div>
-                 <div className="w-32 h-32 md:w-48 md:h-48 rounded-full border border-gray-300 flex items-center justify-center relative z-30 bg-white -ml-4 md:-ml-8 shadow-sm">
-                   <Briefcase size={32} className="text-gray-800" />
+                 <div className="w-24 h-24 md:w-36 md:h-36 rounded-full border border-gray-300 flex items-center justify-center relative z-30 bg-white -ml-2 md:-ml-4 shadow-sm">
+                   <Briefcase size={28} className="text-gray-800" />
                    <span className="absolute -bottom-8 md:-bottom-10 text-xs md:text-sm text-gray-500 whitespace-nowrap">Automação</span>
                  </div>
               </div>

@@ -97,7 +97,7 @@ export default function Navbar({ items, logoText }: NavbarProps) {
 
           <MagneticButton className="hidden md:inline-block">
             <a href="#contact" className="inline-flex items-center justify-center text-xs md:text-sm font-semibold bg-charcoal text-cream px-5 py-2 md:py-2.5 rounded-full hover:bg-black transition-colors">
-              Fale Conosco
+              WhatsApp
             </a>
           </MagneticButton>
           

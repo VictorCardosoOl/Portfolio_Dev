@@ -153,7 +153,11 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-project-title"
-        className="absolute left-0 right-0 bottom-0 z-[9999] bg-[#FFFFFF] text-[#1a1a1a] rounded-t-[2rem] md:rounded-t-[3rem] h-[98vh] overflow-hidden shadow-2xl translate-y-full border-t border-[#1a1a1a]/10"
+        tabIndex={-1}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') onClose();
+        }}
+        className="absolute left-0 right-0 bottom-0 z-[9999] bg-[#FFFFFF] text-[#1a1a1a] rounded-t-[2rem] md:rounded-t-[3rem] h-[98vh] overflow-hidden shadow-2xl translate-y-full border-t border-[#1a1a1a]/10 outline-none"
       >
         <div ref={modalContainerRef} className="h-full w-full overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
           <div ref={modalContentRef} className="pb-16 md:pb-32 flex flex-col items-center">

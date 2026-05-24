@@ -86,6 +86,8 @@ export default function Services() {
                 key={item.id}
                 className="srv-row cursor-pointer"
                 onClick={() => toggleExpanded(i)}
+                onMouseEnter={() => window.innerWidth >= 1024 && setExpandedIndex(i)}
+                onMouseLeave={() => window.innerWidth >= 1024 && setExpandedIndex(null)}
               >
                 {/* Row header */}
                 <div className="w-full flex items-center gap-6 md:gap-10 py-5 md:py-6">

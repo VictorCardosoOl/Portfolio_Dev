@@ -60,7 +60,7 @@ export default function HeroPortfolio() {
              <TextType text={["Victor\nCardoso"]} typingSpeed={100} showCursor={true} cursorCharacter="_" />
            </h1>
            <p className="mt-4 text-[11px] md:text-xs font-bold tracking-[0.25em] text-[#1a1a1a]/50 uppercase">
-             Projetos Selecionados
+             Desenvolvedor Web
            </p>
         </div>
 
@@ -69,7 +69,7 @@ export default function HeroPortfolio() {
           <Link 
             to={`/case/${project.id}`} 
             key={project.id} 
-            className="w-full md:w-[60vw] md:h-full flex flex-col justify-center px-6 md:px-8 shrink-0 group/card block cursor-pointer text-left focus:outline-none mb-16 md:mb-0"
+            className="w-full md:w-[70vw] md:h-full flex flex-col justify-center px-6 md:px-8 shrink-0 group/card block cursor-pointer text-left focus:outline-none mb-16 md:mb-0"
           >
              {/* Máscara de imagem sem parallax interno */}
              <div className="w-full aspect-[4/5] md:aspect-video overflow-hidden relative group rounded-xl md:rounded-sm bg-transparent">
@@ -96,7 +96,7 @@ export default function HeroPortfolio() {
              
              {/* Metadados do Projeto */}
              <div className="flex justify-between items-end mt-6 text-[#1a1a1a] w-full px-1 md:px-0">
-               <h2 className="text-2xl md:text-3xl font-serif tracking-tight group-hover/card:opacity-70 transition-opacity">{project.title}</h2>
+               <h2 className="text-3xl md:text-5xl font-serif font-light tracking-tight group-hover/card:opacity-70 transition-opacity">{project.title}</h2>
                <div className="flex items-center gap-6">
                  <span className="text-lg md:text-xl font-serif tracking-tight opacity-80">{project.year}</span>
                  <span className="text-xs font-medium uppercase tracking-widest opacity-40">0{j + 1}</span>
