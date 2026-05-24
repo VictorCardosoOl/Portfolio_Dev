@@ -74,10 +74,12 @@ const Footer = () => {
         </div>
 
         {/* Bottom Giant Typography */}
-        <div className="w-full flex flex-col items-center justify-end px-4 overflow-hidden pt-4 pb-8 md:pb-12">
-          <h1 className="text-[10vw] md:text-[11vw] leading-[0.8] tracking-tighter font-serif m-0 p-0 whitespace-nowrap select-none text-center flex items-center justify-center relative">
-            @VictorCardoso
-          </h1>
+        <div className="w-full flex flex-col items-center justify-end px-4 overflow-hidden pt-4 pb-32 md:pb-12">
+          <a href="#" aria-label="Ir para a Home" className="hover:opacity-70 transition-opacity">
+            <h1 className="text-[10vw] md:text-[11vw] leading-[0.8] tracking-tighter font-serif m-0 p-0 whitespace-nowrap select-none text-center flex items-center justify-center relative">
+              @VictorCardoso
+            </h1>
+          </a>
         </div>
 
       </footer>

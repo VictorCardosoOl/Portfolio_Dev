@@ -28,6 +28,7 @@
   --color-stone-900: #111111;
   --color-stone-800: #222222;
 
+  --breakpoint-md: 1024px;
   --breakpoint-3xl: 1920px;
   --breakpoint-4xl: 2560px;
 }

@@ -7,7 +7,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Services() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
+  const toggleExpanded = (index: number) => {
+    setExpandedIndex(prev => prev === index ? null : index);
+  };
 
   useLayoutEffect(() => {
     if (!containerRef.current) return;
@@ -76,13 +80,12 @@ export default function Services() {
         {/* ── LISTA DE ESPECIALIDADES ── */}
         <ul className="srv-list divide-y divide-[#1a1a1a]/10">
           {specialties.map((item, i) => {
-            const isHovered = hoveredIndex === i;
+            const isExpanded = expandedIndex === i;
             return (
               <li
                 key={item.id}
-                className="srv-row"
-                onMouseEnter={() => setHoveredIndex(i)}
-                onMouseLeave={() => setHoveredIndex(null)}
+                className="srv-row cursor-pointer"
+                onClick={() => toggleExpanded(i)}
               >
                 {/* Row header */}
                 <div className="w-full flex items-center gap-6 md:gap-10 py-5 md:py-6">
@@ -92,7 +95,7 @@ export default function Services() {
                   </span>
 
                   {/* Title */}
-                  <span className={`flex-1 text-2xl md:text-3xl lg:text-4xl font-serif tracking-tight transition-colors duration-300 ${isHovered ? 'text-[#1a1a1a]/50' : 'text-[#1a1a1a]'}`}>
+                  <span className={`flex-1 text-2xl md:text-3xl lg:text-4xl font-serif tracking-tight transition-colors duration-300 ${isExpanded ? 'text-[#1a1a1a]/50' : 'text-[#1a1a1a]'}`}>
                     {item.title}
                   </span>
 
@@ -110,7 +113,7 @@ export default function Services() {
 
                   {/* Toggle icon */}
                   <span
-                    className={`shrink-0 ml-2 text-[#1a1a1a]/40 transition-transform duration-500 ${isHovered ? 'rotate-45' : 'rotate-0'}`}
+                    className={`shrink-0 ml-2 text-[#1a1a1a]/40 transition-transform duration-500 ${isExpanded ? 'rotate-45' : 'rotate-0'}`}
                     aria-hidden="true"
                   >
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -120,9 +123,9 @@ export default function Services() {
                   </span>
                 </div>
 
-                {/* Expandable panel — hover controlled via state */}
+                {/* Expandable panel */}
                 <div
-                  className={`overflow-hidden transition-all duration-500 ease-in-out ${isHovered ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}
+                  className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}
                 >
                   <div className="pl-14 md:pl-20 pb-8 grid md:grid-cols-2 gap-10">
                     <p className="text-sm md:text-base font-light text-[#1a1a1a]/60 leading-relaxed max-w-lg">
