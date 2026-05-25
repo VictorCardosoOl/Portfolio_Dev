@@ -49,7 +49,7 @@ export default function Values() {
     <section 
       id="values" 
       ref={containerRef} 
-      className="min-h-[80vh] grid grid-cols-1 md:grid-cols-2 border-t border-[#1a1a1a]/15 pt-12 pb-12 text-charcoal overflow-hidden"
+      className="min-h-[80vh] grid grid-cols-1 md:grid-cols-2 border-t border-black/5 shadow-[0_-8px_30px_rgba(0,0,0,0.03)] bg-white/80 backdrop-blur-sm pt-12 pb-12 text-charcoal overflow-hidden"
     >
       <div className="p-6 md:p-10 3xl:p-24 4xl:p-32 flex flex-col min-h-[40vh] md:min-h-[80vh]">
         <div className="flex justify-between text-[10px] 3xl:text-xs uppercase tracking-widest opacity-80 font-bold mb-8">

@@ -79,7 +79,7 @@ const Process: React.FC = () => {
   if (!PROCESS_STEPS || PROCESS_STEPS.length === 0) return null;
 
   return (
-    <section id="process" className="py-8 md:py-12 border-t border-[#1a1a1a]/15 pt-8 md:pt-12 text-[#111] relative overflow-hidden z-10 flex flex-col justify-center">
+    <section id="process" className="py-8 md:py-12 border-t border-black/5 shadow-[0_-8px_30px_rgba(0,0,0,0.03)] bg-white/80 backdrop-blur-sm pt-8 md:pt-12 text-[#111] relative overflow-hidden z-10 flex flex-col justify-center">
       <div className="container-fluid">
         <div className="mb-8 md:mb-20 max-w-2xl">
            <Reveal>

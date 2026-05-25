@@ -306,7 +306,7 @@ const AboutMe: React.FC = () => {
 
   return (
     <>
-      <section ref={sectionRef} id="aboutme" className="min-h-screen flex flex-col md:flex-row relative z-10 overflow-hidden font-sans border-t border-[#1a1a1a]/15">
+      <section ref={sectionRef} id="aboutme" className="min-h-screen flex flex-col md:flex-row relative z-10 overflow-hidden font-sans border-t border-black/5 shadow-[0_-8px_30px_rgba(0,0,0,0.03)] bg-white/80 backdrop-blur-sm">
         
         {/* Fundo e Textura (Noise SVG) */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.04] mix-blend-overlay">

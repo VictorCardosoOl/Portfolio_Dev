@@ -51,7 +51,7 @@ export default function Services() {
     <section
       id="services"
       ref={containerRef}
-      className="border-t border-[#1a1a1a]/15 overflow-hidden relative z-10"
+      className="border-t border-black/5 shadow-[0_-8px_30px_rgba(0,0,0,0.03)] bg-white/80 backdrop-blur-sm overflow-hidden relative z-10"
     >
       
 

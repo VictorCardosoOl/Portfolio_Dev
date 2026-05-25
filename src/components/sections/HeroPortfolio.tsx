@@ -56,7 +56,7 @@ export default function HeroPortfolio() {
         
         {/* 1. HERO SECTION */}
         <div className="w-full md:w-[100vw] min-h-[60vh] md:h-full flex flex-col justify-center px-6 md:px-12 z-10 shrink-0 relative mt-16 md:mt-0">
-           <h1 className="text-6xl sm:text-7xl md:text-[8rem] 3xl:text-[10rem] font-serif font-medium tracking-tighter uppercase whitespace-pre-line text-[#1a1a1a] leading-[0.9]">
+           <h1 className="text-7xl sm:text-8xl md:text-[11rem] 3xl:text-[14rem] font-serif font-medium tracking-tighter uppercase whitespace-pre-line text-[#1a1a1a] leading-[0.9]">
              <TextType text={["Victor\nCardoso"]} typingSpeed={100} showCursor={true} cursorCharacter="_" />
            </h1>
            <p className="mt-4 text-[11px] md:text-xs font-bold tracking-[0.25em] text-[#1a1a1a]/50 uppercase">
