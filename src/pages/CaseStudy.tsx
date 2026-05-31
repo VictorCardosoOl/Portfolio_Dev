@@ -22,86 +22,118 @@ export default function CaseStudy() {
       <SmoothScroll />
       <main className="w-full min-h-screen bg-[#ffffff] text-[#0a0a0a] font-sans selection:bg-[#0a0a0a] selection:text-[#ffffff]">
         
-        {/* PD-BAR (Sticky Navbar) */}
-        <nav className="sticky top-0 z-50 flex items-center justify-between px-6 md:px-24 py-5 bg-white/90 backdrop-blur-md border-b border-black/10">
-          <span className="font-mono text-[9px] tracking-[0.3em] uppercase opacity-40">
-            {String(currentIndex + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
-          </span>
-          <Link to="/" className="w-11 h-11 rounded-full border border-black/15 bg-black/5 flex items-center justify-center hover:bg-black/10 hover:border-black/30 transition-all flex-shrink-0 text-black">
-            <X size={16} strokeWidth={1.5} />
-          </Link>
-        </nav>
-
-        {/* PD-CONTENT */}
-        <div className="px-6 md:px-24 py-20">
+        {/* MAIN SPLIT SCREEN CONTAINER */}
+        <div className="w-full flex flex-col md:flex-row relative">
           
-          {/* HEADER GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-x-16 gap-y-6 mb-16">
-            <div className="md:col-span-8">
-              <p className="font-mono text-[9px] tracking-[0.3em] text-[#0a0a0a] opacity-40 uppercase mb-4">{project.category}</p>
-              <h1 className="font-serif text-5xl md:text-7xl font-light tracking-tight leading-tight mb-6">{project.title}</h1>
-            </div>
+          {/* LEFT COLUMN: SIDEBAR (STICKY ON DESKTOP) */}
+          <div className="w-full md:w-[35%] lg:w-[30%] bg-[#FAF9F6] z-10 border-b md:border-b-0 md:border-r border-black/10 relative">
+             <div className="md:sticky md:top-0 md:h-screen p-8 md:p-12 flex flex-col justify-between overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
+                
+                {/* Header: Project Index & Close Button */}
+                <div className="flex justify-between items-center w-full mb-12">
+                   <span className="font-mono text-[9px] tracking-[0.3em] uppercase opacity-40">
+                     PROJECT {String(currentIndex + 1).padStart(2, '0')}
+                   </span>
+                   <Link 
+                     to="/" 
+                     className="flex items-center gap-1.5 font-mono text-[9px] tracking-[0.2em] uppercase opacity-60 hover:opacity-100 transition-opacity text-black font-semibold"
+                   >
+                     CLOSE <X size={12} strokeWidth={2.5} />
+                   </Link>
+                </div>
+
+                {/* Content Details */}
+                <div className="flex-grow flex flex-col justify-center my-8">
+                   <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-light tracking-tight leading-tight uppercase mb-6">
+                     {project.title}
+                   </h1>
+                   
+                   <div className="w-12 h-[1px] bg-black/30 mb-8" />
+
+                   <p className="font-serif italic text-sm md:text-base text-black/80 leading-relaxed mb-6">
+                     "{project.problem}"
+                   </p>
+                   
+                   <p className="text-xs md:text-sm font-light leading-relaxed text-black/60 mb-8">
+                     {project.architecture}
+                   </p>
+
+                   {/* Meta Grid (Similar to screenshot layout) */}
+                   <div className="grid grid-cols-2 gap-y-6 gap-x-4 border-t border-black/10 pt-6 mt-4 text-left">
+                     <div>
+                        <span className="font-mono text-[8px] uppercase tracking-[0.3em] opacity-30 block mb-1">Year</span>
+                        <span className="text-xs font-light text-black/70">{project.year}</span>
+                     </div>
+                     <div>
+                        <span className="font-mono text-[8px] uppercase tracking-[0.3em] opacity-30 block mb-1">Role</span>
+                        <span className="text-xs font-light text-black/70">{project.role}</span>
+                     </div>
+                     <div className="col-span-2">
+                        <span className="font-mono text-[8px] uppercase tracking-[0.3em] opacity-30 block mb-1">Tech Stack</span>
+                        <span className="text-xs font-light text-black/70">{project.techStack.join(', ')}</span>
+                     </div>
+                   </div>
+                </div>
+
+                {/* Call To Action buttons at bottom of Sidebar */}
+                <div className="flex flex-col gap-3 mt-8">
+                   {project.liveUrl && project.liveUrl !== '#' ? (
+                      <a 
+                        href={project.liveUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="w-full bg-[#1a1a1a] text-white hover:bg-black py-4 px-6 rounded-none text-[10px] font-bold tracking-widest uppercase flex items-center justify-between transition-colors duration-300"
+                      >
+                        Ver Projeto Online
+                        <ExternalLink size={12} />
+                      </a>
+                   ) : (
+                      <button 
+                        disabled
+                        className="w-full bg-[#1a1a1a]/20 text-black/40 py-4 px-6 rounded-none text-[10px] font-bold tracking-widest uppercase flex items-center justify-between"
+                      >
+                        Projeto Interno
+                      </button>
+                   )}
+                   {project.repoUrl && (
+                      <a 
+                        href={project.repoUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="w-full border border-black/20 hover:border-black py-3.5 px-6 rounded-none text-[10px] font-bold tracking-widest uppercase text-center transition-colors duration-300"
+                      >
+                        Repository GitHub
+                      </a>
+                   )}
+                </div>
+
+             </div>
           </div>
 
-          {/* META ROW */}
-          <div className="flex items-center gap-8 md:gap-16 flex-wrap border-y border-black/10 py-6 my-10">
-            <div className="flex flex-col gap-1.5">
-               <span className="font-mono text-[9px] uppercase tracking-[0.4em] opacity-30">Ano</span>
-               <span className="text-[13px] font-light text-black/50 border-l border-black/10 pl-4">{project.year}</span>
-            </div>
-            <div className="flex flex-col gap-1.5">
-               <span className="font-mono text-[9px] uppercase tracking-[0.4em] opacity-30">Role</span>
-               <span className="text-[13px] font-light text-black/50 border-l border-black/10 pl-4">{project.role}</span>
-            </div>
-            <div className="flex flex-col gap-1.5">
-               <span className="font-mono text-[9px] uppercase tracking-[0.4em] opacity-30">Tech Stack</span>
-               <span className="text-[13px] font-light text-black/50 border-l border-black/10 pl-4">
-                  {project.techStack.join(', ')}
-               </span>
-            </div>
+          {/* RIGHT COLUMN: SCROLLING IMAGES */}
+          <div className="w-full md:w-[65%] lg:w-[70%] bg-black">
+             <div className="w-full min-h-[50vh] md:min-h-screen flex flex-col">
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className="w-full h-auto md:h-screen md:object-cover" 
+                />
+                
+                {/* Secondary Full Screen display of details/outcome */}
+                <div className="w-full h-auto md:h-screen bg-neutral-900 flex items-center justify-center p-8 md:p-16">
+                  <div className="max-w-2xl text-center text-white/80">
+                     <p className="font-mono text-[10px] tracking-[0.3em] uppercase opacity-45 mb-4">Outcome & Impact</p>
+                     <h3 className="font-serif italic text-2xl md:text-4xl font-light mb-8 leading-relaxed">"{project.outcome}"</h3>
+                  </div>
+                </div>
+             </div>
           </div>
 
-          {/* DESCRIPTION ROW */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-x-16 gap-y-6 mb-20">
-            <div className="md:col-span-7 flex flex-col gap-8">
-              <div>
-                <h3 className="font-serif italic text-[13px] opacity-40 tracking-wider mb-2">The Challenge</h3>
-                <p className="text-[15px] font-light leading-[1.8] text-black/60">{project.problem}</p>
-              </div>
-              <div>
-                <h3 className="font-serif italic text-[13px] opacity-40 tracking-wider mb-2">Architecture & Process</h3>
-                <p className="text-[15px] font-light leading-[1.8] text-black/60">{project.architecture}</p>
-              </div>
-              <div>
-                <h3 className="font-serif italic text-[13px] opacity-40 tracking-wider mb-2">Outcome</h3>
-                <p className="text-[15px] font-light leading-[1.8] text-black/60">{project.outcome}</p>
-              </div>
+        </div>
 
-              {/* Links Ao Vivo / Repo */}
-              {(project.liveUrl || project.repoUrl) && (
-                 <div className="flex flex-wrap gap-4 pt-4">
-                    {project.liveUrl && project.liveUrl !== '#' && (
-                       <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-mono text-[9px] tracking-[0.3em] uppercase opacity-40 hover:opacity-100 transition-opacity">
-                         <ExternalLink size={12} /> Live Project
-                       </a>
-                    )}
-                    {project.repoUrl && (
-                       <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-mono text-[9px] tracking-[0.3em] uppercase opacity-40 hover:opacity-100 transition-opacity">
-                         <Github size={12} /> Repository
-                       </a>
-                    )}
-                 </div>
-              )}
-            </div>
-          </div>
-
-          {/* IMAGE WRAPPER */}
-          <div className="relative w-full mb-[30px] overflow-hidden">
-             <img src={project.image} alt={project.title} className="w-full block" />
-          </div>
-
-          {/* BOTTOM NAV */}
-          <div className="flex items-center justify-between py-12 mt-16 border-t border-black/10">
+        {/* PART 3: BOTTOM NAVIGATION & FOOTER */}
+        <div className="w-full border-t border-black/10 bg-white relative z-20">
+          <div className="px-6 md:px-24 py-16 flex items-center justify-between">
              {prevProject ? (
                <Link to={`/case/${prevProject.id}`} className="flex items-center gap-4 group hover:opacity-60 transition-opacity">
                   <div className="w-11 h-11 rounded-full border border-black/15 flex items-center justify-center flex-shrink-0 group-hover:border-black/40 transition-colors">
@@ -132,9 +164,9 @@ export default function CaseStudy() {
                </Link>
              ) : <div />}
           </div>
+          <Footer />
         </div>
-        
-        <Footer />
+
       </main>
     </TransitionLayout>
   );
