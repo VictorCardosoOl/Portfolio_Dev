@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ScrollTrigger } from '../lib/gsap';
 
-import SmoothScroll from '../components/SmoothScroll';
 import { ErrorBoundary } from '../components/ErrorBoundary';
 import { ScrollProgressBar } from '../components/ui/ScrollProgressBar';
 
@@ -23,6 +22,12 @@ export default function Home() {
     if (!showPreloader) {
       ScrollTrigger.refresh();
     }
+    
+    // Controla o travamento do scroll global através da instância unificada do Lenis
+    const lenis = (window as any).lenis;
+    if (lenis) {
+      showPreloader ? lenis.stop() : lenis.start();
+    }
   }, [showPreloader]);
 
   return (
@@ -30,7 +35,6 @@ export default function Home() {
       {showPreloader && <Preloader onComplete={() => setShowPreloader(false)} />}
       <main className="w-full min-h-screen bg-[#FFFFFF] text-[#1a1a1a] selection:bg-[#1a1a1a] selection:text-[#FFFFFF] overflow-x-hidden">
         <ScrollProgressBar />
-        <SmoothScroll isLocked={showPreloader} />
 
         <div className="w-full">
           <ErrorBoundary>

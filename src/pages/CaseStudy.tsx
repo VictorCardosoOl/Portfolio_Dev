@@ -1,7 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { projects } from '../data/portfolio';
 import TransitionLayout from '../components/TransitionLayout';
-import SmoothScroll from '../components/SmoothScroll';
 import Footer from '../components/sections/Footer';
 import { X, ExternalLink, Github, ArrowLeft, ArrowRight } from 'lucide-react';
 
@@ -19,7 +18,6 @@ export default function CaseStudy() {
 
   return (
     <TransitionLayout>
-      <SmoothScroll />
       <main className="w-full min-h-screen bg-[#ffffff] text-[#0a0a0a] font-sans selection:bg-[#0a0a0a] selection:text-[#ffffff]">
         
         {/* MAIN SPLIT SCREEN CONTAINER */}

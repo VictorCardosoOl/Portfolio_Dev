@@ -1,58 +1,48 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Lenis from 'lenis';
 import { gsap, ScrollTrigger } from '../lib/gsap';
 import { useLocation } from 'react-router-dom';
 
-export default function SmoothScroll({ isLocked = false }: { isLocked?: boolean }) {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const location = useLocation();
+export default function SmoothScroll() {
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
-    
-    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
-
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-
+    // 1. Inicializa o Lenis apenas uma vez
     const lenis = new Lenis({
-      lerp: 0.07, // Menor lerp = rolagem mais suave e amortecida
+      lerp: 0.07, 
       smoothWheel: true,
       syncTouch: true,
-      autoRaf: false, // Impede atualizações duplicadas fora do ticker
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
+      autoRaf: false, // Deixamos o GSAP controlar o requestAnimationFrame
     });
 
-    isLocked ? lenis.stop() : lenis.start();
+    // Torna o lenis globalmente acessível caso precise pausar em algum momento
+    (window as any).lenis = lenis;
 
-    // Garante que a página inicie no topo e redimensione ao mudar de rota
-    lenis.scrollTo(0, { immediate: true });
-    setTimeout(() => {
-      lenis.resize();
-    }, 50);
+    // 2. Sincroniza o ScrollTrigger com o scroll do Lenis
+    lenis.on('scroll', ScrollTrigger.update);
 
-    // Sincroniza Lenis e ScrollTrigger no mesmo tick do GSAP para evitar lag visual
-    const updateLenis = () => {
-      lenis.raf(performance.now());
-      ScrollTrigger.update();
+    // 3. Integra o Lenis ao Ticker do GSAP (o GSAP v3.12+ passa o tempo em segundos, o Lenis espera ms)
+    const updateLenis = (time: number) => {
+      lenis.raf(time * 1000);
     };
 
     gsap.ticker.add(updateLenis);
-    
-    // Desativa lagSmoothing para evitar delay na sincronização
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      // Limpeza correta ao desmontar a aplicação
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
+      delete (window as any).lenis;
     };
-  }, [prefersReducedMotion, isLocked, location.pathname]);
+  }, []);
+
+  // 4. Toda vez que a rota mudar, volte o scroll para o topo imediatamente
+  useEffect(() => {
+    if ((window as any).lenis) {
+      (window as any).lenis.scrollTo(0, { immediate: true });
+    }
+  }, [pathname]);
 
   return null;
 }
-
