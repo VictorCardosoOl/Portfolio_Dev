@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ScrollTrigger } from '../lib/gsap';
 
-import { ErrorBoundary } from '../components/ErrorBoundary';
 import { ScrollProgressBar } from '../components/ui/ScrollProgressBar';
 
 import HeroPortfolio from '../components/sections/HeroPortfolio';
@@ -32,20 +31,20 @@ export default function Home() {
 
   return (
     <TransitionLayout>
+      <title>Victor Cardoso | Frontend Dev & Designer UI</title>
+      <meta name="description" content="Portfólio de Victor Cardoso - Engenheiro de Software focado em UI/UX e Web Performance." />
       {showPreloader && <Preloader onComplete={() => setShowPreloader(false)} />}
       <main className="w-full min-h-screen bg-[#FFFFFF] text-[#1a1a1a] selection:bg-[#1a1a1a] selection:text-[#FFFFFF] overflow-x-hidden">
         <ScrollProgressBar />
 
         <div className="w-full">
-          <ErrorBoundary>
-            <HeroPortfolio />
-            <Services />
-            <Process />
-            <AboutMe />
-            <Values />
-            <FAQSection />
-            <Footer />
-          </ErrorBoundary>
+          <HeroPortfolio />
+          <Services />
+          <Process />
+          <AboutMe />
+          <Values />
+          <FAQSection />
+          <Footer />
         </div>
       </main>
     </TransitionLayout>

@@ -1,52 +1,16 @@
-import { useLayoutEffect, useRef } from 'react';
-import { gsap } from '../../lib/gsap';
+import { useRef } from 'react';
 import { projects } from '../../data/portfolio';
 import Image from '../ui/Image';
 import TextType from '../ui/TextType';
 import { Link } from 'react-router-dom';
 import { MagneticButton } from '../ui/MagneticButton';
+import { useHeroAnimation } from '../../hooks/useHeroAnimation';
 
 export default function HeroPortfolio() {
   const containerRef = useRef<HTMLElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const gallery = galleryRef.current;
-      if (!gallery) return;
-
-      let mm = gsap.matchMedia();
-
-      mm.add("(min-width: 768px)", () => {
-        const totalScroll = gallery.scrollWidth - window.innerWidth;
-
-        // Movimento lateral limpo
-        const lateralScroll = gsap.to(gallery, {
-          x: () => -totalScroll,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            pin: true,
-            scrub: 1, // Suaviza a resposta do scroll para dar um efeito deslizante super fluido a 120Hz
-            start: "top top",
-            end: () => `+=${totalScroll}`,
-            invalidateOnRefresh: true,
-          }
-        });
-
-        // Parallax interno nas imagens removido para evitar barras cinzas laterais/verticais
-        // e manter um visual minimalista e elegante (a imagem agora é fixa no card).
-      });
-      
-      // Ajustes mobile
-      mm.add("(max-width: 767px)", () => {
-         // Nenhuma animação parallax interna na imagem para mobile para manter a consistência limpa
-      });
-
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+  useHeroAnimation(containerRef, galleryRef);
 
   return (
     <section ref={containerRef} className="relative w-full md:h-[100dvh] md:overflow-hidden pb-32 md:pb-0">

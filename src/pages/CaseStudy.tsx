@@ -18,6 +18,8 @@ export default function CaseStudy() {
 
   return (
     <TransitionLayout>
+      <title>{project.title} | Case Study - Victor Cardoso</title>
+      <meta name="description" content={project.problem} />
       <main className="w-full min-h-screen bg-[#ffffff] text-[#0a0a0a] font-sans selection:bg-[#0a0a0a] selection:text-[#ffffff]">
         
         {/* MAIN SPLIT SCREEN CONTAINER */}
