@@ -36,7 +36,7 @@ export default function CaseStudy() {
                    </span>
                    <Link 
                      to="/" 
-                     className="flex items-center gap-1.5 font-mono text-[9px] tracking-[0.2em] uppercase opacity-60 hover:opacity-100 transition-opacity text-black font-semibold"
+                     className="flex items-center gap-1.5 font-mono text-[9px] tracking-[0.2em] uppercase opacity-60 hover:opacity-100 transition-opacity text-black font-semibold p-3 -mr-3 touch-manipulation"
                    >
                      CLOSE <X size={12} strokeWidth={2.5} />
                    </Link>

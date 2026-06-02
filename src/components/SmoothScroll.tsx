@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import Lenis from 'lenis';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap, ScrollTrigger } from '../lib/gsap';
+import { useLocation } from 'react-router-dom';
 
 export default function SmoothScroll({ isLocked = false }: { isLocked?: boolean }) {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -21,27 +20,39 @@ export default function SmoothScroll({ isLocked = false }: { isLocked?: boolean 
     if (prefersReducedMotion) return;
 
     const lenis = new Lenis({
-      lerp: 0.08,
+      lerp: 0.07, // Menor lerp = rolagem mais suave e amortecida
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
+      syncTouch: true,
+      autoRaf: false, // Impede atualizações duplicadas fora do ticker
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.5,
     });
 
     isLocked ? lenis.stop() : lenis.start();
 
-    lenis.on('scroll', ScrollTrigger.update);
+    // Garante que a página inicie no topo e redimensione ao mudar de rota
+    lenis.scrollTo(0, { immediate: true });
+    setTimeout(() => {
+      lenis.resize();
+    }, 50);
 
-    gsap.ticker.fps(60); // Fixes 120hz monitors running lerp animations too fast
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+    // Sincroniza Lenis e ScrollTrigger no mesmo tick do GSAP para evitar lag visual
+    const updateLenis = () => {
+      lenis.raf(performance.now());
+      ScrollTrigger.update();
+    };
+
+    gsap.ticker.add(updateLenis);
+    
+    // Desativa lagSmoothing para evitar delay na sincronização
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(updateLenis);
       lenis.destroy();
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
     };
-  }, [prefersReducedMotion, isLocked]);
+  }, [prefersReducedMotion, isLocked, location.pathname]);
 
   return null;
 }
+

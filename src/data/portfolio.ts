@@ -72,7 +72,7 @@ export const projects: Project[] = [
     outcome: 'Carrinho de compras totalmente seguro, fluxo performático e integração CMS permitiu o time de marketing alterar os catálogos independentemente de deploys.',
     repoUrl: 'https://github.com/VictorCardosoOl',
     liveUrl: '#',
-    image: 'https://images.unsplash.com/photo-1615397323758-1e0e4179323c?q=80&w=2000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=2000&auto=format&fit=crop',
     year: '2025',
     category: 'E-Commerce',
   },

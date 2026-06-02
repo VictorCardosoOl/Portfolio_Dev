@@ -14,6 +14,10 @@ import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import App from './App.tsx';
 import './index.css';
+import { inject } from '@vercel/analytics';
+
+// Inicializa o Vercel Analytics para monitoramento de métricas e conversão
+inject();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

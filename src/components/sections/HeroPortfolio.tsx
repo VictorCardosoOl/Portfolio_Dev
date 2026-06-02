@@ -27,7 +27,7 @@ export default function HeroPortfolio() {
           scrollTrigger: {
             trigger: containerRef.current,
             pin: true,
-            scrub: true, 
+            scrub: 1, // Suaviza a resposta do scroll para dar um efeito deslizante super fluido a 120Hz
             start: "top top",
             end: () => `+=${totalScroll}`,
             invalidateOnRefresh: true,
@@ -52,7 +52,11 @@ export default function HeroPortfolio() {
     <section ref={containerRef} className="relative w-full md:h-[100dvh] md:overflow-hidden pb-32 md:pb-0">
       
       {/* Container Flexível que ultrapassa os 100vw no desktop */}
-      <div ref={galleryRef} className="flex flex-col md:flex-row md:h-full w-full md:w-max">
+      <div 
+        ref={galleryRef} 
+        className="flex flex-col md:flex-row md:h-full w-full md:w-max"
+        style={{ willChange: 'transform' }}
+      >
         
         {/* 1. HERO SECTION */}
         <div className="w-full md:w-[100vw] min-h-[60vh] md:h-full flex flex-col justify-center px-6 md:px-12 z-10 shrink-0 relative mt-16 md:mt-0">
@@ -96,11 +100,17 @@ export default function HeroPortfolio() {
              </div>
              
              {/* Metadados do Projeto */}
-             <div className="flex justify-between items-end mt-6 text-[#1a1a1a] w-full px-1 md:px-0">
-               <h2 className="text-3xl md:text-5xl font-serif font-light tracking-tight group-hover/card:opacity-70 transition-opacity">{project.title}</h2>
-               <div className="flex items-center gap-6">
-                 <span className="text-lg md:text-xl font-serif tracking-tight opacity-80">{project.year}</span>
-                 <span className="text-xs font-medium uppercase tracking-widest opacity-40">0{j + 1}</span>
+             <div className="flex flex-col mt-4 md:mt-6 text-[#1a1a1a] w-full px-1 md:px-0">
+               <div className="flex justify-between items-end w-full">
+                 <h2 className="text-3xl md:text-5xl font-serif font-light tracking-tight group-hover/card:opacity-70 transition-opacity">{project.title}</h2>
+                 <div className="flex items-center gap-6">
+                   <span className="text-lg md:text-xl font-serif tracking-tight opacity-80">{project.year}</span>
+                   <span className="text-xs font-medium uppercase tracking-widest opacity-40">0{j + 1}</span>
+                 </div>
+               </div>
+               {/* Call to Action para mobile com área de toque de 44px para conformidade com Lei de Fitts */}
+               <div className="md:hidden mt-2 flex items-center text-[10px] font-bold tracking-widest uppercase text-black/50 min-h-[44px] touch-manipulation">
+                 Ver Case Estudado <span className="ml-1.5">→</span>
                </div>
              </div>
           </Link>
