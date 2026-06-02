@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useMemo, useCallback, CSSProperties } from 'react';
 
-const styles: Record<string, CSSProperties> = {
+const styles = {
   wrapper: {
     display: 'inline-block',
     whiteSpace: 'pre-wrap'
@@ -15,7 +15,7 @@ const styles: Record<string, CSSProperties> = {
     clip: 'rect(0,0,0,0)',
     border: 0
   }
-};
+} as const;
 
 export default function DecryptedText({
   text,

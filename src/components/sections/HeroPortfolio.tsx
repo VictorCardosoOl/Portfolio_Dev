@@ -70,6 +70,7 @@ export default function HeroPortfolio() {
             to={`/case/${project.id}`} 
             key={project.id} 
             className="w-full md:w-[70vw] md:h-full flex flex-col justify-center px-6 md:px-8 shrink-0 group/card block cursor-pointer text-left focus:outline-none mb-16 md:mb-0"
+            aria-label={`Ver os detalhes do projeto ${project.title}`}
           >
              {/* Máscara de imagem sem parallax interno */}
              <div className="w-full aspect-[4/5] md:aspect-video overflow-hidden relative group rounded-xl md:rounded-sm bg-transparent">

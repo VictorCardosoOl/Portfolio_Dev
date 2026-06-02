@@ -77,6 +77,17 @@ const ResumeContent = ({ isOpen }: { isOpen: boolean }) => {
               </p>
             </div>
 
+            {/* FILOSOFIA DE ENGENHARIA */}
+            <div className="mb-20">
+              <h2 className="text-xs md:text-sm font-bold text-black uppercase tracking-widest border-b border-dotted border-gray-400 pb-4 mb-8">Filosofia de Engenharia</h2>
+              <p className="text-sm md:text-base text-gray-600 font-light leading-loose mb-4">
+                Acredito que o código deva não apenas funcionar, mas ser escalável e de fácil manutenção. Para isso, pauto meu desenvolvimento em metodologias ágeis e nos princípios <strong>SOLID</strong>, <strong>DRY</strong> (Don't Repeat Yourself) e <strong>KISS</strong> (Keep It Simple, Stupid).
+              </p>
+              <p className="text-sm md:text-base text-gray-600 font-light leading-loose">
+                Também considero inegociável a criação de interfaces inclusivas, desenvolvendo seguindo as diretrizes <strong>WCAG 2.1</strong> para garantir máxima acessibilidade.
+              </p>
+            </div>
+
             {/* ESPECIALIDADES */}
             <div className="mb-20">
               <h2 className="text-xs md:text-sm font-bold text-black uppercase tracking-widest border-b border-dotted border-gray-400 pb-4 mb-16">Especialidades</h2>
@@ -197,6 +208,42 @@ const ResumeContent = ({ isOpen }: { isOpen: boolean }) => {
                   <p className="text-sm text-gray-500 leading-loose">
                     Atendimento ao cliente, auxílio na infraestrutura e testes.
                   </p>
+                </div>
+              </div>
+            </div>
+
+            {/* ESTUDOS DE CASO */}
+            <div className="mb-20">
+              <h2 className="text-xs md:text-sm font-bold text-black uppercase tracking-widest border-b border-dotted border-gray-400 pb-4 mb-10">Estudos de Caso & Projetos Reais</h2>
+              
+              <div className="space-y-10">
+                <div className="border-l-2 border-[#1a1a1a] pl-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">Base de Conhecimento (FAQ Local)</h4>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-2">
+                    <strong>Problema:</strong> Descentralização da informação técnica da equipe.<br />
+                    <strong>Solução:</strong> Implementação de um portal documentacional, reduzindo o tempo de onboarding e o número de chamados recorrentes.
+                  </p>
+                  <span className="text-xs font-semibold uppercase tracking-widest text-gray-400">Impacto Operacional & Otimização</span>
+                </div>
+
+                <div className="border-l-2 border-[#1a1a1a] pl-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">Plant Care (Mobile First PWA)</h4>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-2">
+                    <strong>Desafio:</strong> Gerenciar estado complexo (irrigação, iluminação) em interface responsiva.<br />
+                    <strong>Solução:</strong> Arquitetura PWA moderna focada em UX mobile-first e rápido TTI (Time to Interactive).
+                  </p>
+                  <span className="text-xs font-semibold uppercase tracking-widest text-gray-400">React, PWA, UX/UI</span>
+                </div>
+
+                <div className="border-l-2 border-[#1a1a1a] pl-6">
+                  <h4 className="text-base font-bold text-gray-800 flex items-center gap-2 mb-2">
+                    Leitor EPUB Nativo 
+                    <span className="px-2 py-0.5 bg-yellow-100 text-yellow-800 text-[9px] rounded-full uppercase tracking-widest">WIP</span>
+                  </h4>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-2">
+                    Desenvolvimento de aplicativo Android focado na performance de renderização de e-books utilizando <strong>Jetpack Compose</strong> e arquitetura nativa.
+                  </p>
+                  <span className="text-xs font-semibold uppercase tracking-widest text-gray-400">Android, Kotlin, Jetpack Compose</span>
                 </div>
               </div>
             </div>

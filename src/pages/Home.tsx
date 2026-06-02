@@ -14,32 +14,25 @@ import FAQSection from '../components/sections/FAQSection';
 import Footer from '../components/sections/Footer';
 import TransitionLayout from '../components/TransitionLayout';
 
+import { Preloader } from '../components/ui/Preloader';
+
 export default function Home() {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [showPreloader, setShowPreloader] = useState(true);
 
   useEffect(() => {
-    const handleLoad = () => {
-      document.fonts.ready.then(() => {
-        setIsLoaded(true);
-        ScrollTrigger.refresh();
-      });
-    };
-    
-    if (document.readyState === 'complete') {
-      handleLoad();
-    } else {
-      window.addEventListener('load', handleLoad);
-      return () => window.removeEventListener('load', handleLoad);
+    if (!showPreloader) {
+      ScrollTrigger.refresh();
     }
-  }, []);
+  }, [showPreloader]);
 
   return (
     <TransitionLayout>
+      {showPreloader && <Preloader onComplete={() => setShowPreloader(false)} />}
       <main className="w-full min-h-screen bg-[#FFFFFF] text-[#1a1a1a] selection:bg-[#1a1a1a] selection:text-[#FFFFFF] overflow-x-hidden">
         <ScrollProgressBar />
-        <SmoothScroll isLocked={!isLoaded} />
+        <SmoothScroll isLocked={showPreloader} />
 
-        <div className={`transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="w-full">
           <ErrorBoundary>
             <HeroPortfolio />
             <Services />

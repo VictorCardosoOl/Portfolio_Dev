@@ -231,14 +231,19 @@ export default function LineWaves({
     }
 
     let animationFrameId: number;
+    let lastTime = performance.now();
 
     function update(time: number) {
       animationFrameId = requestAnimationFrame(update);
+      const deltaTime = time - lastTime;
+      lastTime = time;
+      const timeScale = Math.min(deltaTime / 16.666, 2.0); // Limit max scale to prevent jumps
+
       program.uniforms.uTime.value = time * 0.001;
 
       if (enableMouseInteraction) {
-        currentMouse[0] += 0.05 * (targetMouse[0] - currentMouse[0]);
-        currentMouse[1] += 0.05 * (targetMouse[1] - currentMouse[1]);
+        currentMouse[0] += 0.05 * timeScale * (targetMouse[0] - currentMouse[0]);
+        currentMouse[1] += 0.05 * timeScale * (targetMouse[1] - currentMouse[1]);
         program.uniforms.uMouse.value[0] = currentMouse[0];
         program.uniforms.uMouse.value[1] = currentMouse[1];
       } else {

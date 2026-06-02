@@ -31,6 +31,7 @@ export default function SmoothScroll({ isLocked = false }: { isLocked?: boolean 
 
     lenis.on('scroll', ScrollTrigger.update);
 
+    gsap.ticker.fps(60); // Fixes 120hz monitors running lerp animations too fast
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
