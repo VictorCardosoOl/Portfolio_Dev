@@ -116,8 +116,31 @@ export default function CaseStudy() {
                 <img 
                   src={project.image} 
                   alt={project.title} 
-                  className="w-full h-auto md:h-screen md:object-cover" 
+                  className="w-full h-auto block" 
                 />
+
+                {/* Detailed Text Sections from the project */}
+                {project.sections && project.sections.length > 0 && (
+                  <div className="w-full bg-[#faf9f6] text-[#1a1a1a] p-8 md:p-16 lg:p-24 border-b border-black/10">
+                    <div className="max-w-4xl mx-auto space-y-16">
+                      {project.sections.map((sec, i) => (
+                        <div key={i} className="flex flex-col gap-6">
+                           <h3 className="font-serif text-2xl md:text-3xl font-light uppercase tracking-widest border-b border-black/10 pb-4">{sec.title}</h3>
+                           {sec.content && sec.content.map((p, j) => (
+                             <p key={j} className="text-sm md:text-base leading-relaxed text-black/80 font-light">{p}</p>
+                           ))}
+                           {sec.list && sec.list.length > 0 && (
+                             <ul className="list-disc pl-5 space-y-4 text-sm md:text-base leading-relaxed text-black/80 font-light mt-2">
+                               {sec.list.map((li, j) => (
+                                 <li key={j} className="pl-2">{li}</li>
+                               ))}
+                             </ul>
+                           )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 
                 {/* Secondary Full Screen display of details/outcome */}
                 <div className="w-full h-auto md:h-screen bg-neutral-900 flex items-center justify-center p-8 md:p-16">
@@ -126,6 +149,25 @@ export default function CaseStudy() {
                      <h3 className="font-serif italic text-2xl md:text-4xl font-light mb-8 leading-relaxed">"{project.outcome}"</h3>
                   </div>
                 </div>
+
+                {/* Masonry Gallery (Montessoriana) */}
+                {project.gallery && project.gallery.length > 0 && (
+                  <div className="w-full bg-[#0a0a0a] p-6 md:p-12 lg:p-16">
+                    <p className="font-mono text-[10px] tracking-[0.3em] uppercase opacity-45 mb-10 text-white text-center">Galeria do Projeto</p>
+                    <div className="columns-1 md:columns-2 gap-6 space-y-6">
+                      {project.gallery.map((img, index) => (
+                        <div key={index} className="break-inside-avoid w-full">
+                          <img 
+                            src={img} 
+                            alt={`${project.title} gallery ${index + 1}`} 
+                            className="w-full h-auto object-cover rounded-sm border border-white/5"
+                            loading="lazy"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
              </div>
           </div>
 

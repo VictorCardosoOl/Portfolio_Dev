@@ -18,26 +18,71 @@ export interface Project {
   image: string;
   year: string;
   category: string;
+  gallery?: string[];
+  sections?: {
+    title: string;
+    content: string[];
+    list?: string[];
+  }[];
 }
 
 export const projects: Project[] = [
   {
-    id: 'termique',
-    title: 'Tērmique',
-    description: 'Brand strategy, visual identity & digital experience for a premium wellness brand.',
+    id: 'luiz-felipe',
+    title: 'Luiz Felipe (TCC)',
+    description: 'Plataforma web focada na captação e conversão de pacientes para o psicólogo Luiz Felipe, especialista em TCC.',
     fullDescription:
-      'Sistema de identidade visual completo para uma marca de bem-estar premium, abrangendo estratégia de marca, naming, tipografia editorial e a presença digital flagship.',
+      'Muito além de uma vitrine institucional, a aplicação foi projetada como uma ferramenta estratégica de negócios. O design foi guiado por uma experiência de usuário (UX) empática e acolhedora, utilizando uma paleta de cores amena, aplicação inteligente de espaços de respiro e transições fluidas.',
     technicalChallenge:
-      'Implementar uma experiência de scroll horizontal com GSAP ScrollTrigger pinning preciso, garantindo fluidez em resoluções de 1080p a 4K sem causar layout shift perceptível.',
-    techStack: ['React', 'TypeScript', 'GSAP', 'ScrollTrigger', 'TailwindCSS'],
-    problem: 'O cliente precisava de um posicionamento premium digital que não comprometesse a performance e mantivesse o feeling de "revista editorial" nas interações de rolagem.',
-    architecture: 'Arquitetura componentizada usando React com custom hooks para orquestração das timelines GSAP. O CSS global foi otimizado aplicando princípios SOLID de separação de responsabilidades para evitar vazamento de estilos.',
-    role: 'Lead Frontend Developer & UI Engineer - Fui responsável pela idealização da micro-interação, codificação e otimização Core Web Vitals.',
-    outcome: 'A plataforma atingiu pontuações perfeitas no Lighthouse (98 Performance / 100 Acessibilidade). Aumento de 40% na permanência de tempo de página e redução brusca de Bounce Rate.',
-    liveUrl: '#',
-    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop',
+      'Motion Design de Alta Fidelidade: sincronização minuciosa entre a física de interpolação do Lenis e o ScrollTrigger do GSAP, com taxa de atualização cravada em 60fps sem onerar a bateria.',
+    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Lenis', 'Zod'],
+    problem: 'O público-alvo que procura suporte emocional precisava de um ambiente virtual que diminuísse a fricção na navegação e transmitisse segurança imediata e acolhimento.',
+    architecture: 'A aplicação foi desenvolvida sob o paradigma de Server-Side Rendering (SSR) do Next.js App Router, garantindo SEO técnico para destaque orgânico. A estrutura segue Separation of Concerns (SoC) com dados isolados em /src/constants/data.ts.',
+    role: 'Frontend Developer - Desenvolvimento da plataforma, otimização de SEO e UX Design empático.',
+    outcome: 'Navegação fluida e premium que prepara o terreno emocional para o processo terapêutico, maximizando as taxas de contato e atração de tráfego orgânico qualificado.',
+    liveUrl: 'https://luizfelipepsicologo.vercel.app/',
+    image: '/luiz-felipe/hero.png',
     year: '2026',
-    category: 'Branding & Web',
+    category: 'Saúde & Bem-estar',
+    gallery: [
+      '/luiz-felipe/hero_moblie.png',
+      '/luiz-felipe/about_moblie.png',
+      '/luiz-felipe/tcc.png',
+      '/luiz-felipe/formulario.png',
+      '/luiz-felipe/formulario_moblie.png',
+      '/luiz-felipe/footer.png'
+    ],
+    sections: [
+      {
+        title: 'Resumo do Projeto e Estratégia Comercial',
+        content: [
+          'Este projeto consiste no desenvolvimento de uma plataforma web de alta performance focada na captação e conversão de pacientes para o psicólogo Luiz Felipe, especialista em Terapia Cognitivo-Comportamental (TCC). Muito além de uma vitrine institucional, a aplicação foi projetada como uma ferramenta estratégica de negócios. A arquitetura foi construída com rigorosas práticas de SEO (Otimização para Mecanismos de Busca) para garantir que o profissional ganhe destaque orgânico no Google, conectando-o rapidamente a quem busca ajuda.',
+          'Considerando que o público-alvo procura suporte emocional e saúde mental, o design foi guiado por uma experiência de usuário (UX) empática e acolhedora. A interface utiliza uma paleta de cores amena, aplicação inteligente de espaços de respiro (whitespace) e transições de tela altamente fluidas. Esse cuidado técnico diminui a fricção na navegação, transmite segurança imediata e prepara o terreno emocional para o processo terapêutico, maximizando as taxas de contato.'
+        ]
+      },
+      {
+        title: 'Ficha Técnica de Desenvolvimento',
+        content: [],
+        list: [
+          'Framework Core: Next.js (App Router) e React.',
+          'Linguagem: TypeScript.',
+          'Estilização & UI: Tailwind CSS integrado com variáveis CSS.',
+          'Motion Design: GSAP (GreenSock) para coreografias de animação e Lenis para rolagem suave (smooth scroll).',
+          'Formulários & Validação: React Hook Form e Zod.',
+          'DevOps & Qualidade: Pipeline de CI/CD automatizado, Husky, Commitlint (padrão Conventional Commits), Lint-staged e GitHub Actions.'
+        ]
+      },
+      {
+        title: 'Destaques de Arquitetura e Engenharia',
+        content: [],
+        list: [
+          'Performance e SEO Técnico (Foco em Conversão): A aplicação foi desenvolvida sob o paradigma de Server-Side Rendering (SSR) nativo do Next.js App Router, garantindo que os motores de busca (Googlebots) façam a leitura instantânea de meta tags e conteúdo. A implementação de tags semânticas e metadados focados em tratamentos de ansiedade, depressão e TCC impulsiona a indexação e atrai tráfego qualificado.',
+          'Motion Design de Alta Fidelidade: O sistema de rolagem foi aprimorado com a criação do componente dedicado SmoothScrollLayout. Houve uma sincronização minuciosa entre a física de interpolação do Lenis e o ScrollTrigger do GSAP. O ticker de renderização do GSAP foi configurado com prioridade máxima no loop, mantendo uma taxa de atualização cravada em 60fps. O resultado é uma navegação fluida e premium, sem onerar a bateria do dispositivo ou causar engasgos (lag smoothing travado em 0).',
+          'Clean Code e Escalabilidade (Data Layer): A estrutura do projeto segue rigorosamente o princípio de Separation of Concerns (SoC). Os dados brutos da aplicação (textos de serviços, detalhamento de transtornos) foram extraídos da camada de apresentação e isolados em /src/constants/data.ts. Isso mantém os componentes React limpos, estritamente focados na renderização, facilitando a escalabilidade e futuras manutenções.',
+          'Design System Customizado: A paleta padrão do Tailwind foi reescrita para refletir um tom Premium, combinando autoridade e acolhimento. Foram adicionados tons terrosos (stone), azuis serenos (primary) e esverdeados (sage). Esse conjunto é complementado por uma tipografia elegante (fontes Inter e Playfair Display) e animações customizadas, como o fade-in-up, consolidando a identidade visual do profissional.'
+        ]
+      }
+    ]
   },
   {
     id: 'lumina',

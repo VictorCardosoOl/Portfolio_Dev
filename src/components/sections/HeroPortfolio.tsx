@@ -45,7 +45,7 @@ export default function HeroPortfolio() {
                 <Image 
                   src={project.image} 
                   alt={project.title} 
-                  className="w-full h-full object-cover origin-center transition-transform duration-700 group-hover:scale-105" 
+                  className="w-full h-full object-contain origin-center transition-transform duration-700 group-hover:scale-105" 
                 />
                 {/* Overlay Elegante Escurecendo no Hover */}
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-500" />
