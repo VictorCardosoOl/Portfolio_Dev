@@ -2,6 +2,7 @@ import React, { useState, useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MagneticButton } from '../ui/MagneticButton';
+import { PROFILE_DATA } from '../../config/profile';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -172,7 +173,9 @@ export default function FAQSection() {
           </p>
           <MagneticButton>
             <a
-              href="#contact"
+              href={PROFILE_DATA.contact.whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
               id="faq-cta"
               className="group inline-flex items-center gap-3 border border-[#1a1a1a]/20 hover:border-[#1a1a1a]/60 text-[#1a1a1a]/70 hover:text-[#1a1a1a] text-xs uppercase tracking-widest font-bold py-4 px-8 transition-all duration-300 rounded-sm"
             >

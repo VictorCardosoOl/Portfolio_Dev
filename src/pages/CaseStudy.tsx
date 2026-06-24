@@ -2,7 +2,8 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { projects } from '../data/portfolio';
 import TransitionLayout from '../components/TransitionLayout';
 import Footer from '../components/sections/Footer';
-import { X, ExternalLink, Github, ArrowLeft, ArrowRight } from 'lucide-react';
+import { X, ExternalLink, Github, ArrowLeft, ArrowRight, Linkedin, MessageCircle } from 'lucide-react';
+import { PROFILE_DATA } from '../config/profile';
 
 export default function CaseStudy() {
   const { id } = useParams<{ id: string }>();
@@ -105,6 +106,19 @@ export default function CaseStudy() {
                         Repository GitHub
                       </a>
                    )}
+                </div>
+
+                {/* Contact Links */}
+                <div className="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-black/10">
+                   <a href={PROFILE_DATA.socials.linkedin} target="_blank" rel="noreferrer" className="text-black/50 hover:text-black transition-colors" aria-label="LinkedIn">
+                      <Linkedin size={20} strokeWidth={1.5} />
+                   </a>
+                   <a href={PROFILE_DATA.socials.github} target="_blank" rel="noreferrer" className="text-black/50 hover:text-black transition-colors" aria-label="GitHub">
+                      <Github size={20} strokeWidth={1.5} />
+                   </a>
+                   <a href={PROFILE_DATA.contact.whatsappUrl} target="_blank" rel="noreferrer" className="text-black/50 hover:text-black transition-colors" aria-label="WhatsApp">
+                      <MessageCircle size={20} strokeWidth={1.5} />
+                   </a>
                 </div>
 
              </div>

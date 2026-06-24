@@ -15,7 +15,8 @@ export const PROFILE_DATA = {
   },
   contact: {
     email: "hello@victorcardoso.com",
-    phone: "+55 11 99999-9999",
+    phone: "5511977440146",
+    whatsappUrl: "https://wa.me/5511977440146?text=Ol%C3%A1%20Victor!%20Vim%20pelo%20seu%20portf%C3%B3lio.%0AGostaria%20de%20falar%20sobre%20um%20projeto.%0A*Nome:*%20%0A*Empresa%2FProjeto:*%20%0A*Como%20posso%20ajudar:*%20",
   },
   experience: [
     {

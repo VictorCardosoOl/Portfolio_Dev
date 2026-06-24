@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useScrollDirection } from '../hooks/useScrollDirection';
 import { MagneticButton } from './ui/MagneticButton';
 import { Linkedin, MessageCircle, Folder, User, Mail, Home } from 'lucide-react';
+import { PROFILE_DATA } from '../config/profile';
 
 interface NavLink {
   label: string;
@@ -87,16 +88,16 @@ export default function Navbar({ items, logoText }: NavbarProps) {
 
           {/* Ícones Sociais Desktop */}
           <div className="hidden md:flex items-center gap-3 mr-2">
-             <a href="#" aria-label="LinkedIn" className="text-charcoal/70 hover:text-charcoal transition-colors p-1">
+             <a href={PROFILE_DATA.socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="text-charcoal/70 hover:text-charcoal transition-colors p-1">
                 <Linkedin size={20} strokeWidth={1.5} />
              </a>
-             <a href="#" aria-label="WhatsApp" className="text-charcoal/70 hover:text-charcoal transition-colors p-1">
+             <a href={PROFILE_DATA.contact.whatsappUrl} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="text-charcoal/70 hover:text-charcoal transition-colors p-1">
                 <MessageCircle size={20} strokeWidth={1.5} />
              </a>
           </div>
 
           <MagneticButton className="hidden md:inline-block">
-            <a href="#contact" className="inline-flex items-center justify-center text-xs md:text-sm font-semibold bg-charcoal text-cream px-5 py-2 md:py-2.5 rounded-full hover:bg-black transition-colors">
+            <a href={PROFILE_DATA.contact.whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center text-xs md:text-sm font-semibold bg-charcoal text-cream px-5 py-2 md:py-2.5 rounded-full hover:bg-black transition-colors">
               WhatsApp
             </a>
           </MagneticButton>
