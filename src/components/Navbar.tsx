@@ -3,6 +3,7 @@ import { useScrollDirection } from '../hooks/useScrollDirection';
 import { MagneticButton } from './ui/MagneticButton';
 import { Linkedin, MessageCircle, Folder, User, Mail, Home } from 'lucide-react';
 import { PROFILE_DATA } from '../config/profile';
+import { useWhatsAppModal } from '../context/WhatsAppModalContext';
 
 interface NavLink {
   label: string;
@@ -25,6 +26,7 @@ interface NavbarProps {
 export default function Navbar({ items, logoText }: NavbarProps) {
   const { scrollDirection, scrollY } = useScrollDirection();
   const [windowHeight, setWindowHeight] = useState<number>(0);
+  const { openWhatsAppModal } = useWhatsAppModal();
 
   useEffect(() => {
     const handleResize = () => setWindowHeight(window.innerHeight);
@@ -91,15 +93,15 @@ export default function Navbar({ items, logoText }: NavbarProps) {
              <a href={PROFILE_DATA.socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="text-charcoal/70 hover:text-charcoal transition-colors p-1">
                 <Linkedin size={20} strokeWidth={1.5} />
              </a>
-             <a href={PROFILE_DATA.contact.whatsappUrl} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="text-charcoal/70 hover:text-charcoal transition-colors p-1">
+             <button onClick={openWhatsAppModal} aria-label="WhatsApp" className="text-charcoal/70 hover:text-charcoal transition-colors p-1">
                 <MessageCircle size={20} strokeWidth={1.5} />
-             </a>
+             </button>
           </div>
 
           <MagneticButton className="hidden md:inline-block">
-            <a href={PROFILE_DATA.contact.whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center text-xs md:text-sm font-semibold bg-charcoal text-cream px-5 py-2 md:py-2.5 rounded-full hover:bg-black transition-colors">
+            <button onClick={openWhatsAppModal} className="inline-flex items-center justify-center text-xs md:text-sm font-semibold bg-charcoal text-cream px-5 py-2 md:py-2.5 rounded-full hover:bg-black transition-colors">
               WhatsApp
-            </a>
+            </button>
           </MagneticButton>
           
         </div>

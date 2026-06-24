@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MagneticButton } from '../ui/MagneticButton';
 import { PROFILE_DATA } from '../../config/profile';
+import { useWhatsAppModal } from '../../context/WhatsAppModalContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,6 +37,7 @@ const FAQ_ITEMS = [
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { openWhatsAppModal } = useWhatsAppModal();
 
   const toggleItem = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -172,16 +174,14 @@ export default function FAQSection() {
             Ainda não encontrou o que procura? Fale diretamente comigo.
           </p>
           <MagneticButton>
-            <a
-              href={PROFILE_DATA.contact.whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
+            <button
+              onClick={openWhatsAppModal}
               id="faq-cta"
               className="group inline-flex items-center gap-3 border border-[#1a1a1a]/20 hover:border-[#1a1a1a]/60 text-[#1a1a1a]/70 hover:text-[#1a1a1a] text-xs uppercase tracking-widest font-bold py-4 px-8 transition-all duration-300 rounded-sm"
             >
               WhatsApp
               <span className="inline-block transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
-            </a>
+            </button>
           </MagneticButton>
         </div>
 

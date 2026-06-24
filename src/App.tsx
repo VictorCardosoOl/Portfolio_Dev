@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import SmoothScroll from './components/SmoothScroll';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { WhatsAppModalProvider } from './context/WhatsAppModalContext';
 
 const Home = lazy(() => import('./pages/Home'));
 const CaseStudy = lazy(() => import('./pages/CaseStudy'));
@@ -18,17 +19,19 @@ export default function App() {
   return (
     <Router>
       <SmoothScroll />
-      <MainLayout>
-        <ErrorBoundary>
-          <Suspense fallback={<RouteFallback />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/case/:id" element={<CaseStudy />} />
-              <Route path="/servicos" element={<ServicesPage />} />
-            </Routes>
-          </Suspense>
-        </ErrorBoundary>
-      </MainLayout>
+      <WhatsAppModalProvider>
+        <MainLayout>
+          <ErrorBoundary>
+            <Suspense fallback={<RouteFallback />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/case/:id" element={<CaseStudy />} />
+                <Route path="/servicos" element={<ServicesPage />} />
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
+        </MainLayout>
+      </WhatsAppModalProvider>
     </Router>
   );
 }

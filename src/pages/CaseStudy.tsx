@@ -1,18 +1,26 @@
+import { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { projects } from '../data/portfolio';
 import TransitionLayout from '../components/TransitionLayout';
 import Footer from '../components/sections/Footer';
 import { X, ExternalLink, Github, ArrowLeft, ArrowRight, Linkedin, MessageCircle } from 'lucide-react';
 import { PROFILE_DATA } from '../config/profile';
+import { useWhatsAppModal } from '../context/WhatsAppModalContext';
+import Lightbox from '../components/ui/Lightbox';
 
 export default function CaseStudy() {
   const { id } = useParams<{ id: string }>();
+  const { openWhatsAppModal } = useWhatsAppModal();
+  const [lightboxState, setLightboxState] = useState({ isOpen: false, index: 0 });
+
   const currentIndex = projects.findIndex(p => p.id === id);
   const project = projects[currentIndex];
 
   if (!project) {
     return <Navigate to="/" replace />;
   }
+
+  const allImages = [project.image, ...(project.gallery || [])];
 
   const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
   const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
@@ -78,24 +86,39 @@ export default function CaseStudy() {
 
                 {/* Call To Action buttons at bottom of Sidebar */}
                 <div className="flex flex-col gap-3 mt-8">
-                   {project.liveUrl && project.liveUrl !== '#' ? (
-                      <a 
-                        href={project.liveUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="w-full bg-[#1a1a1a] text-white hover:bg-black py-4 px-6 rounded-none text-[10px] font-bold tracking-widest uppercase flex items-center justify-between transition-colors duration-300"
-                      >
-                        Ver Projeto Online
-                        <ExternalLink size={12} />
-                      </a>
-                   ) : (
-                      <button 
-                        disabled
-                        className="w-full bg-[#1a1a1a]/20 text-black/40 py-4 px-6 rounded-none text-[10px] font-bold tracking-widest uppercase flex items-center justify-between"
-                      >
-                        Projeto Interno
-                      </button>
-                   )}
+                   <div className="flex items-stretch gap-2">
+                     {project.liveUrl && project.liveUrl !== '#' ? (
+                        <a 
+                          href={project.liveUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="flex-1 bg-[#1a1a1a] text-white hover:bg-black py-4 px-4 rounded-none text-[10px] font-bold tracking-widest uppercase flex items-center justify-center gap-2 transition-colors duration-300"
+                        >
+                          Ver Projeto Online
+                          <ExternalLink size={12} />
+                        </a>
+                     ) : (
+                        <button 
+                          disabled
+                          className="flex-1 bg-[#1a1a1a]/20 text-black/40 py-4 px-4 rounded-none text-[10px] font-bold tracking-widest uppercase flex items-center justify-center transition-colors"
+                        >
+                          Projeto Interno
+                        </button>
+                     )}
+                     
+                     <div className="flex items-center justify-center gap-4 px-4 border border-black/10">
+                       <a href={PROFILE_DATA.socials.linkedin} target="_blank" rel="noreferrer" className="text-black/50 hover:text-black transition-colors" aria-label="LinkedIn">
+                          <Linkedin size={18} strokeWidth={1.5} />
+                       </a>
+                       <a href={PROFILE_DATA.socials.github} target="_blank" rel="noreferrer" className="text-black/50 hover:text-black transition-colors" aria-label="GitHub">
+                          <Github size={18} strokeWidth={1.5} />
+                       </a>
+                       <button onClick={openWhatsAppModal} className="text-black/50 hover:text-black transition-colors" aria-label="WhatsApp">
+                          <MessageCircle size={18} strokeWidth={1.5} />
+                       </button>
+                     </div>
+                   </div>
+
                    {project.repoUrl && (
                       <a 
                         href={project.repoUrl} 
@@ -108,19 +131,6 @@ export default function CaseStudy() {
                    )}
                 </div>
 
-                {/* Contact Links */}
-                <div className="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-black/10">
-                   <a href={PROFILE_DATA.socials.linkedin} target="_blank" rel="noreferrer" className="text-black/50 hover:text-black transition-colors" aria-label="LinkedIn">
-                      <Linkedin size={20} strokeWidth={1.5} />
-                   </a>
-                   <a href={PROFILE_DATA.socials.github} target="_blank" rel="noreferrer" className="text-black/50 hover:text-black transition-colors" aria-label="GitHub">
-                      <Github size={20} strokeWidth={1.5} />
-                   </a>
-                   <a href={PROFILE_DATA.contact.whatsappUrl} target="_blank" rel="noreferrer" className="text-black/50 hover:text-black transition-colors" aria-label="WhatsApp">
-                      <MessageCircle size={20} strokeWidth={1.5} />
-                   </a>
-                </div>
-
              </div>
           </div>
 
@@ -130,7 +140,8 @@ export default function CaseStudy() {
                 <img 
                   src={project.image} 
                   alt={project.title} 
-                  className="w-full h-auto block" 
+                  className="w-full h-auto block cursor-pointer hover:opacity-95 transition-opacity" 
+                  onClick={() => setLightboxState({ isOpen: true, index: 0 })}
                 />
 
                 {/* Detailed Text Sections from the project */}
@@ -174,8 +185,9 @@ export default function CaseStudy() {
                           <img 
                             src={img} 
                             alt={`${project.title} gallery ${index + 1}`} 
-                            className="w-full h-auto object-cover rounded-sm border border-white/5"
+                            className="w-full h-auto object-cover rounded-sm border border-white/5 cursor-pointer hover:opacity-90 transition-opacity"
                             loading="lazy"
+                            onClick={() => setLightboxState({ isOpen: true, index: index + 1 })}
                           />
                         </div>
                       ))}
@@ -224,6 +236,13 @@ export default function CaseStudy() {
         </div>
 
       </main>
+      
+      <Lightbox 
+        images={allImages}
+        initialIndex={lightboxState.index}
+        isOpen={lightboxState.isOpen}
+        onClose={() => setLightboxState({ ...lightboxState, isOpen: false })}
+      />
     </TransitionLayout>
   );
 }
